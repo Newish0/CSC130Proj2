@@ -1,5 +1,5 @@
 
-
+let tmp;
 
 window.addEventListener("DOMContentLoaded", () => {
     let mal = new Jikan4();
@@ -24,9 +24,20 @@ window.addEventListener("DOMContentLoaded", () => {
             case "anime_top":
             default:
                 displayTopAnime(mal, container);
+                 // setInterval(() => {displayMore(mal, galleryPosterCon)}, 2000)
         }
     }
 
+    function displayMore(api, container) {
+        api.getMore().then((res) => {
+            let data = res.data;
+            console.log(data)
+            for (let i in data) {
+                let card = createCard(cardTemplate, data[i]);
+                container.appendChild(card);
+            }
+        });
+    }
 
     function displayTopAnime(api, container) {
         api.getTopAnime().then((res) => {
@@ -53,8 +64,11 @@ window.addEventListener("DOMContentLoaded", () => {
         let sourceEln = tmpCon.querySelector(".poster-source");
         let themeEln = tmpCon.querySelector(".poster-themes");
         let descpEln = tmpCon.querySelector(".poster-description");
+        let scoreEln = tmpCon.querySelector(".poster-score");
 
         titleEln.innerText = oneData.title;
+
+        titleEln.href = "?view=" + oneData.mal_id;
 
         for (let i in oneData.genres) {
             let tag = document.createElement("div");
@@ -66,16 +80,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         dateEln.innerText = oneData.aired.string;
-        
-        if(oneData.type == "TV" || oneData.type == "Movie") {
+
+
+
+
+        if (oneData.type == "TV" || oneData.type == "Movie") {
             countEln.innerText = oneData.episodes + " ep";
         } else if (oneData.type == "Manga") {
             countEln.innerText = oneData.episodes + " ch";
         } else {
             countEln.innerText = oneData.episodes;
         }
-            
-        
+        countEln.innerText += " (" + oneData.type + ")";
+
+
         lengthEln.innerText = oneData.duration;
 
 
@@ -87,7 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         studioEln.innerText = "";
-        for(let i = 0; i < oneData.studios.length; i++) {
+        for (let i = 0; i < oneData.studios.length; i++) {
             studioEln.innerText += oneData.studios[i].name;
             studioEln.innerText += i < oneData.studios.length - 1 ? ", " : "";
         }
@@ -101,11 +119,13 @@ window.addEventListener("DOMContentLoaded", () => {
             themeEln.appendChild(tag);
         }
 
-        sourceEln.innerText = oneData.source + " → " + oneData.type;
+        sourceEln.innerText = oneData.source;
 
         descpEln.innerText = oneData.synopsis;
 
-        descpEln.innerHTML += "<br><p>Source: <a href='" + oneData.url + "' target='_blank'>myanimelist.net</a></p>"
+        descpEln.innerHTML += "<br><p>Source: <a class='clean-url' href='" + oneData.url + "' target='_blank'>myanimelist.net</a></p>"
+
+        scoreEln.innerText = " " + oneData.score;
 
         return tmpCon.querySelector(".poster-card");
     }

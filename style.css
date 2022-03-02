@@ -55,6 +55,16 @@ nav {
     background-color: var(--blue-violet-color-wheel);
 }
 
+.clean-url {
+    color: var(--paradise-pink);
+    text-decoration: none;
+}
+
+.clean-url:hover {
+    color: var(--paradise-pink);
+    text-decoration: underline;
+}
+
 #gallery-posters {
     display: flex;
     flex-wrap: wrap;
@@ -66,12 +76,29 @@ nav {
 /* Poster STuff */
 
 .poster-card {
+    position: relative;
     border: 1px solid var(--light-3);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 450px;
     height: 350px;
     overflow: hidden;
     border-radius: 1rem;
+}
+
+.poster-score {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    font-size: var(--step--3);
+    color: var(--light-1);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 0.66rem;
+    border-radius: 1rem;
+    transition: opacity 300ms ease-in-out;
+}
+
+.poster-img:hover ~ .poster-score {
+    opacity: 0;
 }
 
 .poster-info {
@@ -160,11 +187,15 @@ nav {
     grid-column: 1 / 3;
     width: 100%;
     padding: 0.25rem 0.1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 .poster-themes .tag {
     font-size: var(--step--3);
-    margin: 0.25rem 0.1rem;
+    margin: 0.1rem 0.1rem;
+    flex-shrink: 1;
 }
 
 .poster-description {

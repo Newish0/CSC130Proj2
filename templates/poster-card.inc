@@ -2,7 +2,7 @@
 <div class="poster-card">
     <div class="poster-info">
         <div class="poster-title-wrapper">
-            <div class="poster-title">Title Here</div>
+            <a class="poster-title clean-url">Title Here</a>
         </div>
         
 
@@ -51,6 +51,7 @@
                 content here. content here. content here.
             </div>
         </div>
+        <div class="poster-score fa-solid fa-star"> 9.12</div>
     </div>
 </div>
 <!-- END: One Poster Template -->
