@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
             case "anime_top":
             default:
                 displayTopAnime(mal, container);
-                 // setInterval(() => {displayMore(mal, galleryPosterCon)}, 2000)
+                setInterval(() => {displayMore(mal, galleryPosterCon)}, 2000)
         }
     }
 
