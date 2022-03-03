@@ -30,7 +30,7 @@
     --step-5: clamp(2.18rem, calc(1.54rem + 3.20vw), 3.82rem);
     --step-6: clamp(2.61rem, calc(1.77rem + 4.21vw), 4.77rem);
 
-    --poster-img-scale: 0.8;
+    --poster-img-scale: 0.85;
     --poster-img-width: 225px;
     --poster-img-height: 320px;
 }
@@ -45,13 +45,14 @@ nav {
 }
 
 #gallery-container {
-    display: grid;
+    display: flex;
     min-height: 200px;
-    grid-template-columns: 250px 1fr;
+    flex-flow: row nowrap;
 }
 
 .filters {
-    width: 250px;
+    min-width: 250px;
+    position: sticky;
     background-color: var(--blue-violet-color-wheel);
 }
 
@@ -63,6 +64,26 @@ nav {
 .clean-url:hover {
     color: var(--paradise-pink);
     text-decoration: underline;
+}
+
+.center {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-25 {
+    width: 25%;
 }
 
 #gallery-posters {
@@ -79,8 +100,8 @@ nav {
     position: relative;
     border: 1px solid var(--light-3);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 450px;
-    height: 350px;
+    width: 450px;
+    height: 375px;
     overflow: hidden;
     border-radius: 1rem;
 }
@@ -106,7 +127,7 @@ nav {
 }
 
 .poster-title-wrapper {
-    height: calc(var(--step-0) * 2.1);
+    height: 48px;
     margin: auto;
     width: 100%;
     display: flex;
@@ -154,7 +175,7 @@ nav {
     display: grid;
     grid-template-columns: calc(var(--poster-img-width) * var(--poster-img-scale)) calc(100% - var(--poster-img-width) * var(--poster-img-scale));
     grid-template-rows: calc(var(--poster-img-height) * var(--poster-img-scale)) 0;
-    height: calc(var(--poster-img-height) * var(--poster-img-scale));
+    /* height: calc(var(--poster-img-height) * var(--poster-img-scale)); */
 }
 
 .poster-img img {

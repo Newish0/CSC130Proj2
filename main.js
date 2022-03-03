@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
             case "anime_top":
             default:
                 displayTopAnime(mal, container);
-                setInterval(() => {displayMore(mal, galleryPosterCon)}, 2000)
+                //setInterval(() => {displayMore(mal, galleryPosterCon)}, 2000)
         }
     }
 
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     function displayTopAnime(api, container) {
-        api.getTopAnime().then((res) => {
+        api.getAnimeSearch().then((res) => {
             let data = res.data;
             console.log(data)
             for (let i in data) {
@@ -60,6 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let countEln = tmpCon.querySelector(".poster-count");
         let lengthEln = tmpCon.querySelector(".poster-length");
         let imgEln = tmpCon.querySelector(".poster-img img");
+        let imgLinkEln = tmpCon.querySelector(".poster-img a");
         let studioEln = tmpCon.querySelector(".poster-studio");
         let sourceEln = tmpCon.querySelector(".poster-source");
         let themeEln = tmpCon.querySelector(".poster-themes");
@@ -102,6 +103,8 @@ window.addEventListener("DOMContentLoaded", () => {
         } else {
             imgEln.src = oneData.images.jpg.image_url;
         } // if else
+
+        imgLinkEln.href = "?view=" + oneData.mal_id;
 
 
         studioEln.innerText = "";
