@@ -72,8 +72,10 @@ window.addEventListener("DOMContentLoaded", () => {
         titleEln.href = "?view=" + oneData.mal_id;
 
         for (let i in oneData.genres) {
-            let tag = document.createElement("div");
+            let tag = document.createElement("a");
             tag.classList.add("tag");
+            tag.classList.add("clean-url");
+            tag.href = `?genres=${oneData.genres[i].mal_id}`;
             tag.innerText = oneData.genres[i].name;
 
             tagsEln.appendChild(tag);
@@ -115,8 +117,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         for (let i in oneData.themes) {
-            let tag = document.createElement("div");
+            let tag = document.createElement("a");
             tag.classList.add("tag");
+            tag.classList.add("clean-url");
+            tag.href = `?genres=${oneData.genres[i].mal_id}`;
             tag.innerText = oneData.themes[i].name;
 
             themeEln.appendChild(tag);

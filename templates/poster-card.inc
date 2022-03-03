@@ -7,9 +7,7 @@
         
 
         <div class="poster-tags">
-            <div class="tag">Action</div>
-            <div class="tag">Fantasy</div>
-            <div class="tag">Drama</div>
+            
         </div>
 
         <div class="poster-details">
@@ -37,9 +35,7 @@
                 <div class="poster-studio">Newish's Studio</div>
                 <div class="poster-source">Light Novel</div>
                 <div class="poster-themes">
-                    <div class="tag">School</div>
-                    <div class="tag">Military</div>
-                    <div class="tag">Demons</div>
+                    
                 </div>
             </div>
 
