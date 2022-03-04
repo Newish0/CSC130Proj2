@@ -1,7 +1,10 @@
 
-let tmp;
+
 
 window.addEventListener("DOMContentLoaded", () => {
+
+    
+
     let mal = new Jikan4();
     let galleryPosterCon = document.querySelector("#gallery-posters");
 
@@ -11,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
             cardTemplate = txt;
             display(galleryPosterCon);
         });
-
+    
 
     function display(container) {
         let view = "anime_top";
