@@ -225,3 +225,32 @@ nav {
     font-size: var(--step--2);
     border-radius: 0 0 1rem 0;
 }
+
+
+
+
+
+
+
+
+.filter-form-inc-exc-tags {
+    display: none;
+}
+
+.filter-form-inc-exc-tags:checked ~ label {
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+}
+
+.filter-form-inc-exc-tags ~ label {
+    padding: 0.1rem 1rem;
+    border: 1px solid orange;
+    border-radius: 1rem;
+    color: #999;
+    margin: 1rem 0;
+}
+
+.unselectable {
+    user-select: none;
+}

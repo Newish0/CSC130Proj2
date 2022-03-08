@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     
 
     let mal = new Jikan4();
+    let jikanIO = new Jikan4IO();
     let galleryPosterCon = document.querySelector("#gallery-posters");
 
     let cardTemplate = fetch("templates/poster-card.inc")
@@ -14,6 +15,10 @@ window.addEventListener("DOMContentLoaded", () => {
             cardTemplate = txt;
             display(galleryPosterCon);
         });
+
+    let filtersContainer = document.querySelector("#filters");
+
+    jikanIO.generateAnimeFilterNav(filtersContainer);
     
 
     function display(container) {
