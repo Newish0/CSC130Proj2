@@ -3,10 +3,10 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    
+
 
     let mal = new Jikan4();
-    let jikanIO = new Jikan4IO();
+
     let galleryPosterCon = document.querySelector("#gallery-posters");
 
     let cardTemplate = fetch("templates/poster-card.inc")
@@ -14,21 +14,101 @@ window.addEventListener("DOMContentLoaded", () => {
         .then((txt) => {
             cardTemplate = txt;
             display(galleryPosterCon);
+            setTimeout(armLoadMoreBtn, 300);
         });
+        
 
-    let filtersContainer = document.querySelector("#filters");
+    let filters = document.querySelector("#filters");
 
-    jikanIO.generateAnimeFilterNav(filtersContainer);
-    
+    filters.addEventListener("change", () => {
+        let params = {};
+        let tags = "";
 
-    function display(container) {
-        let view = "anime_top";
+        let search = document.querySelector("#filter-search-box").value;
+
+        params.q = search;
+        
+
+        document.querySelectorAll("#filter-tags input").forEach((n) => {
+            if (n.checked) {
+                tags += n.value + ",";
+            }
+        });
+        tags = tags.substring(0, tags.length - 1);
+        params.genres = tags;
+
+
+
+        display(galleryPosterCon, "anime_search", params);
+    });
+
+    mal.getAnimeGenres({
+        filter: "genres"
+    }).then(genres => {
+        genres = genres.data;
+        let htmlTxt = "";
+        for (let x in genres) {
+
+            let name = genres[x].name;
+            let value = genres[x].mal_id;
+            htmlTxt += htmlTxt = `
+            <span>
+                <input type="checkbox" name="${name}" class="filter-form-inc-exc-tags" id="${name}-${value}" value="${value}">
+                <label class="unselectable" for="${name}-${value}">${name}</label>
+            </span>
+            `;
+        }
+
+        document.querySelector("#filter-tags").innerHTML += htmlTxt;
+    });
+
+
+
+    function armLoadMoreBtn() {
+        let loadMoreBtn = document.querySelector("#load-more");
+
+        let loadMoreObserverOptions = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0
+        }
+
+        let callback = (entries, observer) => {
+            entries.forEach(entry => {
+                // Each entry describes an intersection change for one observed
+                // target element:
+                //   entry.boundingClientRect
+                //   entry.intersectionRatio
+                //   entry.intersectionRect
+                //   entry.isIntersecting
+                //   entry.rootBounds
+                //   entry.target
+                //   entry.time
+                console.log(entry.target)
+
+                displayMore(mal, galleryPosterCon);
+            });
+        };
+
+        let loadMoreObserver = new IntersectionObserver(callback, loadMoreObserverOptions);
+        loadMoreObserver.observe(loadMoreBtn);
+    }
+
+
+
+    function display(container, view, params) {
+        view = view == undefined ? "anime_top" : view;
 
         switch (view) {
             // TODO
             case "anime_seasonal":
                 // TODO
                 break;
+
+            case "anime_search":
+                displaySearchAnime(mal, container, params);
+                break;
+
             case "anime_top":
             default:
                 displayTopAnime(mal, container);
@@ -38,6 +118,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function displayMore(api, container) {
         api.getMore().then((res) => {
+
+            if(res != null) {
+                let data = res.data;
+                console.log(data)
+                for (let i in data) {
+                    let card = createCard(cardTemplate, data[i]);
+                    container.appendChild(card);
+                }
+            }
+        });
+    }
+
+    function displaySearchAnime(api, container, params) {
+        container.innerHTML = "";
+
+        api.getAnimeSearch(params).then((res) => {
             let data = res.data;
             console.log(data)
             for (let i in data) {
@@ -128,7 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
             let tag = document.createElement("a");
             tag.classList.add("tag");
             tag.classList.add("clean-url");
-            tag.href = `?genres=${oneData.genres[i].mal_id}`;
+            tag.href = `?genres=${oneData.themes[i].mal_id}`;
             tag.innerText = oneData.themes[i].name;
 
             themeEln.appendChild(tag);

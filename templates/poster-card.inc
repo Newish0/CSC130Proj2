@@ -39,12 +39,14 @@
                 </div>
             </div>
 
-            <div class="poster-description">
-                content here. content here. content here. content here. content
-                here. content here. content here. content here. content here.
-                content here. content here. content here. content here. content
-                here. content here. content here. content here. content here.
-                content here. content here. content here.
+            <div class="poster-description-wrapper">
+                <div class="poster-description">
+                    content here. content here. content here. content here. content
+                    here. content here. content here. content here. content here.
+                    content here. content here. content here. content here. content
+                    here. content here. content here. content here. content here.
+                    content here. content here. content here.
+                </div>
             </div>
         </div>
         <div class="poster-score fa-solid fa-star"> 9.12</div>

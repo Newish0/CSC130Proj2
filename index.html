@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="lib/jikan4.js"></script>
     <script src="lib/jikan4IO.js"></script>
 </head>
@@ -21,44 +23,55 @@
     </nav>
 
     <main>
-        <div id="gallery-container">
-            <div class="filters">
-                <div class="filters-wrapper">
-                    <div id="filters"></div>
-                    
+        <div class="search-view-container">
+            <div id="filters-wrapper" class="filters">
+                <div id="filters">
+                    <div>
+                        <input type="text" name="search-box" id="filter-search-box">
+                    </div>
+
+                    <div>
+                        <h3>Tags</h3>
+                        <div id="filter-tags" class="filter-tags">
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div id="gallery-posters">
-                
+            <div id="gallery-container">
+
+                <div id="gallery-posters">
+
 
 
                     <!-- START: One Poster Template -->
                     <div class="poster-card">
                         <div class="poster-info">
                             <div class="poster-title-wrapper">
-                                <div class="poster-title">Title Here</div>
+                                <a class="poster-title clean-url">Title Here</a>
                             </div>
-                            
+
+
                             <div class="poster-tags">
-                                <div class="tag">Action</div>
-                                <div class="tag">Fantasy</div>
-                                <div class="tag">Drama</div>
+
                             </div>
-                            
+
                             <div class="poster-details">
-                                <div class="poster-date">Jan. 20, 2021</div> <!-- ie. air date -->
-                                <div class="poster-count">24ep</div> <!-- ie. number of episodes -->
-                                <div class="poster-length">23min/ep</div> <!-- ie. episode length -->
+                                <div class="poster-date">Jan. 20, 2021</div>
+                                <!-- ie. air date -->
+                                <div class="poster-count">24ep</div>
+                                <!-- ie. number of episodes -->
+                                <div class="poster-length">23min/ep</div>
+                                <!-- ie. episode length -->
                             </div>
-                            
                         </div>
 
-                        
                         <div class="poster-main">
                             <div class="poster-img">
                                 <a href="">
-                                    <img src="https://cdn.myanimelist.net/images/anime/1671/120628.webp" alt="Image Here">
+                                    <img src="" alt="Image Here" />
                                 </a>
                             </div>
 
@@ -67,42 +80,41 @@
                                     <div class="poster-studio">Newish's Studio</div>
                                     <div class="poster-source">Light Novel</div>
                                     <div class="poster-themes">
-                                        <div class="tag">School</div>
-                                        <div class="tag">Military</div>
-                                        <div class="tag">Demons</div>
+
                                     </div>
                                 </div>
-                                
-                                <div class="poster-description">
-                                    content here. content here. content here. content here. content here. content here. content here. 
-                                content here. content here. content here. content here. content here. content here. content here. 
-                                content here. content here. content here. content here. content here. content here. content here. 
-                                
+
+                                <div class="poster-description-wrapper">
+                                    <div class="poster-description">
+                                        content here. content here. content here. content here. content
+                                        here. content here. content here. content here. content here.
+                                        content here. content here. content here. content here. content
+                                        here. content here. content here. content here. content here.
+                                        content here. content here. content here.
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="poster-score fa-solid fa-star"> 9.12</div>
                         </div>
-
-                        
                     </div>
-                    <!-- END: One Poster Template -->
- 
+
+                </div>
 
 
-                
+                <div>
+                    <div class="center text-center w-100">
+                        <a id="load-more">
+                            Load More
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
             
         </div>
 
-        <div>
-            <div class="center text-center w-50">
-                <a id="load-more">
-                    Load More
-                </a>
-            </div>
-        </div>
+        
 
     </main>
 
