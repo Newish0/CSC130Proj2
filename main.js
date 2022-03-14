@@ -232,7 +232,7 @@ $(() => {
 
         titleEln.innerText = oneData.title;
 
-        titleEln.href = "?view=" + oneData.mal_id;
+        titleEln.href = "/anime/?id=" + oneData.mal_id;
 
         for (let i in oneData.genres) {
             let tag = document.createElement("a");

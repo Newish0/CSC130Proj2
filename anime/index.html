@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='anime.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../style.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../lib/jikan4.js"></script>
+    <script src='anime.js'></script>
+</head>
+
+<body>
+
+    <nav></nav>
+
+    <main>
+
+        <div class="panel-container">
+
+            <div class="top-panel">
+                <img id="cover" class="rounded-corner-full" src="https://cdn.myanimelist.net/images/anime/1223/96541.webp" alt="cover image">
+                <div class="top-panel-main">
+                    <h1 id="title">TITLE HERE</h1>
+                    <h3 id="alt-title">ALT TITLE HERE</h3>
+                    <hr>
+                    <div id="tags" class="tags-container">
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                        <a class="tag clean-url" href="">Action</a>
+                    </div>
+
+                    <div>
+                        <h5>Status</h5>
+                        <span id="status">Completed</span>
+                        <div id="status-icon" class="status-completed"></div>
+                    </div>
+
+                    <div class="quick-access-items">
+                        <button class="large-btn">Menu Item 1</button>
+                        <button class="large-btn">Menu Item 2</button>
+                        <button class="large-btn">Menu Item 3</button>
+                        <button class="large-btn">Menu Item 4</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="left-panel">
+                <div class="side-info" id="side-info">
+                    <div class="info-item">
+                        <h5>Type</h5>
+                        <div id="type">TEXT</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Episodes</h5>
+                        <div id="episodes">Episodes</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Duration</h5>
+                        <div id="duration">Duration</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Date</h5>
+                        <div id="date">Date range</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Season</h5>
+                        <div id="season">season</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Schedule</h5>
+                        <div id="schedule">Schedule</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Producers</h5>
+                        <div id="producers" class="tags-container">Producers</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Studios</h5>
+                        <div id="studios" class="tags-container">Studios</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Source</h5>
+                        <div id="source">Source</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Genres</h5>
+                        <div id="genres" class="tags-container">
+                            <a class="tag clean-url" href="">Action</a>
+                            <a class="tag clean-url" href="">Action</a>
+                            <a class="tag clean-url" href="">Action</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Themes</h5>
+                        <div id="themes" class="tags-container">
+                            <a class="tag clean-url" href="">Action</a>
+                            <a class="tag clean-url" href="">Action</a>
+                            <a class="tag clean-url" href="">Action</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Rating</h5>
+                        <div id="rating">Rating</div>
+                    </div>
+
+                    <div class="info-item">
+                        <h5>Demographics</h5>
+                        <div id="demographics" class="tags-container">Demographics</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <div id="score-dist">
+                    <div>
+                        <h1 id="score">8.97</h1>
+                        <div><span id="score-population">154247</span> users</div>
+                    </div>
+                    <div class="score-figure" id="score-figure">
+                        <div class="column" id="score-figure-c1">
+                            <div class="column-text">
+                                1
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c2">
+                            <div class="column-text">
+                                2
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c3">
+                            <div class="column-text">
+                                3
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c4">
+                            <div class="column-text">
+                                4
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+
+                        <div class="column" id="score-figure-c5">
+                            <div class="column-text">
+                                5
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+
+                        <div class="column" id="score-figure-c6">
+                            <div class="column-text">
+                                6
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+
+                        <div class="column" id="score-figure-c7">
+                            <div class="column-text">
+                                7
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c8">
+                            <div class="column-text">
+                                8
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c9">
+                            <div class="column-text">
+                                9
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+
+                        <div class="column" id="score-figure-c10">
+                            <div class="column-text">
+                                10
+                            </div>
+                            <div class="column-bar">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="margin-normal">
+                    <h5>Synopsis</h5>
+                    <div id="synopsis">
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                    </div>
+                </div>
+
+                <div class="margin-normal">
+                    <h5>Background</h5>
+                    <div id="background">
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                        content here. content here. content here. content here. content here. content here. content here.
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+    <footer></footer>
+</body>
+
+</html>
