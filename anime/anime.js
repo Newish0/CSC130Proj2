@@ -124,8 +124,11 @@ $(() => {
         synopsis.html(data.synopsis);
         background.html(data.background != null ? data.background : "n/a");
 
-        score.html(data.score);
-        scorePopulation.html(data.scored_by.toLocaleString(undefined));
+        //score.html(data.score);
+        initNumberLoadingAnimation("#score", data.score, 1000, false, 2);
+        //scorePopulation.html(data.scored_by.toLocaleString(undefined));
+        initNumberLoadingAnimation("#score-population", data.scored_by, 2000, true, 0);
+
 
         const loadScoreDistribution = () => {
             mal.getAnimeStatistics(animeID).then(statRes => {
@@ -135,17 +138,162 @@ $(() => {
                     $(`#score-figure-c${scores[x].score} .column-bar`).css("height", `max(1px, calc(${scores[x].percentage}%))`)
                     $(`#score-figure-c${scores[x].score} .column-bar`).attr("title", `${scores[x].percentage}% (${scores[x].votes.toLocaleString(undefined)} votes)`)
                 }
+            }).catch(err => {
+                setTimeout(loadScoreDistribution, 1000);
             });
         }
 
-        try {
-            loadScoreDistribution();
-        } catch (error) {
-            setTimeout(loadScoreDistribution, 1000);
+        loadScoreDistribution();
+        
+
+        const loadCharacters = () => {
+            mal.getAnimeCharacters(animeID).then(statRes => {
+                let charData = statRes.data;
+                let charactersHTMLText = "";
+                for (let x in charData) {
+                    let charName = charData[x].character.name;
+                    let charImgURL = charData[x].character.images.jpg.image_url;
+                    let charID = charData[x].character.mal_id;
+                    let charRole = charData[x].role;
+
+
+                    charRole = charRole == undefined ? "n/a" : charRole;
+
+
+
+                    let charHTMLText = `
+                    <img class="character-img"
+                        src="${charImgURL}"
+                        alt="character image of ${charName}"
+                        loading="lazy">
+                    <div>
+                        <span class="character-name">${charName}</span> (<span class="character-role">${charRole}</span>)
+                    </div>
+                    `;
+
+                    let vaWrapperHTMLText = "";
+
+                    let voiceActors = charData[x].voice_actors;
+
+
+                    // load in JP VA first
+                    for (let y in voiceActors) {
+                        if (voiceActors[y].language == "Japanese") {
+                            let vaName = voiceActors[y].person.name;
+                            let vaImgURL = voiceActors[y].person.images.jpg.image_url;
+
+
+
+                            let vaCardsHTMLText = `
+                            <div class="character-va-scard">
+                                <img class="character-va-img" src="${vaImgURL}" 
+                                alt="image of ${vaName}, voice actor for ${charName}" 
+                                loading="lazy">
+                                <div class="character-va-name">${vaName}</div>
+                            </div>
+                            `;
+
+                            vaWrapperHTMLText += vaCardsHTMLText;
+                        }
+                    }
+
+
+                    // load in the rest of the VA (non-native)
+                    for (let y in voiceActors) {
+                        if (voiceActors[y].language != "Japanese") {
+                            let vaName = voiceActors[y].person.name;
+                            let vaImgURL = voiceActors[y].person.images.jpg.image_url;
+
+
+
+                            let vaCardsHTMLText = `
+                        <div class="character-va-scard">
+                            <img class="character-va-img" src="${vaImgURL}" 
+                            alt="image of ${vaName}, voice actor for ${charName}" 
+                            loading="lazy">
+                            <div class="character-va-name">${vaName}</div>
+                        </div>
+                        `;
+
+                            vaWrapperHTMLText += vaCardsHTMLText;
+                        }
+                    }
+
+                    vaWrapperHTMLText = `
+                    <div class="character-va-wrapper">
+                    ${vaWrapperHTMLText}
+                    </div>
+                    `;
+
+                    let charCard = `
+                    <div class="character-card">
+                    ${charHTMLText}
+                    ${vaWrapperHTMLText}
+                    </div>
+                    `;
+
+
+                    charactersHTMLText += charCard;
+                }
+
+                $("#characters").html(charactersHTMLText);
+            }).catch(err => {
+                setTimeout(loadCharacters, 1000);
+            });;
         }
+
+        loadCharacters();
+
 
         console.log(res)
     })
+
+
+    function initNumberLoadingAnimation(elnQueryString, number, timeLength, formatOutput, decimalPlaces) {
+        const eln = $(elnQueryString);
+        const interval = 20; // 20ms
+        const numCalls = timeLength / interval;
+        const slice = number / numCalls;
+        let i = 0;
+
+        if (formatOutput) {
+            eln.html("0".toLocaleString(undefined, {
+                minimumFractionDigits: decimalPlaces,
+                maximumFractionDigits: decimalPlaces
+            }));
+        } else {
+            eln.html(0);
+        }
+
+        setTimeout(initNumberLoadingAnimationCallback, interval);
+        function initNumberLoadingAnimationCallback() {
+            let p = i / numCalls;
+            let adjustedP = easeOutQuart(p);
+
+            if (i < numCalls) {
+                eln.html((number * adjustedP).toLocaleString(undefined, {
+                    minimumFractionDigits: decimalPlaces,
+                    maximumFractionDigits: decimalPlaces
+                }));
+                i++;
+                setTimeout(initNumberLoadingAnimationCallback, interval);
+            } else {
+                eln.html(number.toLocaleString(undefined, {
+                    minimumFractionDigits: decimalPlaces,
+                    maximumFractionDigits: decimalPlaces
+                }));
+            }
+        }
+    }
+
+    // Cheat sheet: https://easings.net/
+    function easeOutCirc(x) {
+        return Math.sqrt(1 - Math.pow(x - 1, 2));
+    }
+
+    function easeOutQuart(x) {
+        return 1 - Math.pow(1 - x, 4);
+    }
 
 
     // Source: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
