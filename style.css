@@ -61,6 +61,7 @@ nav {
     padding: 1rem;
     outline: none;
     border: 1px solid var(--honeydew);
+    cursor: pointer;
 }
 
 .large-btn:hover {
@@ -266,10 +267,10 @@ nav {
     height: 100%;
     background-color: var(--paradise-pink);
     padding: 1rem;
-    color: var(--honeydew)
+    color: var(--honeydew);
 }
 
-#filters input[type="text"]{
+#filters input[type="text"] {
     display: inline-block;
     padding: 0.5rem 0.25rem;
     border-radius: 1rem;
@@ -379,12 +380,13 @@ nav {
 }
 
 .tag {
-    background-color: var(--light-1);
-    color: var(--dark-1);
+    /* background-color: var(--light-1);
+    color: var(--dark-1); */
     padding: 0.1rem 0.33rem;
     font-size: var(--step--3);
     border-radius: 1rem;
-    border: 1px solid var(--light-2);
+    /* border: 1px solid var(--light-2); */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
     display: inline;
     margin: 0 0.1rem;
     flex-shrink: 1;
@@ -485,4 +487,94 @@ nav {
 
 .unselectable {
     user-select: none;
+}
+
+/* Animations */
+
+.blur-load-animation {
+    -webkit-animation: blur-load-animation 1s ease-in;
+    animation: blur-load-animation 1s ease-in;
+}
+
+@-webkit-keyframes blur-load-animation {
+    0% {
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+        opacity: 0.9;
+    }
+
+    100% {
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+@keyframes blur-load-animation {
+    0% {
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+        opacity: 0.9;
+    }
+
+    100% {
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.zoom-load-animation {
+    -webkit-animation: zoom-load-animation 1s ease-in;
+    animation: zoom-load-animation 1s ease-in;
+    overflow-x: hidden;
+}
+
+@-webkit-keyframes zoom-load-animation {
+    0% {
+        -webkit-transform: scale(110%) translateY(-2%);
+        transform: scale(110%) translateY(-2%);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: scale(100%);
+        transform: scale(100%);
+        opacity: 1;
+    }
+}
+
+@keyframes zoom-load-animation {
+    0% {
+        -webkit-transform: scale(110%) translateY(-2%);
+        transform: scale(110%) translateY(-2%);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: scale(100%);
+        transform: scale(100%);
+        opacity: 1;
+    }
+}
+
+.loader {
+    position: relative;
+    display: block;
+    border: 16px solid var(--light-1); 
+    border-top: 16px solid var(--paradise-pink); 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 50px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

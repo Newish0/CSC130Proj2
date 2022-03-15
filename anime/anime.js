@@ -144,11 +144,49 @@ $(() => {
         }
 
         loadScoreDistribution();
-        
+
+
+        const loadRelated = () => {
+
+            mal.getAnimeRelations(animeID).then(relaRes => {
+                let relationHTMLText = "";
+                let relaData = relaRes.data;
+
+                for (let x in relaData) {
+                    let entries = relaData[x].entry;
+                    let relation = relaData[x].relation;
+
+                    let relationBlockHTMLText = "";
+
+                    for (let y in entries) {
+                        let entry = entries[y];
+                        let entryHTMLText = "";
+
+                        entryHTMLText = `<a href="/${entry.type}/?id=${entry.mal_id}" class="clean-url related-item">${entry.name}</a>`;
+
+                        relationBlockHTMLText += entryHTMLText;
+                    }
+
+                    relationBlockHTMLText = `<div>${relation}: ${relationBlockHTMLText}</div>`;
+
+                    relationHTMLText += relationBlockHTMLText;
+                }
+
+
+
+                $("#related").html(relationHTMLText);
+
+            }).catch(err => {
+                setTimeout(loadRelated, 1000);
+            });
+        }
+
+        loadRelated();
+
 
         const loadCharacters = () => {
-            mal.getAnimeCharacters(animeID).then(statRes => {
-                let charData = statRes.data;
+            mal.getAnimeCharacters(animeID).then(charRes => {
+                let charData = charRes.data;
                 let charactersHTMLText = "";
                 for (let x in charData) {
                     let charName = charData[x].character.name;
@@ -158,8 +196,6 @@ $(() => {
 
 
                     charRole = charRole == undefined ? "n/a" : charRole;
-
-
 
                     let charHTMLText = `
                     <img class="character-img"
@@ -178,13 +214,12 @@ $(() => {
 
                     // load in JP VA first
                     for (let y in voiceActors) {
-                        if (voiceActors[y].language == "Japanese") {
-                            let vaName = voiceActors[y].person.name;
-                            let vaImgURL = voiceActors[y].person.images.jpg.image_url;
+                        let vaName = voiceActors[y].person.name;
+                        let vaImgURL = voiceActors[y].person.images.jpg.image_url;
 
 
 
-                            let vaCardsHTMLText = `
+                        let vaCardsHTMLText = `
                             <div class="character-va-scard">
                                 <img class="character-va-img" src="${vaImgURL}" 
                                 alt="image of ${vaName}, voice actor for ${charName}" 
@@ -193,28 +228,11 @@ $(() => {
                             </div>
                             `;
 
-                            vaWrapperHTMLText += vaCardsHTMLText;
-                        }
-                    }
-
-
-                    // load in the rest of the VA (non-native)
-                    for (let y in voiceActors) {
-                        if (voiceActors[y].language != "Japanese") {
-                            let vaName = voiceActors[y].person.name;
-                            let vaImgURL = voiceActors[y].person.images.jpg.image_url;
-
-
-
-                            let vaCardsHTMLText = `
-                        <div class="character-va-scard">
-                            <img class="character-va-img" src="${vaImgURL}" 
-                            alt="image of ${vaName}, voice actor for ${charName}" 
-                            loading="lazy">
-                            <div class="character-va-name">${vaName}</div>
-                        </div>
-                        `;
-
+                        // load in JP VA first
+                        // then load in the rest of the VA (non-native)
+                        if (voiceActors[y].language == "Japanese") {
+                            vaWrapperHTMLText = vaCardsHTMLText + vaWrapperHTMLText;
+                        } else {
                             vaWrapperHTMLText += vaCardsHTMLText;
                         }
                     }
@@ -237,16 +255,78 @@ $(() => {
                 }
 
                 $("#characters").html(charactersHTMLText);
+
             }).catch(err => {
                 setTimeout(loadCharacters, 1000);
-            });;
+            });
         }
 
         loadCharacters();
 
 
+        const loadStaffs = () => {
+            mal.getAnimeStaff(animeID).then(staffsRes => {
+                let staffsData = staffsRes.data;
+                let staffsHTMLText = "";
+                for (let x in staffsData) {
+                    let staffName = staffsData[x].person.name;
+                    let staffImgURL = staffsData[x].person.images.jpg.image_url;
+                    let staffID = staffsData[x].person.mal_id;
+                    let staffRoles = staffsData[x].positions;
+                    let staffRolesText = "";
+                    for (let y in staffRoles) {
+                        staffRolesText += staffRoles[y] + ", ";
+                    }
+
+                    staffRolesText = staffRolesText.substring(0, staffRolesText.length - 2);
+
+                    
+                    let staffHTMLText = `
+                    <img class="character-img"
+                        src="${staffImgURL}"
+                        alt="character image of ${staffName}"
+                        loading="lazy">
+                    <div>
+                        <span class="character-name">${staffName}</span> (<span class="character-role">${staffRolesText}</span>)
+                    </div>
+                    `;
+
+                    
+
+                    let staffCard = `
+                    <div class="character-card">
+                    ${staffHTMLText}
+                    </div>
+                    `;
+
+                    staffsHTMLText += staffCard;
+                }
+
+                $("#staffs").html(staffsHTMLText);
+
+            }).catch(err => {
+                setTimeout(loadStaffs, 1000);
+            });
+        }
+
+        loadStaffs();
+
         console.log(res)
-    })
+
+
+        initClickToShowMore();
+    });
+
+    function initClickToShowMore() {
+        $(".hide-rest-container").each(() => {
+            $(this) > $(".click-to-show-more").on("click", (evt) => {
+                if(evt.target.parentElement != null) {
+                    evt.target.parentElement.classList.remove("hide-rest");
+                } 
+                evt.target.remove();
+            });
+        });
+    }
 
 
     function initNumberLoadingAnimation(elnQueryString, number, timeLength, formatOutput, decimalPlaces) {

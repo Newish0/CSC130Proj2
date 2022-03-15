@@ -34,12 +34,13 @@ div {
 }
 
 .panel-container .tag {
-    background-color: var(--light-1);
-    color: var(--dark-1);
+    /* background-color: var(--light-1);*/
+    color: var(--dark-1); 
     padding: 0.1rem 0.33rem;
     font-size: 1rem;
     border-radius: 1rem;
-    border: 1px solid var(--light-2);
+    /* border: 1px solid var(--light-2); */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
     display: inline;
     margin: 0 0.1rem;
     flex-shrink: 1;
@@ -62,6 +63,8 @@ div {
 
 #cover {
     float: left;
+    position: relative;
+    min-height: 220px;
 }
 
 #tags {
@@ -163,6 +166,38 @@ h5 {
     transition: height 1s;
 }
 
+.hide-rest {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.hide-rest-container {
+    position: relative;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.click-to-show-more {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--paradise-pink);
+    color: var(--honeydew);
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--paradise-pink);
+
+    box-shadow: -1px -2px 100px 39px #fff;
+    -webkit-box-shadow: -1px -2px 100px 39px #fff;
+    -moz-box-shadow: -1px -2px 100px 39px #fff;
+}
+
+.click-to-show-more:hover {
+    filter: brightness(120%);
+}
+
 .character-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
@@ -201,7 +236,7 @@ h5 {
 
 .character-va-name {
     font-size: 0.75rem;
-    margin: 0.2rem; 
+    margin: 0.2rem;
     flex-grow: 1;
     flex-shrink: 1;
     text-align: center;
@@ -220,3 +255,17 @@ h5 {
 .auto-gallery > * {
     flex-shrink: 1;
 }
+
+
+.related-item {
+    margin: 0 0.5rem 0 0;
+    padding: 0 0.5rem;
+    border-radius: 1rem;
+    /* border: 1px solid var(--light-1); */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    line-height: 1.33rem;
+}
+
+/* .related-item:not(:last-child)::after {
+    content: ", ";
+} */
