@@ -7,6 +7,7 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="search.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -17,6 +18,7 @@
     <script src="../lib/jikan4.js"></script>
 
     <script src='/main.js'></script>
+    <script src="search.js"></script>
 </head>
 
 <body>
@@ -33,8 +35,11 @@
             </div>
 
             <div class="user-nav">
+                <button id="min-nav-search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></button>
                 <div id="nav-search-box-wrapper">
-                    <input class="search-box" type="text" name="" id="">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="search-box" type="text" name="nav-search-box" id="nav-search-box"
+                        placeholder="Search">
                 </div>
                 <a href="" id="login">Sign In</a>
                 <a href="" id="profile"><i class="fa-solid fa-user"></i></a>
@@ -43,7 +48,50 @@
 
     </nav>
 
+    <div id="overtop-search" class="overtop-fullpage primary-color light-bg">
+        <div class="overtop-content-wrapper">
+            <h1>Search</h1>
+            <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+            <input class="search-box" type="text" name="overtop-search-box" id="overtop-search-box" class="search-box" placeholder="Search">
+        </div>
+    </div>
+
     <main>
+
+        <div class="container padding-medium">
+            <div class="filters-bar ">
+                <div id="filters">
+                    <i class="fa-solid fa-filter"></i>
+                    Filters
+                </div>
+    
+                
+    
+                <div id="filters-bar-search-box-wrapper">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="search-box" type="text" name="filters-bar-search-box" id="filters-bar-search-box"
+                        placeholder="Search">
+                </div>
+                
+                <div id="sort">
+                    <i class="fa-solid fa-arrow-down-short-wide"></i>
+                    Sort by: 
+                    <span id="cur-sort-out">Current sort mode</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="posters-container" class="container">
+
+        </div>
+
+        <br>
+        <br>
+        <div class="container text-center">
+            <button id="load-more" class="large-btn">
+                Load More
+            </button>
+        </div>
 
 
     </main>

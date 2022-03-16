@@ -62,15 +62,19 @@ nav > .wrapper .page-nav {
     justify-content: flex-start;
 }
 
-nav a  {
+nav a, nav button {
     color: var(--light-1);
     text-decoration: none;
     padding: 1rem;
     border-radius: 0.5rem;
     transition: all 100ms;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
-nav a:hover {
+nav a:hover, nav button:hover {
     color: var(--light-0);
     background-color: var(--paradise-pink-l1);
     transform: scale(110%);
@@ -91,7 +95,7 @@ nav > .wrapper .user-nav {
 }
 
 .nav-collap-icon-open {
-    transform: rotate(-90deg) !important; 
+    transform: rotate(-90deg) !important;
 }
 
 @media screen and (max-width: 620px) {
@@ -116,20 +120,45 @@ nav > .wrapper .user-nav {
 
 #nav-search-box-wrapper {
     margin: 0.33rem;
-    
-    position: relative;
+    background-color: var(--light-0);
+    border-radius: 0.5rem;
+    border: 1px solid var(--light-2);
+    padding: 0 10px;
 }
 
 #nav-search-box-wrapper .search-box {
     position: relative;
-    padding: 5px 20px 5px 3rem;
-    height: 100%;
+    padding: 3px 10px;
+    height: 2rem;
+    border: none;
+}
+
+#nav-search-box-wrapper .search-icon {
+    position: relative;
+    color: var(--paradise-pink);
+}
+
+#min-nav-search-icon {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    #nav-search-box-wrapper{
+        display: none;
+    }
+
+    #min-nav-search-icon {
+        display: block;
+    }
+
 }
 
 .search-box {
-    min-width: 128px;
+    min-width: 100px;
     max-width: 350px;
-    width: 25vw;
+    width: 20vw;
+    height: 2rem;
+    padding: 5px 16px;
     border-radius: 0.5rem;
     outline: none;
     border: 1px solid var(--light-2);
@@ -144,12 +173,91 @@ footer a {
     color: var(--light-1);
 }
 
-#sitemap a{
+#sitemap a {
     margin: 0 1rem;
 }
 
 
-.container { 
+[class^="overtop-"] {
+    position: absolute;
+    z-index: 100;
+}
+
+[class^="overtop-"] * {
+    z-index: 105;
+}
+
+.hide-overtop {
+    display: none !important;
+}
+
+.overtop-fullpage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.overtop-content-wrapper {
+    position: relative;
+    width: min(600px, 100%);
+    margin: auto;
+}
+
+#overtop-search {
+    display: none;
+}
+
+#overtop-search-box {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    height: 3rem;
+}
+
+.filters-bar {
+    display: flex;
+    font-size: 1rem;
+    gap: 2rem;
+    align-items: center;
+}
+
+.filters-bar #filters-bar-search-box-wrapper {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0.33rem;
+    background-color: var(--light-0);
+    border-radius: 0.5rem;
+    border: 1px solid var(--light-2);
+    padding: 0 10px;
+}
+
+#filters-bar-search-box {
+    width: 90%;
+    border: none;
+    max-width: none;
+    min-width: none;
+    box-sizing: border-box;
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.light-bg {
+    background-color: var(--light-0);
+}
+
+.primary-color {
+    color: var(--paradise-pink);
+}
+
+
+
+.container {
     margin: auto;
     width: min(1400px, 100%);
 }
@@ -169,12 +277,20 @@ footer a {
     text-decoration: underline;
 }
 
+.x-btn {
+    font-size: 1rem;
+    color: var(--dark-1);
+    cursor: pointer;
+}
+
 .large-btn {
     font-size: var(--step-0);
     border-radius: 0.5rem;
     padding: 1rem;
     outline: none;
-    border: 1px solid var(--honeydew);
+    background-color: var(--paradise-pink);
+    color: var(--light-1);
+    border: none;
     cursor: pointer;
 }
 
@@ -183,7 +299,7 @@ footer a {
 }
 
 .large-btn:active {
-    border: 1px solid var(--sunglow);
+    transform: translateY(5px) scale(102%);
 }
 
 .rounded-corner-half {
@@ -197,8 +313,6 @@ footer a {
 .center {
     margin: auto;
 }
-
-
 
 .w-100 {
     width: 100%;
@@ -234,7 +348,6 @@ footer a {
     margin: 1.5rem;
 }
 
-
 .margin-v-none {
     margin-top: 0;
     margin-bottom: 0;
@@ -260,7 +373,6 @@ footer a {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
-
 
 .padding-none {
     padding: 0;
@@ -314,8 +426,6 @@ footer a {
     border-radius: 1rem;
 }
 
-
-
 .auto-gallery {
     display: flex;
     flex-flow: row wrap;
@@ -327,7 +437,7 @@ footer a {
 }
 
 .no-gap {
-    gap: 0 !important; 
+    gap: 0 !important;
 }
 
 .align-items-start {
@@ -345,9 +455,6 @@ footer a {
 .justify-center {
     justify-content: center;
 }
-
-
-
 
 .url-item {
     margin: 0 0.5rem 0 0;
