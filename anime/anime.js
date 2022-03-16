@@ -53,13 +53,13 @@ $(() => {
         for (let x in data.genres) {
             let name = data.genres[x].name;
             let id = data.genres[x].mal_id;
-            tagsHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            tagsHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
 
         for (let x in data.themes) {
             let name = data.themes[x].name;
             let id = data.themes[x].mal_id;
-            tagsHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            tagsHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
 
         tags.html(tagsHTMLText);
@@ -80,7 +80,7 @@ $(() => {
         for (let x in data.producers) {
             let name = data.producers[x].name;
             let id = data.producers[x].mal_id;
-            producersHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            producersHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
         producers.html(producersHTMLText);
 
@@ -88,7 +88,7 @@ $(() => {
         for (let x in data.studios) {
             let name = data.studios[x].name;
             let id = data.studios[x].mal_id;
-            studiosHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            studiosHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
         studios.html(studiosHTMLText);
 
@@ -98,7 +98,7 @@ $(() => {
         for (let x in data.genres) {
             let name = data.genres[x].name;
             let id = data.genres[x].mal_id;
-            genresHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            genresHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
         genres.html(genresHTMLText);
 
@@ -106,8 +106,11 @@ $(() => {
         for (let x in data.themes) {
             let name = data.themes[x].name;
             let id = data.themes[x].mal_id;
-            themesHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            themesHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
+
+        themesHTMLText = themesHTMLText == "" ? "n/a" : themesHTMLText;
+
         themes.html(themesHTMLText);
 
 
@@ -117,8 +120,11 @@ $(() => {
         for (let x in data.demographics) {
             let name = data.demographics[x].name;
             let id = data.demographics[x].mal_id;
-            demographicsHTMLText += `<a class="tag clean-url" href="../?genre=${id}">${name}</a>`
+            demographicsHTMLText += `<a class="tag clean-url" href="/?genre=${id}">${name}</a>`
         }
+
+        demographicsHTMLText = demographicsHTMLText == "" ? "n/a" : demographicsHTMLText;
+
         demographics.html(demographicsHTMLText);
 
         synopsis.html(data.synopsis);
@@ -135,7 +141,10 @@ $(() => {
                 let statData = statRes.data;
                 let scores = statData.scores;
                 for (let x in scores) {
-                    $(`#score-figure-c${scores[x].score} .column-bar`).css("height", `max(1px, calc(${scores[x].percentage}%))`)
+                    $(`#score-figure-c${scores[x].score} .column-bar`).css("height", `max(1px, ${scores[x].percentage}%)`)
+                    // $(`#score-figure-c${scores[x].score} .column-bar`).css("height", `calc(100% - 1rem)`)
+                    // $(`#score-figure-c${scores[x].score} .column-bar`).css("background", `linear-gradient(to top, var(--paradise-pink), var(--paradise-pink) max(1px, calc(${scores[x].percentage}%)), var(--paradise-pink-a1) max(1px, calc(${scores[x].percentage}%)), var(--paradise-pink-a1) calc(100% - max(1px, calc(${scores[x].percentage}%))))`)
+
                     $(`#score-figure-c${scores[x].score} .column-bar`).attr("title", `${scores[x].percentage}% (${scores[x].votes.toLocaleString(undefined)} votes)`)
                 }
             }).catch(err => {
@@ -162,7 +171,7 @@ $(() => {
                         let entry = entries[y];
                         let entryHTMLText = "";
 
-                        entryHTMLText = `<a href="/${entry.type}/?id=${entry.mal_id}" class="clean-url related-item">${entry.name}</a>`;
+                        entryHTMLText = `<a href="/${entry.type}/?id=${entry.mal_id}" class="clean-url url-item">${entry.name}</a>`;
 
                         relationBlockHTMLText += entryHTMLText;
                     }
@@ -280,7 +289,7 @@ $(() => {
 
                     staffRolesText = staffRolesText.substring(0, staffRolesText.length - 2);
 
-                    
+
                     let staffHTMLText = `
                     <img class="character-img"
                         src="${staffImgURL}"
@@ -291,7 +300,7 @@ $(() => {
                     </div>
                     `;
 
-                    
+
 
                     let staffCard = `
                     <div class="character-card">
@@ -311,6 +320,119 @@ $(() => {
 
         loadStaffs();
 
+
+        const loadExternalLinks = () => {
+            mal.getAnimeExternal(animeID).then(extRes => {
+                let extData = extRes.data;
+                let externalsHTMLText = "";
+                
+                externalsHTMLText += `
+                    <a class="tag clean-url" href="${data.url}">
+                        <img src="https://www.google.com/s2/favicons?domain=${data.url}?size=64">
+                        MyAnimeList
+                    </a>
+                    `;
+                
+                for(let x in extData) {
+                    let name = extData[x].name;
+                    let url = extData[x].url;
+                    let hostname = (new URL(url)).hostname;
+
+                    if(name == "" || name == null) {
+                        name = hostname.replace("www.","");
+                    }
+
+                    // COMMENT: we could try to use the standard favicon protocol, but some sites doesn't work, so we are using Google
+                    // standard favicon protocol:  <img src="http://${hostname}/favicon.ico">
+                    externalsHTMLText += `
+                    <a class="tag clean-url" href="${url}">
+                        <img src="https://www.google.com/s2/favicons?domain=${hostname}?size=64">
+                        ${name}
+                    </a>
+                    `;
+
+                }
+
+                $("#externals").html(externalsHTMLText);
+            }).catch(err => {
+                setTimeout(loadExternalLinks, 1000);
+            });;
+        }
+
+        loadExternalLinks();
+
+
+        const loadSongThemes = () => {
+            mal.getAnimeThemes(animeID).then(themeRes => {
+                let themeData = themeRes.data;
+                let themesHTMLText = "";
+
+                let opHTMLText = "";
+
+               
+
+                for(let i in themeData.openings) {
+                    opHTMLText += `
+                    <a href="//music.youtube.com/search?q=${encodeURI(themeData.openings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.openings[i]}</a>
+                    `;
+                }
+
+                opHTMLText = `<div class="tags-container">Openings: ${opHTMLText == "" ? "No opening found." : opHTMLText}</div>`;
+
+                let edHTMLText = "";
+
+                for(let i in themeData.endings) {
+                    edHTMLText += `
+                    <a href="//music.youtube.com/search?q=${encodeURI(themeData.endings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.endings[i]}</a>
+                    `;
+                }
+
+                edHTMLText = `<div class="tags-container">Endings: ${edHTMLText == "" ? "No ending found." : edHTMLText}</div>`;
+                
+
+                themesHTMLText += opHTMLText;
+                themesHTMLText += edHTMLText;
+                
+                
+                $("#song-themes").html(themesHTMLText);
+            }).catch(err => {
+                console.error(err);
+                setTimeout(loadSongThemes, 1000);
+            });;
+        }
+
+        loadSongThemes();
+
+
+        const loadVidoes = () => {
+            mal.getAnimeVideos(animeID).then(vidRes => {
+                let vidData = vidRes.data;
+                let promos = vidData.promo;
+                let videosHTMLText = "";
+                
+
+                for(let i in promos) {
+                    videosHTMLText += `
+                    <br>
+                    <div class="video-preview-container card padding-medium margin-medium">
+                    <a class="clean-url" href="${promos[i].trailer.url}">
+                    <h6>${promos[i].title}</h6>
+                    <img src="${promos[i].trailer.images.image_url}">
+                    </a>
+                    </div>
+                    `;
+                }
+                
+                $("#videos").html(videosHTMLText);
+            }).catch(err => {
+                console.error(err);
+                setTimeout(loadVidoes, 1000);
+            });;
+        }
+
+        loadVidoes();
+
+
         console.log(res)
 
 
@@ -320,9 +442,9 @@ $(() => {
     function initClickToShowMore() {
         $(".hide-rest-container").each(() => {
             $(this) > $(".click-to-show-more").on("click", (evt) => {
-                if(evt.target.parentElement != null) {
+                if (evt.target.parentElement != null) {
                     evt.target.parentElement.classList.remove("hide-rest");
-                } 
+                }
                 evt.target.remove();
             });
         });
