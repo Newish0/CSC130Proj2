@@ -9,15 +9,17 @@
 
 .filters-bar-item {
     padding: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     color: var(--dark-1);
     transition: all 100ms;
+    cursor: pointer; 
 }
 
 .filters-bar-item:hover {
-    background-color: var(--paradise-pink);
+    /* background-color: var(--paradise-pink-l1); */
+    transform: scale(101%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     color: var(--dark-0);
-    cursor: pointer; 
 }
 
 #sort::after {
@@ -47,6 +49,7 @@
     padding: 0 10px;
     display: flex;
     align-items: center;
+    transition: all 100ms;
 }
 
 #filters-bar-search-box {
@@ -56,6 +59,12 @@
     max-width: none;
     min-width: none;
     box-sizing: border-box;
+    
+}
+
+.filters-bar #filters-bar-search-box-wrapper:focus-within {
+    transform: scale(101%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 
