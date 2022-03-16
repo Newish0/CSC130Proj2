@@ -7,6 +7,69 @@
     width: min(1600px, 100%);
 }
 
+.filters-bar-item {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: var(--dark-1);
+    transition: all 100ms;
+}
+
+.filters-bar-item:hover {
+    background-color: var(--paradise-pink);
+    color: var(--dark-0);
+    cursor: pointer; 
+}
+
+#sort::after {
+    content: "Sort by: ";
+}
+
+#filters::after {
+    content: "Filter";
+}
+
+
+.filters-bar {
+    color: var(--dark-1);
+    display: flex;
+    font-size: 1rem;
+    gap: 2rem;
+    align-items: center;
+}
+
+.filters-bar #filters-bar-search-box-wrapper {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0.33rem;
+    background-color: var(--light-0);
+    border-radius: 0.5rem;
+    border: 1px solid var(--light-2);
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+#filters-bar-search-box {
+    flex-grow: 1;
+    flex-shrink: 1;
+    border: none;
+    max-width: none;
+    min-width: none;
+    box-sizing: border-box;
+}
+
+
+
+@media screen and (max-width: 650px) {
+    #sort::after {
+        content: "";
+    }
+
+    #filters::after {
+        content: "";
+    }
+}
+
 
 .poster-card {
     --poster-scale: 0.8;

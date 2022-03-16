@@ -216,30 +216,6 @@ footer a {
     height: 3rem;
 }
 
-.filters-bar {
-    display: flex;
-    font-size: 1rem;
-    gap: 2rem;
-    align-items: center;
-}
-
-.filters-bar #filters-bar-search-box-wrapper {
-    flex-grow: 1;
-    flex-shrink: 1;
-    margin: 0.33rem;
-    background-color: var(--light-0);
-    border-radius: 0.5rem;
-    border: 1px solid var(--light-2);
-    padding: 0 10px;
-}
-
-#filters-bar-search-box {
-    width: 90%;
-    border: none;
-    max-width: none;
-    min-width: none;
-    box-sizing: border-box;
-}
 
 .top-right {
     position: absolute;
@@ -325,6 +301,7 @@ footer a {
 .w-25 {
     width: 25%;
 }
+
 
 /* margin and padding templates */
 .margin-none {
