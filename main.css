@@ -62,7 +62,8 @@ nav > .wrapper .page-nav {
     justify-content: flex-start;
 }
 
-nav a, nav button {
+nav a,
+nav button {
     color: var(--light-1);
     text-decoration: none;
     padding: 1rem;
@@ -74,7 +75,8 @@ nav a, nav button {
     cursor: pointer;
 }
 
-nav a:hover, nav button:hover {
+nav a:hover,
+nav button:hover {
     color: var(--light-0);
     background-color: var(--paradise-pink-l1);
     transform: scale(110%);
@@ -119,6 +121,7 @@ nav > .wrapper .user-nav {
 }
 
 #nav-search-box-wrapper {
+    position: relative;
     margin: 0.33rem;
     background-color: var(--light-0);
     border-radius: 0.5rem;
@@ -142,15 +145,56 @@ nav > .wrapper .user-nav {
     display: none;
 }
 
+#nav-search-result {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    min-height: 32px;
+    background-color: var(--light-0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    z-index: 5;
+}
+
+#nav-search-result > div {
+    margin: 0.5rem 0.25rem;
+}
+
+#nav-search-result h5 {
+    margin: 0.1rem 0.25rem;
+}
+
+.search-result-item {
+    font-size: 0.75rem;
+}
+
+.search-result-item img {
+    height: 2rem;
+}
+
+.search-result-item a {
+    padding: 0;
+    color: var(--paradise-pink);
+    position: absolute;
+    margin: 0 0.25rem;
+}
+
+.search-result-item a:hover {
+    text-decoration: underline;
+    transform: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--paradise-pink-l1);
+}
+
 @media screen and (max-width: 800px) {
-    #nav-search-box-wrapper{
+    #nav-search-box-wrapper {
         display: none;
     }
 
     #min-nav-search-icon {
         display: block;
     }
-
 }
 
 .search-box {
@@ -176,7 +220,6 @@ footer a {
 #sitemap a {
     margin: 0 1rem;
 }
-
 
 [class^="overtop-"] {
     position: absolute;
@@ -216,7 +259,6 @@ footer a {
     height: 3rem;
 }
 
-
 .top-right {
     position: absolute;
     top: 0;
@@ -230,8 +272,6 @@ footer a {
 .primary-color {
     color: var(--paradise-pink);
 }
-
-
 
 .container {
     margin: auto;
@@ -301,7 +341,6 @@ footer a {
 .w-25 {
     width: 25%;
 }
-
 
 /* margin and padding templates */
 .margin-none {
