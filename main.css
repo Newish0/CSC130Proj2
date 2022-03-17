@@ -147,9 +147,9 @@ nav > .wrapper .user-nav {
 
 #nav-search-result {
     position: absolute;
+    display: none;
     left: 0;
     width: 100%;
-    min-height: 32px;
     background-color: var(--light-0);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
@@ -249,6 +249,14 @@ footer a {
     z-index: 100;
 }
 
+[class^="overtop-"] hr {
+    margin: 1rem;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    opacity: .33;
+    border: 1px solid var(--dark-2);
+}
+
 [class^="overtop-"] * {
     z-index: 105;
 }
@@ -263,6 +271,31 @@ footer a {
     left: 0;
     width: 100vw;
     height: 100vh;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+
+.overtop-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.overtop-popup .overtop-content-wrapper {
+    width: min(1000px, 95vw);
+    height: min(1000px, 95vh);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    overflow: auto;
 }
 
 .overtop-content-wrapper {
@@ -331,6 +364,13 @@ footer a {
     color: var(--light-1);
     border: none;
     cursor: pointer;
+    transition: transform 100ms;
+}
+
+.large-btn.inverted {
+    background-color: transparent;
+    color: var(--paradise-pink);
+    box-shadow:inset 0px 0px 0px 2px var(--paradise-pink); /* inward border trick */
 }
 
 .large-btn:hover {
@@ -444,7 +484,7 @@ footer a {
 }
 
 .text-alt {
-    font-size: 0.5rem;
+    font-size: 0.66rem;
     color: var(--light-2);
 }
 
@@ -484,6 +524,14 @@ footer a {
     gap: 0 !important;
 }
 
+.small-gap {
+    gap: 0.5rem !important;
+}
+
+.normal-gap {
+    gap: 1rem !important;
+}
+
 .align-items-start {
     align-items: flex-start;
 }
@@ -498,6 +546,16 @@ footer a {
 
 .justify-center {
     justify-content: center;
+}
+
+.info-pond {
+    display: flex;
+    flex-flow: row wrap;
+    gap: clamp(1rem, 2rem, 3rem);
+}
+
+.info-item {
+    flex-shrink: 1;
 }
 
 .url-item {

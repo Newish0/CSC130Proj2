@@ -148,7 +148,11 @@ $(() => {
                     $(`#score-figure-c${scores[x].score} .column-bar`).attr("title", `${scores[x].percentage}% (${scores[x].votes.toLocaleString(undefined)} votes)`)
                 }
             }).catch(err => {
-                setTimeout(loadScoreDistribution, 1000);
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadScoreDistribution, 1000);
+                } else {
+                    console.error(err);
+                }   
             });
         }
 
@@ -186,7 +190,11 @@ $(() => {
                 $("#related").html(relationHTMLText);
 
             }).catch(err => {
-                setTimeout(loadRelated, 1000);
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadRelated, 1000);
+                } else {
+                    console.error(err);
+                }   
             });
         }
 
@@ -266,7 +274,11 @@ $(() => {
                 $("#characters").html(charactersHTMLText);
 
             }).catch(err => {
-                setTimeout(loadCharacters, 1000);
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadCharacters, 1000);
+                } else {
+                    console.error(err);
+                }   
             });
         }
 
@@ -314,7 +326,11 @@ $(() => {
                 $("#staffs").html(staffsHTMLText);
 
             }).catch(err => {
-                setTimeout(loadStaffs, 1000);
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadStaffs, 1000);
+                } else {
+                    console.error(err);
+                } 
             });
         }
 
@@ -355,8 +371,12 @@ $(() => {
 
                 $("#externals").html(externalsHTMLText);
             }).catch(err => {
-                setTimeout(loadExternalLinks, 1000);
-            });;
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadExternalLinks, 1000);
+                } else {
+                    console.error(err);
+                } 
+            });
         }
 
         loadExternalLinks();
@@ -396,9 +416,12 @@ $(() => {
                 
                 $("#song-themes").html(themesHTMLText);
             }).catch(err => {
-                console.error(err);
-                setTimeout(loadSongThemes, 1000);
-            });;
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadSongThemes, 1000);
+                } else {
+                    console.error(err);
+                } 
+            });
         }
 
         loadSongThemes();
@@ -425,9 +448,12 @@ $(() => {
                 
                 $("#videos").html(videosHTMLText);
             }).catch(err => {
-                console.error(err);
-                setTimeout(loadVidoes, 1000);
-            });;
+                if(err == "Jikan4 API errored with response: 429") {
+                    setTimeout(loadVidoes, 1000);
+                } else {
+                    console.error(err);
+                } 
+            });
         }
 
         loadVidoes();

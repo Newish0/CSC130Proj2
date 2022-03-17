@@ -1,7 +1,10 @@
 :root {
-    --light-blue: rgb(137, 231, 255);
+    --light-blue: rgb(66, 224, 238);
+    --light-green: rgb(66, 238, 103);
+    --light-orange: rgb(238, 149, 66);
+    /* --light-blue: rgb(137, 231, 255);
     --light-green: rgb(137, 255, 147);
-    --light-green: rgb(255, 204, 137);
+    --light-orange: rgb(255, 204, 137); */
 }
 
 div {
@@ -103,16 +106,6 @@ div {
 .main-panel {
     grid-column: 2 / 6;
     grid-row: 2 / 3;
-}
-
-.side-info {
-    display: flex;
-    flex-flow: row wrap;
-    gap: clamp(1rem, 2rem, 3rem);
-}
-
-.info-item {
-    flex-shrink: 1;
 }
 
 h5,

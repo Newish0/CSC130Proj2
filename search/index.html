@@ -40,25 +40,21 @@
                     <i class="search-icon fa-solid fa-magnifying-glass"></i>
                     <input class="search-box" type="text" name="nav-search-box" id="nav-search-box"
                         placeholder="Search">
-                        
+
                     <div id="nav-search-result" class="search-result">
                         <div>
-                            <h5>Anime</h5>
                             <div class="search-result-anime"></div>
                         </div>
 
                         <div>
-                            <h5>Manga</h5>
                             <div class="search-result-manga"></div>
                         </div>
 
                         <div>
-                            <h5>Character</h5>
                             <div class="search-result-character"></div>
                         </div>
 
                         <div>
-                            <h5>People</h5>
                             <div class="search-result-people"></div>
                         </div>
                     </div>
@@ -70,55 +66,63 @@
 
     </nav>
 
-    <div id="overtop-search" class="overtop-fullpage primary-color light-bg">
-        <div class="overtop-content-wrapper">
+    <div id="overtop-search" class="overtop-popup">
+        <div class="overtop-content-wrapper light-bg">
             <h1>Search</h1>
             <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
             <input class="search-box" type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
                 placeholder="Search">
 
-                <div id="nav-search-result" class="search-result">
-                    <div>
-                        <h5>Anime</h5>
-                        <div class="search-result-anime"></div>
-                    </div>
-
-                    <div>
-                        <h5>Manga</h5>
-                        <div class="search-result-manga"></div>
-                    </div>
-
-                    <div>
-                        <h5>Character</h5>
-                        <div class="search-result-character"></div>
-                    </div>
-
-                    <div>
-                        <h5>People</h5>
-                        <div class="search-result-people"></div>
-                    </div>
+            <div id="overtop-search-result" class="search-result">
+                <div>
+                    <div class="search-result-anime"></div>
                 </div>
+
+                <div>
+                    <div class="search-result-manga"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-character"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-people"></div>
+                </div>
+            </div>
         </div>
     </div>
-
+    
     <main>
 
-        <!--
-            *********************************** 
-            TODO!!!!!!!!!!!!!!!!!!!!!
-            - overlay filters
-            - overlay sort
-            *********************************
 
-            <div id="overtop-filters" class="overtop-popup primary-color light-bg">
-            <div class="overtop-content-wrapper">
-                <h1>Search</h1>
-                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
-                <input class="search-box" type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
-                    placeholder="Search">
+        <div id="overtop-filters" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper light-bg">
+                <h1>Filter</h1>
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
+                
+                <h3>Active Filters</h3>
+                <div class="filter-active margin-v-normal info-pond normal-gap">
+                    
+                </div>
+
+                <button class="large-btn w-50 overtop-x-btn">Apply</button>
+                <button class="large-btn inverted w-25 filters-reset">Reset</button>
+
+                <hr>
+
+                <h3>Genres</h3>
+                <div class="filter-genres info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
+                <br>
+                <h3>Themes</h3>
+                <div class="filter-themes info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
             </div>
         </div> 
-        -->
+
 
         <div class="padding-medium">
             <div class="filters-bar container">
@@ -146,8 +150,10 @@
             </div>
         </div>
 
-        <div id="posters-container" class="container">
+        <div class="padding-small">
+            <div id="posters-container" class="container">
 
+            </div>
         </div>
 
         <br>
