@@ -6,9 +6,9 @@ $(() => {
     });
 
     let mal = new Jikan4();
-    let animeID = params.id;
+    let mangaID = params.id;
 
-    mal.getAnimeById(animeID).then(res => {
+    mal.getMangaById(mangaID).then(res => {
         let data = res.data;
 
         let title = $("#title");
@@ -18,17 +18,13 @@ $(() => {
         let status = $("#status");
         let statusIcon = $("#status-icon");
         let type = $("#type");
-        let episodes = $("#episodes");
-        let duration = $("#duration");
+        let chapters = $("#chapters");
+        let volumes = $("#volumes");
         let date = $("#date");
-        let season = $("#season");
-        let schedule = $("#schedule");
-        let producers = $("#producers");
-        let studios = $("#studios");
-        let source = $("#source");
+        let publishers = $("#publishers");
+        let authors = $("#authors");
         let genres = $("#genres");
         let themes = $("#themes");
-        let rating = $("#rating");
         let demographics = $("#demographics");
         let synopsis = $("#synopsis");
         let background = $("#background");
@@ -67,32 +63,28 @@ $(() => {
         status.html(data.status);
         statusIcon.removeClass("status-completed");
         statusIcon.removeClass("status-ongoing");
-        statusIcon.addClass(data.airing ? "status-ongoing" : "status-completed");
+        statusIcon.addClass(data.publishing ? "status-ongoing" : "status-completed");
 
         type.html(data.type);
-        episodes.html(data.episodes);
-        duration.html(data.duration);
-        date.html(data.aired.string);
-        season.html(data.season != null ? toTitleCase(data.season) : "n/a");
-        schedule.html(data.broadcast.string == null ? "n/a" : data.broadcast.string);
+        chapters.html(data.chapters);
+        volumes.html(data.volumes);
+        date.html(data.published.string);
 
-        let producersHTMLText = "";
-        for (let x in data.producers) {
-            let name = data.producers[x].name;
-            let id = data.producers[x].mal_id;
-            producersHTMLText += `<a class="tag clean-url" href="/search/producer=${id}">${name}</a>`
+        let serializationsHTMLText = "";
+        for (let x in data.serializations) {
+            let name = data.serializations[x].name;
+            let id = data.serializations[x].mal_id;
+            serializationsHTMLText += `<a class="tag clean-url" href="/search/?producer=${id}">${name}</a>`
         }
-        producers.html(producersHTMLText);
+        publishers.html(serializationsHTMLText);
 
-        let studiosHTMLText = "";
-        for (let x in data.studios) {
-            let name = data.studios[x].name;
-            let id = data.studios[x].mal_id;
-            studiosHTMLText += `<a class="tag clean-url" href="/search/?studio=${id}">${name}</a>`
+        let authorsHTMLText = "";
+        for (let x in data.authors) {
+            let name = data.authors[x].name;
+            let id = data.authors[x].mal_id;
+            authorsHTMLText += `<a class="tag clean-url" href="/search/?authors=${id}">${name}</a>`
         }
-        studios.html(studiosHTMLText);
-
-        source.html(data.source);
+        authors.html(authorsHTMLText);
 
         let genresHTMLText = "";
         for (let x in data.genres) {
@@ -114,8 +106,6 @@ $(() => {
         themes.html(themesHTMLText);
 
 
-        rating.html(data.rating);
-
         let demographicsHTMLText = "";
         for (let x in data.demographics) {
             let name = data.demographics[x].name;
@@ -131,13 +121,13 @@ $(() => {
         background.html(data.background != null ? data.background : "n/a");
 
         //score.html(data.score);
-        initNumberLoadingAnimation("#score", data.score, 1000, false, 2);
+        initNumberLoadingAnimation("#score", data.scored, 1000, false, 2);
         //scorePopulation.html(data.scored_by.toLocaleString(undefined));
         initNumberLoadingAnimation("#score-population", data.scored_by, 2000, true, 0);
 
 
         const loadScoreDistribution = () => {
-            mal.getAnimeStatistics(animeID).then(statRes => {
+            mal.getMangaStatistics(mangaID).then(statRes => {
                 let statData = statRes.data;
                 let scores = statData.scores;
                 for (let x in scores) {
@@ -161,7 +151,7 @@ $(() => {
 
         const loadRelated = () => {
 
-            mal.getAnimeRelations(animeID).then(relaRes => {
+            mal.getMangaRelations(mangaID).then(relaRes => {
                 let relationHTMLText = "";
                 let relaData = relaRes.data;
 
@@ -202,7 +192,7 @@ $(() => {
 
 
         const loadCharacters = () => {
-            mal.getAnimeCharacters(animeID).then(charRes => {
+            mal.getMangaCharacters(mangaID).then(charRes => {
                 let charData = charRes.data;
                 let charactersHTMLText = "";
                 for (let x in charData) {
@@ -285,60 +275,9 @@ $(() => {
         loadCharacters();
 
 
-        const loadStaffs = () => {
-            mal.getAnimeStaff(animeID).then(staffsRes => {
-                let staffsData = staffsRes.data;
-                let staffsHTMLText = "";
-                for (let x in staffsData) {
-                    let staffName = staffsData[x].person.name;
-                    let staffImgURL = staffsData[x].person.images.jpg.image_url;
-                    let staffID = staffsData[x].person.mal_id;
-                    let staffRoles = staffsData[x].positions;
-                    let staffRolesText = "";
-                    for (let y in staffRoles) {
-                        staffRolesText += staffRoles[y] + ", ";
-                    }
-
-                    staffRolesText = staffRolesText.substring(0, staffRolesText.length - 2);
-
-
-                    let staffHTMLText = `
-                    <img class="character-img"
-                        src="${staffImgURL}"
-                        alt="character image of ${staffName}"
-                        loading="lazy">
-                    <div>
-                        <span class="character-name">${staffName}</span> (<span class="character-role">${staffRolesText}</span>)
-                    </div>
-                    `;
-
-
-
-                    let staffCard = `
-                    <div class="character-card">
-                    ${staffHTMLText}
-                    </div>
-                    `;
-
-                    staffsHTMLText += staffCard;
-                }
-
-                $("#staffs").html(staffsHTMLText);
-
-            }).catch(err => {
-                if(err == "Jikan4 API errored with response: 429") {
-                    setTimeout(loadStaffs, 1000);
-                } else {
-                    console.error(err);
-                } 
-            });
-        }
-
-        loadStaffs();
-
 
         const loadExternalLinks = () => {
-            mal.getAnimeExternal(animeID).then(extRes => {
+            mal.getMangaExternal (mangaID).then(extRes => {
                 let extData = extRes.data;
                 let externalsHTMLText = "";
                 
@@ -380,91 +319,13 @@ $(() => {
         }
 
         loadExternalLinks();
-
-
-        const loadSongThemes = () => {
-            mal.getAnimeThemes(animeID).then(themeRes => {
-                let themeData = themeRes.data;
-                let themesHTMLText = "";
-
-                let opHTMLText = "";
-
-               
-
-                for(let i in themeData.openings) {
-                    opHTMLText += `
-                    <a href="//music.youtube.com/search?q=${encodeURI(themeData.openings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.openings[i]}</a>
-                    `;
-                }
-
-                opHTMLText = `<div class="tags-container">Openings: ${opHTMLText == "" ? "No opening found." : opHTMLText}</div>`;
-
-                let edHTMLText = "";
-
-                for(let i in themeData.endings) {
-                    edHTMLText += `
-                    <a href="//music.youtube.com/search?q=${encodeURI(themeData.endings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.endings[i]}</a>
-                    `;
-                }
-
-                edHTMLText = `<div class="tags-container">Endings: ${edHTMLText == "" ? "No ending found." : edHTMLText}</div>`;
-                
-
-                themesHTMLText += opHTMLText;
-                themesHTMLText += edHTMLText;
-                
-                
-                $("#song-themes").html(themesHTMLText);
-            }).catch(err => {
-                if(err == "Jikan4 API errored with response: 429") {
-                    setTimeout(loadSongThemes, 1000);
-                } else {
-                    console.error(err);
-                } 
-            });
-        }
-
-        loadSongThemes();
-
-
-        const loadVidoes = () => {
-            mal.getAnimeVideos(animeID).then(vidRes => {
-                let vidData = vidRes.data;
-                let promos = vidData.promo;
-                let videosHTMLText = "";
-                
-
-                for(let i in promos) {
-                    videosHTMLText += `
-                    <br>
-                    <div class="video-preview-container card padding-medium margin-medium">
-                    <a class="clean-url" href="${promos[i].trailer.url}">
-                    <h6>${promos[i].title}</h6>
-                    <img src="${promos[i].trailer.images.image_url}">
-                    </a>
-                    </div>
-                    `;
-                }
-                
-                $("#videos").html(videosHTMLText);
-            }).catch(err => {
-                if(err == "Jikan4 API errored with response: 429") {
-                    setTimeout(loadVidoes, 1000);
-                } else {
-                    console.error(err);
-                } 
-            });
-        }
-
-        loadVidoes();
-
+        
 
         console.log(res)
 
 
         initClickToShowMore();
-    }).catch(err => console.error(err));
-
+    });
 
     function initClickToShowMore() {
         $(".hide-rest-container").each(() => {

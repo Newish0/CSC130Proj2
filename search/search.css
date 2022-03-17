@@ -21,7 +21,7 @@
     color: var(--dark-0);
 }
 
-#sort::after {
+#cur-sort-out::before {
     content: "Sort by: ";
 }
 
@@ -59,24 +59,36 @@
     box-sizing: border-box;
 }
 
+#overtop-sorts {
+    display: none;
+}
+
 #overtop-filters {
     display: none;
 }
 
 /* Override JQuery UI Styles */
 
-[class^="ui-"] {
+/* [class^="ui-"] {
     border: none !important;
     background-color: var(--light-1) !important;
     border-radius: 0.5rem !important;
+} */
+
+#overtop-filters .ui-slider {
+    background-color: var(--light-1) !important;
+    border: none;
 }
 
 #overtop-filters .ui-slider-range {
-    background-color: var(--light-4) !important;
+    background-color: var(--paradise-pink) !important;
+    border: none;
 }
 
 #overtop-filters .ui-slider-handle {
-    background-color: var(--paradise-pink) !important;
+    background-color: var(--light-2) !important;
+    border-radius: 1rem;
+    border: none;
     outline: none;
 }
 
@@ -140,7 +152,7 @@
 }
 
 @media screen and (max-width: 650px) {
-    #sort::after {
+    #cur-sort-out::before {
         content: "";
     }
 

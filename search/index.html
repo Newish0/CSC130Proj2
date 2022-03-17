@@ -18,6 +18,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
         integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
     <script src="../lib/jikan4.js"></script>
 
     <script src='/main.js'></script>
@@ -73,7 +75,7 @@
         <div class="overtop-content-wrapper light-bg">
             <h1>Search</h1>
             <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
-            <input class="search-box" type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
+            <input type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
                 placeholder="Search">
 
             <div id="overtop-search-result" class="search-result">
@@ -115,10 +117,7 @@
                 <hr>
 
                 <h3>Score</h3>
-                <div>
-                    <label for="amount">Score range:</label>
-                    <input type="text" id="score-range-out" readonly>
-                </div>
+                <br>
                 <br>
                 <div id="score-range-slider"></div>
 
@@ -139,34 +138,54 @@
                 <h1>Sorting</h1>
                 <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
 
-                <div>
-                    <div>
-                        <input type="radio" id="huey" name="group1" value="huey" checked>
-                        <label for="huey">Huey</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="huey" name="group1" value="huey" checked>
-                        <label for="huey">Huey</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="huey" name="group1" value="huey" checked>
-                        <label for="huey">Huey</label>
-                    </div>
+                <h3>Order By</h3>
+                <div class="order-by info-pond normal-gap">
+                    <span>
+                        <input type="radio" id="sorting-order-by-score" class="filter-ix-tag" name="order-by" value="score" checked>
+                        <label for="sorting-order-by-score">Score</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-members" class="filter-ix-tag" name="order-by" value="members">
+                        <label for="sorting-order-by-members">Popularity</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-id" class="filter-ix-tag" name="order-by" value="mal_id">
+                        <label for="sorting-order-by-id">ID</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-title" class="filter-ix-tag" name="order-by" value="title">
+                        <label for="sorting-order-by-title">Title</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-type" class="filter-ix-tag" name="order-by" value="type">
+                        <label for="sorting-order-by-type">Type</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-start-date" class="filter-ix-tag" name="order-by" value="start_date">
+                        <label for="sorting-order-by-start-date">Start Date</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-end-date" class="filter-ix-tag" name="order-by" value="end_date">
+                        <label for="sorting-order-by-end-date">End Date</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-episodes" class="filter-ix-tag" name="order-by" value="episodes">
+                        <label for="sorting-order-by-episodes">Episodes</label>
+                    </span>
+                    
                 </div>
 
-                <div>
-                    <div>
-                        <input type="radio" id="huey" name="group2" value="huey" checked>
-                        <label for="huey">Huey2</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="huey" name="group2" value="huey" checked>
-                        <label for="huey">Huey2</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="huey" name="group2" value="huey" checked>
-                        <label for="huey">Huey2</label>
-                    </div>
+                <br>
+                <h3>Sort</h3>
+                <div class="sort-by info-pond normal-gap">
+                    <span>
+                        <input type="radio" id="sorting-sort-asc" class="filter-ix-tag" name="sort" value="asc">
+                        <label for="sorting-sort-asc">Ascending</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-sort-desc" class="filter-ix-tag" name="sort" value="desc" checked>
+                        <label for="sorting-sort-desc">Descending</label>
+                    </span>
                 </div>
             </div>
         </div>
@@ -189,8 +208,8 @@
                         placeholder="Search">
                 </div>
 
-                <div class="filters-bar-item">
-                    <span id="sort">
+                <div id="sort" class="filters-bar-item">
+                    <span>
                         <i class="fa-solid fa-arrow-down-short-wide"></i>
 
                     </span>
@@ -251,7 +270,7 @@
         <!-- copyright notice  -->
         <div class="container">
             <div class="content-wrapper color-white text-center">
-                <div>Copyright &copy Yours Truly</div>
+                <div>Copyright &copy; Yours Truly</div>
             </div>
         </div>
         <br>

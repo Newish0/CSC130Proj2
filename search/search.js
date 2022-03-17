@@ -1,7 +1,3 @@
-
-
-
-
 $(() => {
     let mal = new Jikan4();
     let container = $("#posters-container");
@@ -12,22 +8,26 @@ $(() => {
         maxScore: 10,
         genres: "",
         sort: "desc",
-        orderBy: "score"
-    }
+        orderBy: "score",
+    };
 
     armFilterBar();
     initFilters();
+    initSorting();
 
     displaySearch();
 
     armLoadMoreBtn();
     armLoadMoreBtnAsAuto();
 
-
+    function initSorting() {
+        $("#sort").on("click", () => {
+            $("#overtop-sorts").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+        });
+    }
 
     // add in tags for filter
     function initFilters() {
-
         $("#filters").on("click", () => {
             $("#overtop-filters").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
         });
@@ -50,145 +50,155 @@ $(() => {
             });
         });
 
-
         const initGenres = () => {
             let filterGenres = $(".filter-genres");
             mal.getAnimeGenres({
-                filter: "genres"
-            }).then(res => {
+                filter: "genres",
+            })
+                .then((res) => {
+                    filterGenres.html("");
 
-                filterGenres.html("");
+                    res.data.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-                res.data.sort((a, b) => (a.name > b.name) ? 1 : -1)
-
-                for (let x in res.data) {
-                    let name = res.data[x].name;
-                    let value = res.data[x].mal_id;
-                    let tag = `
+                    for (let x in res.data) {
+                        let name = res.data[x].name;
+                        let value = res.data[x].mal_id;
+                        let tag = `
                     <span class="info-item">
                         <input type="checkbox" name="filter-genre-${name}-${value}" class="filter-ix-tag" id="filter-genre-${name}-${value}" value="${value}">
                         <label class="unselectable" for="filter-genre-${name}-${value}">${name}</label>
                     </span>
                     `;
 
-                    filterGenres.append(tag);
-                }
+                        filterGenres.append(tag);
+                    }
 
-
-
-                // add in 'any' tag
-                let anyTag = `
+                    // add in 'any' tag
+                    let anyTag = `
                 <span class="info-item">
                     <input type="checkbox" name="filter-genre-any-0" class="filter-ix-tag" id="filter-genre-any-0" value="" checked>
                     <label class="unselectable" for="filter-genre-any-0">Any</label>
                 </span>
                 `;
-                filterGenres.append(anyTag);
+                    filterGenres.append(anyTag);
 
+                    $(".filter-genres .filter-ix-tag").on("change", (evt) => {
+                        if (
+                            $(
+                                ".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked"
+                            ).length >= 1
+                        ) {
+                            $("#filter-genre-any-0").prop("checked", false);
+                        } else {
+                            $("#filter-genre-any-0").prop("checked", true);
+                        }
 
-                $(".filter-genres .filter-ix-tag").on("change", (evt) => {
-
-                    if ($(".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked").length >= 1) {
-                        $("#filter-genre-any-0").prop("checked", false);
-                    } else {
-                        $("#filter-genre-any-0").prop("checked", true);
-                    }
-
-
-                    let label = $("label[for='" + evt.target.id + "']");
-                    if (evt.target.checked && evt.target != $("#filter-genre-any-0").get(0)) {
-                        let aTag = `
+                        let label = $("label[for='" + evt.target.id + "']");
+                        if (
+                            evt.target.checked &&
+                            evt.target != $("#filter-genre-any-0").get(0)
+                        ) {
+                            let aTag = `
                         <span class="info-item filter-active-${label.html()}">
                             <span class="filter-i-tag unselectable">${label.html()}</span>
                         </span>
                         `;
-                        $(".filter-active").append(aTag);
+                            $(".filter-active").append(aTag);
+                        } else {
+                            $(
+                                `.filter-active .filter-active-${label.html()}`
+                            ).remove();
+                        }
+                    });
+                })
+                .catch((err) => {
+                    if (err == "Jikan4 API errored with response: 429") {
+                        setTimeout(initGenres, 1000);
                     } else {
-                        $(`.filter-active .filter-active-${label.html()}`).remove();
+                        console.error(err);
                     }
-
                 });
-
-            }).catch(err => {
-                if (err == "Jikan4 API errored with response: 429") {
-                    setTimeout(initGenres, 1000);
-                } else {
-                    console.error(err);
-                }
-            });
 
             // filterGenres.on("change", (evt) => {
             //     syncUserInputs()
             // });
-        }
+        };
 
         initGenres();
 
         const initThemes = () => {
             let filterThemes = $(".filter-themes");
             mal.getAnimeGenres({
-                filter: "themes"
-            }).then(res => {
+                filter: "themes",
+            })
+                .then((res) => {
+                    filterThemes.html("");
 
-                filterThemes.html("");
+                    res.data.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-                res.data.sort((a, b) => (a.name > b.name) ? 1 : -1)
-
-                for (let x in res.data) {
-                    let name = res.data[x].name;
-                    let value = res.data[x].mal_id;
-                    let tag = `
+                    for (let x in res.data) {
+                        let name = res.data[x].name;
+                        let value = res.data[x].mal_id;
+                        let tag = `
                     <span class="info-item">
                         <input type="checkbox" name="filter-theme-${name}-${value}" class="filter-ix-tag" id="filter-theme-${name}-${value}" value="${value}">
                         <label class="unselectable" for="filter-theme-${name}-${value}">${name}</label>
                     </span>
                     `;
 
-                    filterThemes.append(tag);
-                }
+                        filterThemes.append(tag);
+                    }
 
-                // add in 'any' tag
-                let anyTag = `
+                    // add in 'any' tag
+                    let anyTag = `
                 <span class="info-item">
                     <input type="checkbox" name="filter-theme-any-0" class="filter-ix-tag" id="filter-theme-any-0" value="" checked>
                     <label class="unselectable" for="filter-theme-any-0">Any</label>
                 </span>
                 `;
-                filterThemes.append(anyTag);
+                    filterThemes.append(anyTag);
 
+                    $(".filter-themes .filter-ix-tag").on("change", (evt) => {
+                        if (
+                            $(
+                                ".filter-themes .filter-ix-tag:not(#filter-genre-any-0):checked"
+                            ).length >= 1
+                        ) {
+                            $("#filter-theme-any-0").prop("checked", false);
+                        } else {
+                            $("#filter-theme-any-0").prop("checked", true);
+                        }
 
-                $(".filter-themes .filter-ix-tag").on("change", (evt) => {
-                    if ($(".filter-themes .filter-ix-tag:not(#filter-genre-any-0):checked").length >= 1) {
-                        $("#filter-theme-any-0").prop("checked", false);
-                    } else {
-                        $("#filter-theme-any-0").prop("checked", true);
-                    }
-
-                    let label = $("label[for='" + evt.target.id + "']");
-                    if (evt.target.checked && evt.target != $("#filter-theme-any-0").get(0)) {
-                        let aTag = `
+                        let label = $("label[for='" + evt.target.id + "']");
+                        if (
+                            evt.target.checked &&
+                            evt.target != $("#filter-theme-any-0").get(0)
+                        ) {
+                            let aTag = `
                         <span class="info-item filter-active-${label.html()}">
                             <span class="filter-i-tag unselectable">${label.html()}</span>
                         </span>
                         `;
-                        $(".filter-active").append(aTag);
+                            $(".filter-active").append(aTag);
+                        } else {
+                            $(
+                                `.filter-active .filter-active-${label.html()}`
+                            ).remove();
+                        }
+                    });
+                })
+                .catch((err) => {
+                    if (err == "Jikan4 API errored with response: 429") {
+                        setTimeout(initThemes, 1000);
                     } else {
-                        $(`.filter-active .filter-active-${label.html()}`).remove();
+                        console.error(err);
                     }
                 });
-
-            }).catch(err => {
-                if (err == "Jikan4 API errored with response: 429") {
-                    setTimeout(initThemes, 1000);
-                } else {
-                    console.error(err);
-                }
-            });
 
             // filterThemes.on("change", (evt) => {
             //     syncUserInputs()
             // });
-        }
+        };
 
         initThemes();
     }
@@ -211,30 +221,42 @@ $(() => {
                     `;
                     $(obj).html(html);
                 });
-                params.minScore = ui.values[0];
-                params.maxScore = ui.values[1];
-            }
+            },
         });
-        $("#score-range-out").val($("#score-range-slider").slider("values", 0) +
-            " - " + $("#score-range-slider").slider("values", 1));
+
+        let values = $('#score-range-slider').slider("option", "values");
+
+        $("#score-range-slider .ui-slider-handle").each((i, obj) => {
+            let html = `
+            <div class="output">
+            ${values[i]}
+            <i class="fa-solid fa-caret-down"></i>
+            </div>
+            `;
+            $(obj).html(html);
+        });
     }
 
     function resetFilters() {
-        console.log("lol")
-        $(".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked").prop("checked", false);
+        console.log("lol");
+        $(
+            ".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked"
+        ).prop("checked", false);
         $(".filter-genres #filter-genre-any-0").prop("checked", true);
-        $(".filter-themes .filter-ix-tag:not(#filter-theme-any-0):checked").prop("checked", false);
+        $(
+            ".filter-themes .filter-ix-tag:not(#filter-theme-any-0):checked"
+        ).prop("checked", false);
         $(".filter-themes #filter-theme-any-0").prop("checked", true);
     }
 
     function displaySearch() {
         clearDisplay();
         insertLoader();
-        mal.getAnimeSearch(params).then(res => {
+        mal.getAnimeSearch(params).then((res) => {
             clearDisplay();
             addDataToDisplay(res.data);
             removeLoader();
-        })
+        });
     }
 
     function clearDisplay() {
@@ -242,13 +264,12 @@ $(() => {
     }
 
     function addDataToDisplay(data) {
-
         if (data.length == 0) {
             container.append("<div>No results found.</div>");
         }
 
         for (let i in data) {
-            container.append(addOneToDisplay(data[i]))
+            container.append(addOneToDisplay(data[i]));
         }
 
         if (mal.hasNextPage()) {
@@ -277,15 +298,17 @@ $(() => {
 
         let count = "";
         if (oneData.type == "TV" || oneData.type == "Movie") {
-            count = oneData.episodes + " ep";
+            count = (oneData.episodes == null ? "Unknown" : oneData.episodes) + " ep";
         } else if (oneData.type == "Manga") {
-            count = oneData.episodes + " ch";
+            count = (oneData.episodes == null ? "Unknown" : oneData.episodes) + " ch";
         } else {
-            count = oneData.episodes;
+            count = (oneData.episodes == null ? "Unknown" : oneData.episodes);
         }
+
+        
         count += " (" + oneData.type + ")";
 
-        let length = oneData.duration;
+        let length = oneData.duration == null ? "Unknown" : oneData.duration;
 
         let imgSrc = "";
         let imgLink = "";
@@ -303,6 +326,7 @@ $(() => {
             studios += i < oneData.studios.length - 1 ? ", " : "";
         }
 
+        studios = studios == "" ? "Unknown" : studios;
 
         let themesHTML = "";
         for (let i in oneData.themes) {
@@ -317,12 +341,14 @@ $(() => {
 
         let source = oneData.source;
 
-        let description = oneData.synopsis;
+        let description = (oneData.synopsis == null ? "n/a" : oneData.synopsis);
 
-        description += "<br><p>Source: <a class='clean-url' href='" + oneData.url + "' target='_blank'>myanimelist.net</a></p>"
+        description +=
+            "<br><p>Source: <a class='clean-url' href='" +
+            oneData.url +
+            "' target='_blank'>myanimelist.net</a></p>";
 
-        let score = " " + oneData.score;
-
+        let score = " " + (oneData.score == null ? "n/a" : oneData.score);
 
         let template = `
             <!-- START: One Poster Template -->
@@ -383,18 +409,15 @@ $(() => {
 
     function armLoadMoreBtn() {
         $("#load-more").on("click", (evt) => {
-
             if (!loadingMore) {
-                insertLoader()
-                mal.getMore().then(res => {
+                insertLoader();
+                mal.getMore().then((res) => {
                     addDataToDisplay(res.data);
                     removeLoader();
                 });
             }
-
         });
     }
-
 
     function armLoadMoreBtnAsAuto() {
         let loadMoreBtn = document.querySelector("#load-more");
@@ -402,15 +425,15 @@ $(() => {
         let loadMoreObserverOptions = {
             root: null,
             rootMargin: "0px",
-            threshold: 1.0
-        }
+            threshold: 1.0,
+        };
 
         let callback = (entries, observer) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (container.children().length > 1) {
                     if (!loadingMore) {
                         insertLoader();
-                        mal.getMore().then(res => {
+                        mal.getMore().then((res) => {
                             addDataToDisplay(res.data);
                             removeLoader();
                         });
@@ -419,7 +442,10 @@ $(() => {
             });
         };
 
-        let loadMoreObserver = new IntersectionObserver(callback, loadMoreObserverOptions);
+        let loadMoreObserver = new IntersectionObserver(
+            callback,
+            loadMoreObserverOptions
+        );
         loadMoreObserver.observe(loadMoreBtn);
     }
 
@@ -433,7 +459,9 @@ $(() => {
 
     function insertLoader() {
         loadingMore = true;
-        $("#load-more").parent().prepend('<div class="loader margin-auto"></div>');
+        $("#load-more")
+            .parent()
+            .prepend('<div class="loader margin-auto"></div>');
     }
 
     function removeLoader() {
@@ -447,7 +475,7 @@ $(() => {
         let sort = $("#sort");
 
         filters.on("click", (evt) => {
-            console.log("FILTER OVERLAY")
+            console.log("FILTER OVERLAY");
         });
 
         search.on("change", () => {
@@ -455,11 +483,9 @@ $(() => {
         });
 
         sort.on("click", () => {
-            console.log("SORT OVERLAY")
+            console.log("SORT OVERLAY");
         });
-
     }
-
 
     /**
      * Get the values from the filters, sorts etc...
@@ -467,11 +493,12 @@ $(() => {
      */
     function syncUserInputs() {
         let search = $("#filters-bar-search-box");
-        let sort = $("#sort");
+        let scoreRangeValues = $('#score-range-slider').slider("option", "values");
+        
 
         let filterString = "";
 
-        console.log("SYNC")
+        console.log("SYNC");
 
         params.q = search.val();
 
@@ -491,8 +518,25 @@ $(() => {
 
         params.genres = filterString;
 
+        params.minScore = scoreRangeValues[0];
+        params.maxScore = scoreRangeValues[1];
+
+
+        $(".order-by input").each((i, obj) => {
+            if (obj.checked) {
+                params.orderBy = obj.value;
+                let label = $("label[for='" + obj.id + "']");
+                $("#cur-sort-out").html(label.html());
+            }
+        });
+
+        $(".sort-by input").each((i, obj) => {
+            if (obj.checked) {
+                params.sort = obj.value;
+            }
+        });
+       
 
         displaySearch(params);
     }
-
-})
+});

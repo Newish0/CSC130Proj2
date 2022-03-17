@@ -92,6 +92,7 @@ div {
     flex-flow: row nowrap;
     width: 100%;
     bottom: 0;
+    gap: 1rem;
 }
 
 .top-panel-main .quick-access-items > * {
