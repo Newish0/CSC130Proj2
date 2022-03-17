@@ -86,6 +86,7 @@ nav button:hover {
 nav > .wrapper .user-nav {
     display: flex;
     justify-content: flex-end;
+    align-items: flex-start;
 }
 
 #nav-collap-icon {
@@ -180,7 +181,6 @@ nav > .wrapper .user-nav {
     border-radius: 0.5rem;
 }
 
-
 .search-result-item > div {
     width: 100%;
     box-sizing: border-box;
@@ -202,7 +202,7 @@ nav > .wrapper .user-nav {
     text-overflow: ellipsis;
 }
 
-.search-result-item a:hover{
+.search-result-item a:hover {
     text-decoration: underline;
     transform: none;
     background-color: transparent;
@@ -253,7 +253,7 @@ footer a {
     margin: 1rem;
     margin-inline-start: auto;
     margin-inline-end: auto;
-    opacity: .33;
+    opacity: 0.33;
     border: 1px solid var(--dark-2);
 }
 
@@ -275,7 +275,6 @@ footer a {
     box-sizing: border-box;
 }
 
-
 .overtop-popup {
     position: fixed;
     top: 0;
@@ -296,6 +295,14 @@ footer a {
     border-radius: 1rem;
     box-sizing: border-box;
     overflow: auto;
+}
+
+@media screen and (max-width: 420px) {
+    .overtop-popup .overtop-content-wrapper {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
 }
 
 .overtop-content-wrapper {
@@ -370,7 +377,7 @@ footer a {
 .large-btn.inverted {
     background-color: transparent;
     color: var(--paradise-pink);
-    box-shadow:inset 0px 0px 0px 2px var(--paradise-pink); /* inward border trick */
+    box-shadow: inset 0px 0px 0px 2px var(--paradise-pink); /* inward border trick */
 }
 
 .large-btn:hover {
