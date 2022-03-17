@@ -8,13 +8,16 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="search.css">
-
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script src="../lib/jikan4.js"></script>
 
     <script src='/main.js'></script>
@@ -92,7 +95,7 @@
             </div>
         </div>
     </div>
-    
+
     <main>
 
 
@@ -100,16 +103,24 @@
             <div class="overtop-content-wrapper light-bg">
                 <h1>Filter</h1>
                 <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
-                
+
                 <h3>Active Filters</h3>
                 <div class="filter-active margin-v-normal info-pond normal-gap">
-                    
+
                 </div>
 
                 <button class="large-btn w-50 overtop-x-btn">Apply</button>
                 <button class="large-btn inverted w-25 filters-reset">Reset</button>
 
                 <hr>
+
+                <h3>Score</h3>
+                <div>
+                    <label for="amount">Score range:</label>
+                    <input type="text" id="score-range-out" readonly>
+                </div>
+                <br>
+                <div id="score-range-slider"></div>
 
                 <h3>Genres</h3>
                 <div class="filter-genres info-pond normal-gap">
@@ -121,7 +132,46 @@
                     <div class="loader-small"></div>
                 </div>
             </div>
-        </div> 
+        </div>
+
+        <div id="overtop-sorts" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper light-bg">
+                <h1>Sorting</h1>
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
+
+                <div>
+                    <div>
+                        <input type="radio" id="huey" name="group1" value="huey" checked>
+                        <label for="huey">Huey</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="huey" name="group1" value="huey" checked>
+                        <label for="huey">Huey</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="huey" name="group1" value="huey" checked>
+                        <label for="huey">Huey</label>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <input type="radio" id="huey" name="group2" value="huey" checked>
+                        <label for="huey">Huey2</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="huey" name="group2" value="huey" checked>
+                        <label for="huey">Huey2</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="huey" name="group2" value="huey" checked>
+                        <label for="huey">Huey2</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
         <div class="padding-medium">

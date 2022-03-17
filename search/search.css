@@ -63,6 +63,44 @@
     display: none;
 }
 
+/* Override JQuery UI Styles */
+
+[class^="ui-"] {
+    border: none !important;
+    background-color: var(--light-1) !important;
+    border-radius: 0.5rem !important;
+}
+
+#overtop-filters .ui-slider-range {
+    background-color: var(--light-4) !important;
+}
+
+#overtop-filters .ui-slider-handle {
+    background-color: var(--paradise-pink) !important;
+    outline: none;
+}
+
+#overtop-filters .ui-slider-handle .output {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: var(--paradise-pink);
+    color: var(--light-0);
+    text-align: center;
+    top: -2.5rem;
+    padding: 0.5rem;
+    left: -0.5rem;
+    border-radius: 1rem;
+}
+
+#overtop-filters .ui-slider-handle .output i {
+    color: var(--paradise-pink);
+}
+
+#overtop-filters .ui-state-active {
+    background-color: var(--paradise-pink-l1) !important;
+}
+
 .filters-bar #filters-bar-search-box-wrapper:focus-within {
     transform: scale(101%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

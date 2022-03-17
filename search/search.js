@@ -87,7 +87,7 @@ $(() => {
 
 
                 $(".filter-genres .filter-ix-tag").on("change", (evt) => {
-                    
+
                     if ($(".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked").length >= 1) {
                         $("#filter-genre-any-0").prop("checked", false);
                     } else {
@@ -96,7 +96,7 @@ $(() => {
 
 
                     let label = $("label[for='" + evt.target.id + "']");
-                    if(evt.target.checked && evt.target != $("#filter-genre-any-0").get(0)) { 
+                    if (evt.target.checked && evt.target != $("#filter-genre-any-0").get(0)) {
                         let aTag = `
                         <span class="info-item filter-active-${label.html()}">
                             <span class="filter-i-tag unselectable">${label.html()}</span>
@@ -106,7 +106,7 @@ $(() => {
                     } else {
                         $(`.filter-active .filter-active-${label.html()}`).remove();
                     }
-                    
+
                 });
 
             }).catch(err => {
@@ -165,7 +165,7 @@ $(() => {
                     }
 
                     let label = $("label[for='" + evt.target.id + "']");
-                    if(evt.target.checked && evt.target != $("#filter-theme-any-0").get(0)) { 
+                    if (evt.target.checked && evt.target != $("#filter-theme-any-0").get(0)) {
                         let aTag = `
                         <span class="info-item filter-active-${label.html()}">
                             <span class="filter-i-tag unselectable">${label.html()}</span>
@@ -193,6 +193,32 @@ $(() => {
         initThemes();
     }
 
+    initScoreRangeSlider();
+    function initScoreRangeSlider() {
+        $("#score-range-slider").slider({
+            range: true,
+            min: 0,
+            max: 10,
+            values: [0, 10],
+            slide: function (event, ui) {
+                $("#score-range-out").val(ui.values[0] + " - " + ui.values[1]);
+                $("#score-range-slider .ui-slider-handle").each((i, obj) => {
+                    let html = `
+                    <div class="output">
+                    ${ui.values[i]}
+                    <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    `;
+                    $(obj).html(html);
+                });
+                params.minScore = ui.values[0];
+                params.maxScore = ui.values[1];
+            }
+        });
+        $("#score-range-out").val($("#score-range-slider").slider("values", 0) +
+            " - " + $("#score-range-slider").slider("values", 1));
+    }
+
     function resetFilters() {
         console.log("lol")
         $(".filter-genres .filter-ix-tag:not(#filter-genre-any-0):checked").prop("checked", false);
@@ -216,16 +242,16 @@ $(() => {
     }
 
     function addDataToDisplay(data) {
-        
-        if(data.length == 0) {
+
+        if (data.length == 0) {
             container.append("<div>No results found.</div>");
         }
-        
+
         for (let i in data) {
             container.append(addOneToDisplay(data[i]))
         }
-        
-        if(mal.hasNextPage()) {
+
+        if (mal.hasNextPage()) {
             showLoadMore();
         } else {
             hideLoadMore();
