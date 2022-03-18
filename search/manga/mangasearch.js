@@ -448,7 +448,7 @@ $(() => {
             oneData.url +
             "' target='_blank'>myanimelist.net</a></p>";
 
-        let score = " " + (oneData.score == null ? "n/a" : oneData.score);
+        let score = " " + (oneData.scored == null ? "n/a" : oneData.scored);
 
         let template = `
             <!-- START: One Poster Template -->
