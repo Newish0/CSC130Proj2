@@ -42,7 +42,8 @@ body {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     min-height: 50vh;
-    min-width: fit-content;
+    /* min-width: fit-content; */
+    max-width: 100vw;
     margin: 0;
 }
 
@@ -336,6 +337,10 @@ footer a {
     color: var(--paradise-pink);
 }
 
+.dark-color {
+    color: var(--dark-0);
+}
+
 .container {
     margin: auto;
     width: min(1400px, 100%);
@@ -493,6 +498,22 @@ footer a {
 .text-alt {
     font-size: 0.66rem;
     color: var(--light-2);
+}
+
+.text-small {
+    font-size: 0.5rem;
+}
+
+.text-normal {
+    font-size: 1rem;
+}
+
+.text-large {
+    font-size: 1.5rem;
+}
+
+.text-xlarge {
+    font-size: 2rem;
 }
 
 .tag {

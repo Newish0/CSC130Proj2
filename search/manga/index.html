@@ -7,7 +7,7 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="/search/search.css">
     
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -20,10 +20,10 @@
         integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    
-    <script src="../lib/jikan4.js"></script>
+    <script src="/lib/jikan4.js"></script>
 
     <script src='/main.js'></script>
-    <script src="search.js"></script>
+    <script src="mangasearch.js"></script>
 </head>
 
 <body>
@@ -32,10 +32,10 @@
         <div class="wrapper">
             <div class="page-nav">
                 <a href=""> <img class="nav-page-icon" src="" alt=""> </a>
-                <a href="/search/?media=anime">Animes</a>
-                <a href="/search/?media=manga">Mangas</a>
-                <a href="/search/?media=character">Characters</a>
-                <a href="/search/?media=people">People</a>
+                <a href="/search/anime">Animes</a>
+                <a href="/search/manga">Mangas</a>
+                <a href="/search/character">Characters</a>
+                <a href="/search/people">People</a>
                 <a id="nav-collap-icon"><i class="fas fa-bars"></i></a>
             </div>
 
@@ -111,7 +111,7 @@
 
                 </div>
 
-                <button class="large-btn w-50 overtop-x-btn">Apply</button>
+                <button class="large-btn w-50 overtop-x-btn sync-on-click">Apply</button>
                 <button class="large-btn inverted w-25 filters-reset">Reset</button>
 
                 <hr>
@@ -130,6 +130,11 @@
                 <div class="filter-themes info-pond normal-gap">
                     <div class="loader-small"></div>
                 </div>
+                <br>
+                <h3>Magazines</h3>
+                <div class="filter-magazines info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
             </div>
         </div>
 
@@ -146,7 +151,7 @@
                     </span>
                     <span>
                         <input type="radio" id="sorting-order-by-members" class="filter-ix-tag" name="order-by" value="members">
-                        <label for="sorting-order-by-members">Popularity</label>
+                        <label for="sorting-order-by-members">User Count</label>
                     </span>
                     <span>
                         <input type="radio" id="sorting-order-by-id" class="filter-ix-tag" name="order-by" value="mal_id">
@@ -214,7 +219,7 @@
 
                     </span>
 
-                    <span id="cur-sort-out">Current sort mode</span>
+                    <span id="cur-sort-out">Score</span>
                 </div>
             </div>
         </div>
@@ -255,10 +260,10 @@
         <div id="sitemap" class="container">
             <div class="auto-gallery justify-center text-center margin-medium">
                 <div>
-                    <a href="/search/?media=anime">Animes</a>
-                    <a href="/search/?media=manga">Mangas</a>
-                    <a href="/search/?media=character">Characters</a>
-                    <a href="/search/?media=people">People</a>
+                    <a href="/search/anime">Animes</a>
+                    <a href="/search/manga">Mangas</a>
+                    <a href="/search/character">Characters</a>
+                    <a href="/search/people">People</a>
                     <span> | </span>
                     <a href="/about/">About</a>
                     <a href="/contact/">Contact</a>

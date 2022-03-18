@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/search/search.css">
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+    <script src="/lib/jikan4.js"></script>
+
+    <script src='/main.js'></script>
+    <script src="animesearch.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrapper">
+            <div class="page-nav">
+                <a href=""> <img class="nav-page-icon" src="" alt=""> </a>
+                <a href="/search/anime">Animes</a>
+                <a href="/search/manga">Mangas</a>
+                <a href="/search/character">Characters</a>
+                <a href="/search/people">People</a>
+                <a id="nav-collap-icon"><i class="fas fa-bars"></i></a>
+            </div>
+
+            <div class="user-nav">
+                <button id="min-nav-search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></button>
+                <div id="nav-search-box-wrapper">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="search-box" type="text" name="nav-search-box" id="nav-search-box"
+                        placeholder="Search">
+
+                    <div id="nav-search-result" class="search-result">
+                        <div>
+                            <div class="search-result-anime"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-manga"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-character"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-people"></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="" id="login">Sign In</a>
+                <a href="" id="profile"><i class="fa-solid fa-user"></i></a>
+            </div>
+        </div>
+
+    </nav>
+
+    <div id="overtop-search" class="overtop-popup">
+        <div class="overtop-content-wrapper light-bg">
+            <h1>Search</h1>
+            <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+            <input type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
+                placeholder="Search">
+
+            <div id="overtop-search-result" class="search-result">
+                <div>
+                    <div class="search-result-anime"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-manga"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-character"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-people"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+
+        <div id="overtop-filters" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper light-bg">
+                <h1>Filter</h1>
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
+
+                <h3>Active Filters</h3>
+                <div class="filter-active margin-v-normal info-pond normal-gap">
+
+                </div>
+
+                <button class="large-btn w-50 overtop-x-btn sync-on-click">Apply</button>
+                <button class="large-btn inverted w-25 filters-reset">Reset</button>
+
+                <hr>
+
+                <h3>Score</h3>
+                <br>
+                <br>
+                <div id="score-range-slider"></div>
+
+                <h3>Genres</h3>
+                <div class="filter-genres info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
+                <br>
+                <h3>Themes</h3>
+                <div class="filter-themes info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
+                <br>
+                <h3>Studios</h3>
+                <div class="filter-studios info-pond normal-gap">
+                    <div class="loader-small"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="overtop-sorts" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper light-bg">
+                <h1>Sorting</h1>
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
+
+                <h3>Order By</h3>
+                <div class="order-by info-pond normal-gap">
+                    <span>
+                        <input type="radio" id="sorting-order-by-score" class="filter-ix-tag" name="order-by" value="score" checked>
+                        <label for="sorting-order-by-score">Score</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-members" class="filter-ix-tag" name="order-by" value="members">
+                        <label for="sorting-order-by-members">User Count</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-id" class="filter-ix-tag" name="order-by" value="mal_id">
+                        <label for="sorting-order-by-id">ID</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-title" class="filter-ix-tag" name="order-by" value="title">
+                        <label for="sorting-order-by-title">Title</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-type" class="filter-ix-tag" name="order-by" value="type">
+                        <label for="sorting-order-by-type">Type</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-start-date" class="filter-ix-tag" name="order-by" value="start_date">
+                        <label for="sorting-order-by-start-date">Start Date</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-end-date" class="filter-ix-tag" name="order-by" value="end_date">
+                        <label for="sorting-order-by-end-date">End Date</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-order-by-episodes" class="filter-ix-tag" name="order-by" value="episodes">
+                        <label for="sorting-order-by-episodes">Episodes</label>
+                    </span>
+                    
+                </div>
+
+                <br>
+                <h3>Sort</h3>
+                <div class="sort-by info-pond normal-gap">
+                    <span>
+                        <input type="radio" id="sorting-sort-asc" class="filter-ix-tag" name="sort" value="asc">
+                        <label for="sorting-sort-asc">Ascending</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="sorting-sort-desc" class="filter-ix-tag" name="sort" value="desc" checked>
+                        <label for="sorting-sort-desc">Descending</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="padding-medium">
+            <div class="filters-bar container">
+                <div id="filters" class="filters-bar-item">
+                    <i class="fa-solid fa-filter"></i>
+
+                </div>
+
+
+
+                <div id="filters-bar-search-box-wrapper">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="search-box" type="text" name="filters-bar-search-box" id="filters-bar-search-box"
+                        placeholder="Search">
+                </div>
+
+                <div id="sort" class="filters-bar-item">
+                    <span>
+                        <i class="fa-solid fa-arrow-down-short-wide"></i>
+
+                    </span>
+
+                    <span id="cur-sort-out">Score</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="padding-small">
+            <div id="posters-container" class="container">
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="container text-center">
+            <button id="load-more" class="large-btn">
+                Load More
+            </button>
+        </div>
+
+
+    </main>
+
+    <br>
+
+    <footer>
+        <!-- social media links -->
+        <div class="container">
+            <br>
+            <div class="socials">
+                <a target="_blank" href=""><i class="fab fa-github color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-instagram color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-twitter color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-linkedin-in color-white margin-medium hover-dim"></i></a>
+            </div>
+            <br>
+        </div>
+
+        <!-- site map -->
+        <div id="sitemap" class="container">
+            <div class="auto-gallery justify-center text-center margin-medium">
+                <div>
+                    <a href="/search/anime">Animes</a>
+                    <a href="/search/manga">Mangas</a>
+                    <a href="/search/character">Characters</a>
+                    <a href="/search/people">People</a>
+                    <span> | </span>
+                    <a href="/about/">About</a>
+                    <a href="/contact/">Contact</a>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- copyright notice  -->
+        <div class="container">
+            <div class="content-wrapper color-white text-center">
+                <div>Copyright &copy; Yours Truly</div>
+            </div>
+        </div>
+        <br>
+        </div>
+    </footer>
+</body>
+
+</html>
