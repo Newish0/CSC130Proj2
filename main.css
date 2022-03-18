@@ -21,7 +21,7 @@
     --dark-4: rgb(166, 166, 166);
 
 
-    /* @link https://utopia.fyi/type/calculator?c=680,16,1.125,1600,20,1.414,4,4,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
+    /* https://utopia.fyi/type/calculator/?c=480,14,1.125,1400,16,1.2,4,4,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
     --step--4: clamp(0.48rem, calc(0.58rem + -0.11vw), 0.55rem);
     --step--3: clamp(0.58rem, calc(0.63rem + -0.06vw), 0.61rem);
     --step--2: clamp(0.69rem, calc(0.69rem + 0.01vw), 0.69rem);
