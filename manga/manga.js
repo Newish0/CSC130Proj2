@@ -56,13 +56,13 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}-${name}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}~${name}">${name}</a>`
             }
 
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}-${name}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}~${name}">${name}</a>`
             }
 
             tags.html(tagsHTMLText);
@@ -81,7 +81,7 @@ $(() => {
             for (let x in data.serializations) {
                 let name = data.serializations[x].name;
                 let id = data.serializations[x].mal_id;
-                serializationsHTMLText += `<a class="tag clean-url" href="/search/manga/?magazine=${id}-${name}">${name}</a>`
+                serializationsHTMLText += `<a class="tag clean-url" href="/search/manga/?magazine=${id}~${name}">${name}</a>`
             }
             publishers.html(serializationsHTMLText);
 
@@ -89,7 +89,7 @@ $(() => {
             for (let x in data.authors) {
                 let name = data.authors[x].name;
                 let id = data.authors[x].mal_id;
-                authorsHTMLText += `<a class="tag clean-url" href="/search/manga/?author=${id}-${name}">${name}</a>`
+                authorsHTMLText += `<a class="tag clean-url" href="/search/manga/?author=${id}~${name}">${name}</a>`
             }
             authors.html(authorsHTMLText);
 
@@ -97,7 +97,7 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                genresHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}-${name}">${name}</a>`
+                genresHTMLText += `<a class="tag clean-url" href="/search/manga/?genre=${id}~${name}">${name}</a>`
             }
             genres.html(genresHTMLText);
 
@@ -105,7 +105,7 @@ $(() => {
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                themesHTMLText += `<a class="tag clean-url" href=/search/manga/?genre=${id}-${name}">${name}</a>`
+                themesHTMLText += `<a class="tag clean-url" href=/search/manga/?genre=${id}~${name}">${name}</a>`
             }
 
             themesHTMLText = themesHTMLText == "" ? "n/a" : themesHTMLText;
@@ -117,7 +117,7 @@ $(() => {
             for (let x in data.demographics) {
                 let name = data.demographics[x].name;
                 let id = data.demographics[x].mal_id;
-                demographicsHTMLText += `<a class="tag clean-url" href="/search/manga/?demographic=${id}-${name}">${name}</a>`
+                demographicsHTMLText += `<a class="tag clean-url" href="/search/manga/?demographic=${id}~${name}">${name}</a>`
             }
 
             demographicsHTMLText = demographicsHTMLText == "" ? "n/a" : demographicsHTMLText;

@@ -60,13 +60,13 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}-${encodeURIComponent(name)}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
 
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}-${encodeURIComponent(name)}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
 
             tags.html(tagsHTMLText);
@@ -87,7 +87,7 @@ $(() => {
             for (let x in data.producers) {
                 let name = data.producers[x].name;
                 let id = data.producers[x].mal_id;
-                producersHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}-${encodeURIComponent(name)}">${name}</a>`
+                producersHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
             producers.html(producersHTMLText);
 
@@ -95,7 +95,7 @@ $(() => {
             for (let x in data.studios) {
                 let name = data.studios[x].name;
                 let id = data.studios[x].mal_id;
-                studiosHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}-${encodeURIComponent(name)}">${name}</a>`
+                studiosHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
             studios.html(studiosHTMLText);
 
@@ -105,7 +105,7 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                genresHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}-${encodeURIComponent(name)}">${name}</a>`
+                genresHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
             genres.html(genresHTMLText);
 
@@ -113,7 +113,7 @@ $(() => {
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                themesHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}-${encodeURIComponent(name)}">${name}</a>`
+                themesHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
 
             themesHTMLText = themesHTMLText == "" ? "n/a" : themesHTMLText;
@@ -127,7 +127,7 @@ $(() => {
             for (let x in data.demographics) {
                 let name = data.demographics[x].name;
                 let id = data.demographics[x].mal_id;
-                demographicsHTMLText += `<a class="tag clean-url" href="/search/anime/?demographic=${id}-${encodeURIComponent(name)}">${name}</a>`
+                demographicsHTMLText += `<a class="tag clean-url" href="/search/anime/?demographic=${id}~${encodeURIComponent(name)}">${name}</a>`
             }
 
             demographicsHTMLText = demographicsHTMLText == "" ? "n/a" : demographicsHTMLText;

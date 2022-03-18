@@ -19,19 +19,19 @@ $(() => {
     armFilterBar();
 
     if(urlParams.genre) {
-        let params = urlParams.genre.split("-");
+        let params = urlParams.genre.split("~");
         searchParams.genres = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
-    } else if(urlParams.producer) {
-        let params = urlParams.producer.split("-");
-        searchParams.producers = params[0];
+    } else if(urlParams.magazine) {
+        let params = urlParams.magazine.split("~");
+        searchParams.magazines = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
     } else if(urlParams.demographic) {
-        let params = urlParams.demographic.split("-");
+        let params = urlParams.demographic.split("~");
         searchParams.genres = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
@@ -137,13 +137,13 @@ $(() => {
                     let label = $("label[for='" + evt.target.id + "']");
                     if (evt.target.checked && evt.target != $("#filter-genre-any").get(0)) {
                         let aTag = `
-                            <span class="info-item filter-active-${label.html()}">
+                            <span class="info-item filter-active-genre-${evt.target.value}">
                                 <span class="filter-i-tag unselectable">${label.html()}</span>
                             </span>
                             `;
                         $(".filter-active").append(aTag);
                     } else {
-                        $(`.filter-active .filter-active-${label.html()}`).remove();
+                        $(`.filter-active .filter-active-genre-${evt.target.value}`).remove();
                     }
                 });
             }).catch((err) => {
@@ -202,13 +202,13 @@ $(() => {
                     let label = $("label[for='" + evt.target.id + "']");
                     if (evt.target.checked && evt.target != $("#filter-theme-any").get(0)) {
                         let aTag = `
-                            <span class="info-item filter-active-${label.html()}">
+                            <span class="info-item filter-active-theme-${evt.target.value}">
                                 <span class="filter-i-tag unselectable">${label.html()}</span>
                             </span>
                             `;
                         $(".filter-active").append(aTag);
                     } else {
-                        $(`.filter-active .filter-active-${label.html()}`).remove();
+                        $(`.filter-active .filter-active-theme-${evt.target.value}`).remove();
                     }
                 });
             }).catch((err) => {

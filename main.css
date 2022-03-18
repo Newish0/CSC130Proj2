@@ -400,6 +400,11 @@ footer a {
     text-decoration: underline;
 }
 
+.active-url {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
 .x-btn {
     font-size: 1rem;
     color: var(--dark-1);
