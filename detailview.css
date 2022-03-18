@@ -98,6 +98,7 @@ div {
 .top-panel-main .quick-access-menu > * {
     flex-grow: 1;
     flex-shrink: 1;
+    width: max-content;
 }
 
 .quick-access-submenu {
@@ -127,7 +128,9 @@ div {
         display: block;
     }
 
-    .top-panel-main .quick-access-submenu > *:not(.quick-access-submenu-toggle) {
+    .top-panel-main
+        .quick-access-submenu
+        > *:not(.quick-access-submenu-toggle) {
         display: none;
     }
 }
@@ -135,6 +138,10 @@ div {
 @media screen and (max-width: 550px) {
     #cover {
         max-height: 100px;
+    }
+
+    .top-panel-main .quick-access-menu > * {
+        width: fit-content;
     }
 }
 
@@ -295,10 +302,6 @@ h6 {
     max-width: 320px;
     min-width: 150px;
 }
-
-
-
-
 
 @media screen and (max-width: 600px) {
     .panel-container {
