@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="59.131214"
+   height="20.621326"
+   viewBox="0 0 59.131214 20.621326"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="logofull.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="22.627417"
+     inkscape:cx="27.952815"
+     inkscape:cy="8.2201163"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.13822448,-10.97541)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.15;font-family:'Lucida Sans';-inkscape-font-specification:'Lucida Sans';letter-spacing:-1.96px;word-spacing:0px;fill:#ffffff"
+       x="-1.260213"
+       y="28.323299"
+       id="text1794"
+       inkscape:export-filename="G:\Documents\Files and Docs\Web Dev\jikanfrontend\assets\icons\logofull.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><tspan
+         sodipodi:role="line"
+         id="tspan1792"
+         x="-1.260213"
+         y="28.323299">Usagi</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:1.15;font-family:'Lucida Sans';-inkscape-font-specification:'Lucida Sans';letter-spacing:-2.35px;word-spacing:0px;fill:#ffffff"
+       x="30.834282"
+       y="28.31916"
+       id="text11908"
+       inkscape:export-filename="G:\Documents\Files and Docs\Web Dev\jikanfrontend\assets\icons\logofull.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><tspan
+         sodipodi:role="line"
+         id="tspan11906"
+         x="30.834282"
+         y="28.31916">DB</tspan></text>
+  </g>
+</svg>

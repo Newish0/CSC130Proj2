@@ -49,7 +49,7 @@ $(() => {
 
             pageTitle += data.title;
             if (data.title_english != null) { pageTitle += data.title_english };
-            $("title").html(pageTitle);
+            $("title").html(`${pageTitle} - UsagiDB`);
 
 
             title.html(data.title);

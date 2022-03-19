@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="26.548923"
+   height="27.31568"
+   viewBox="0 0 26.548923 27.315679"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="32"
+     inkscape:cx="12.796875"
+     inkscape:cy="16.53125"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-page="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.5659361,-10.310672)">
+    <rect
+       style="opacity:0.999;fill:#ee4266;fill-opacity:0.8;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
+       id="rect47200"
+       width="26.548923"
+       height="27.31568"
+       x="7.5659361"
+       y="10.310672"
+       ry="4.6085157" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.15;font-family:'Lucida Sans';-inkscape-font-specification:'Lucida Sans';letter-spacing:-2.19px;word-spacing:0px;fill:#ffffff"
+       x="8.5508938"
+       y="28.676853"
+       id="text1794"
+       inkscape:export-filename="G:\Documents\Files and Docs\Web Dev\jikanfrontend\assets\icons\logofull.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><tspan
+         sodipodi:role="line"
+         id="tspan1792"
+         x="8.5508938"
+         y="28.676853"
+         rotate="0 0 0 0"><tspan
+   style="font-size:11px"
+   id="tspan34784"
+   rotate="0 0">U</tspan>DB</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:1.15;font-family:'Lucida Sans';-inkscape-font-specification:'Lucida Sans';letter-spacing:-2.35px;word-spacing:0px;fill:#ffffff"
+       x="30.834282"
+       y="28.31916"
+       id="text11908"
+       inkscape:export-filename="G:\Documents\Files and Docs\Web Dev\jikanfrontend\assets\icons\logofull.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"><tspan
+         sodipodi:role="line"
+         id="tspan11906"
+         x="30.834282"
+         y="28.31916" /></text>
+  </g>
+</svg>

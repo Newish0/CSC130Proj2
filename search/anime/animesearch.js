@@ -258,7 +258,6 @@ $(() => {
                 });
 
 
-
                 let anyTag = `
                 <span>
                     <input type="radio" name="filter-studios" class="filter-ix-tag" id="filter-studios-any" value="" checked>

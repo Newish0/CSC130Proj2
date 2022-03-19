@@ -123,6 +123,14 @@ nav button:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+.nav-page-icon-wrapper {
+    padding: 0.5rem;
+}
+
+.nav-page-icon-wrapper img {
+    height: 2.25rem;
+}
+
 nav > .wrapper .user-nav {
     display: flex;
     justify-content: flex-end;
@@ -564,7 +572,7 @@ footer a {
     /* background-color: var(--light-1);
     color: var(--dark-1); */
     padding: 0.1rem 0.33rem;
-    font-size: var(--step--3);
+    font-size: var(--step--2);
     border-radius: 1rem;
     /* border: 1px solid var(--light-2); */
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
