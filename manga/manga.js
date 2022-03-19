@@ -15,6 +15,13 @@ $(() => {
     
 
     function displayManga() {
+
+        // hide panel till ready
+        $(".panel-container *").hide();
+
+        // add in loader
+        $("main").append('<div class="loader center"></div>');
+
         mal.getMangaById(mangaID).then(res => {
             let data = res.data;
 
@@ -133,6 +140,11 @@ $(() => {
             //scorePopulation.html(data.scored_by.toLocaleString(undefined));
             initNumberLoadingAnimation("#score-population", data.scored_by, 2000, true, 0);
 
+            // now ready to display the basic data
+            $(".panel-container *").fadeIn(100);
+
+            $("main > .loader").remove();
+
 
             const loadScoreDistribution = () => {
                 mal.getMangaStatistics(mangaID).then(statRes => {
@@ -183,6 +195,8 @@ $(() => {
                         relationHTMLText += relationBlockHTMLText;
                     }
 
+
+                    relationHTMLText = relationHTMLText == "" ? "n/a" : relationHTMLText;
 
 
                     $("#related").html(relationHTMLText);

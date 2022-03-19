@@ -7,31 +7,27 @@ $(() => {
 
 
     // load suggestions
-    mal.getSeasonNow().then(res => {
-        let selection = [];
+    // selected from top anime and current season
+    mal.getTopAnime().then(res => {
+        let selectionIndexes = [];
         let animeSelection = [];
-        const numSelection = 5;
+        const numSelection = 8;
         let dataConcat = res.data;
 
-        mal.getTopAnime().then(topRes => {
-            dataConcat = dataConcat.concat(topRes.data);
+        mal.getSeasonNow().then(res2 => {
+            dataConcat = dataConcat.concat(res2.data);
 
-
-            for (let i = 0; i < numSelection; i++) {
-                while (true) {
-                    let n = parseInt(getRandomArbitrary(0, dataConcat.length));
-                    if (!selection.includes(n)) {
-                        selection.push(n);
-                        break;
-                    }
+            while (selectionIndexes.length < numSelection) {
+                let n = parseInt(getRandomArbitrary(0, dataConcat.length));
+                if (!selectionIndexes.includes(n)) {
+                    selectionIndexes.push(n);
                 }
             }
 
 
             for (let i = 0; i < numSelection; i++) {
-                animeSelection.push(dataConcat[selection[i]]);
+                animeSelection.push(dataConcat[selectionIndexes[i]]);
             }
-
 
             clearSuggestionsDisplay();
             displaySuggestions(animeSelection);
@@ -67,8 +63,10 @@ $(() => {
     }
 
     function displaySuggestions(data) {
-        let suggestionCon = $(".suggestion-container");
-        let indicatorDotContainer  = $(".indicator-dot-container ");
+        let suggestionCon = $(".suggestion-items");
+        let indicatorDotContainer = $(".indicator-dot-container ");
+
+        suggestionCon.find($(".loader")).remove();
 
         for (let x in data) {
             let title = data[x].title;
@@ -77,6 +75,18 @@ $(() => {
             let id = data[x].mal_id;
             let synopsis = data[x].synopsis;
 
+            const maxSynopsisCharLength = 225;
+
+            // if over max length, cut it at the first space after max length
+            if (synopsis.length > maxSynopsisCharLength) {
+                synopsis = synopsis.substring(0, synopsis.indexOf(" ", maxSynopsisCharLength));
+
+                if(synopsis[synopsis.length - 1].match(/[^A-Za-z0-9]/g)) {
+                    synopsis = synopsis.substring(0, synopsis.length - 1);
+                }
+
+                synopsis += "...";
+            }
 
 
             let tagsHTML = "";
@@ -115,7 +125,7 @@ $(() => {
                 <br>
                 <br>
                 <br>
-                <a class="block clean-url text-center w-100 large-btn" href="/anime?id=${id}">View</a>
+                <a class="block text-center w-100 large-btn" href="/anime/?id=${id}">View</a>
             </div>
 
             <img class="w-25 rounded-corner-full" src="${imgSrc}"
@@ -128,55 +138,96 @@ $(() => {
         }
 
         initSuggestions();
+        autoAdvanceOnSuggestion();
     }
 
+    function autoAdvanceOnSuggestion() {
+        let interval = setInterval(() => {
+            let index = getActiveSuggestion();
+            if (index == $(".suggestion-container .suggestion-item").length - 1) {
+                index = 0;
+            } else {
+                index++;
+            }
 
+            showSuggestions(index, "left", 400);
+        }, 10000);
+
+        $(".suggestion-container ").find(".suggestion-prev").on("click", () => {clearInterval(interval)})
+        $(".suggestion-container ").find(".suggestion-next").on("click", () => {clearInterval(interval)})
+        $(".suggestion-indicators").find(".indicator-dot").on("click", () => {clearInterval(interval)})
+    }
+
+    function getActiveSuggestion() {
+        let index = 0;
+        $(".suggestion-container .suggestion-item").each((i, eln) => {
+            if ($(eln).is(":visible")) {
+                index = i;
+            }
+        });
+
+        return index;
+    }
 
     function initSuggestions() {
-        $(".suggestion-container .suggestion-item").hide();
-        $(".suggestion-container .suggestion-item").first().show();
 
-        $(".suggestion-container .indicator-dot").removeClass("indicator-dot-active");
-        $(".suggestion-container .indicator-dot").first().addClass("indicator-dot-active");
+        // hide all suggestions
+        $(".suggestion-item").hide();
 
+        // show only the first suggestion
+        $(".suggestion-item").first().show();
+        $(".suggestion-indicators").find(".indicator-dot").first().addClass("indicator-dot-active");
 
-        $(".indicator-dot").each((i, eln) => {
+        // initialize dots to have on click that takes it to that suggestion
+        $(".suggestion-indicators").find(".indicator-dot").each((i, eln) => {
             $(eln).on("click", () => { showSuggestions(i) });
         });
 
-        $(".suggestion-prev").on("click", () => {
-            let i = $(".indicator-dot-active").index();
-            if (i == 0) {
-                i = $(".indicator-dot").last().index();
+        // init prev button
+        $(".suggestion-container ").find(".suggestion-prev").on("click", () => {
+            let index = getActiveSuggestion();
+
+            if (index == 0) {
+                index = $(".suggestion-container .suggestion-item").last().index();
             } else {
-                i--;
+                index--;
             }
 
-            showSuggestions(i, "right");
+            showSuggestions(index, "right");
         });
 
-        $(".suggestion-next").on("click", () => {
-            let i = $(".indicator-dot-active").index();
-            if (i == $(".indicator-dot").length - 1) {
-                i = $(".indicator-dot").first().index();
+
+        // init next button
+        $(".suggestion-container ").find(".suggestion-next").on("click", () => {
+            let index = getActiveSuggestion();
+
+            if (index == $(".suggestion-container .suggestion-item").length - 1) {
+                index = 0;
             } else {
-                i++;
+                index++;
             }
 
-            showSuggestions(i, "left");
+            showSuggestions(index, "left");
         });
     }
 
-    function showSuggestions(n, direction) {
+    function showSuggestions(n, direction, animemationLength=200) {
+        
         $(".suggestion-container .suggestion-item").each((i, eln) => {
             if (n == i) {
+                // fixed height for transition
                 $(".suggestion-container").height($(".suggestion-container").height());
-                setTimeout(() => { $(eln).show("slide", { direction: direction }, 200) }, 200);
+
+                setTimeout(() => { 
+                    // auto height after transition
+                    $(".suggestion-container").css("height", "auto");
+                    $(eln).show("slide", { direction: direction }, animemationLength); 
+                }, animemationLength);
                 $(".indicator-dot").eq(i).addClass("indicator-dot-active");
 
             } else {
                 if ($(eln).is(":visible")) {
-                    $(eln).hide("slide", { direction: (direction == "left" ? "right" : "left") }, 180);
+                    $(eln).hide("slide", { direction: (direction == "left" ? "right" : "left") }, animemationLength - 20);
                     $(".indicator-dot").eq(i).removeClass("indicator-dot-active");
                 }
             }

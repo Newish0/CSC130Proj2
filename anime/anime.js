@@ -15,6 +15,13 @@ $(() => {
 
     
     function displayAnime() {
+
+        // hide panel till ready
+        $(".panel-container *").hide();
+
+        // add in loader
+        $("main").append('<div class="loader center"></div>');
+
         mal.getAnimeById(animeID).then(res => {
             let data = res.data;
 
@@ -144,6 +151,12 @@ $(() => {
             initNumberLoadingAnimation("#score-population", data.scored_by, 2000, true, 0);
 
 
+            // now ready to display the basic data
+            $(".panel-container *").fadeIn(100);
+
+            $("main > .loader").remove();
+
+
             const loadScoreDistribution = () => {
                 mal.getAnimeStatistics(animeID).then(statRes => {
                     let statData = statRes.data;
@@ -195,7 +208,7 @@ $(() => {
                         relationHTMLText += relationBlockHTMLText;
                     }
 
-
+                    relationHTMLText = relationHTMLText == "" ? "n/a" : relationHTMLText;
 
                     $("#related").html(relationHTMLText);
 

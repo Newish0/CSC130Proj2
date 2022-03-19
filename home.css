@@ -8,8 +8,10 @@
 }
 
 .suggestion-item img {
-    max-width: 100%;
+    max-width: 330px;
+    height: min(460px, 60vh);
     width: 25vh;
+    object-fit: cover;
 }
 
 .suggestion-container:hover > i {
@@ -51,7 +53,11 @@
     transform: scale(105%) translateY(0.25rem);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 725px) {
+    .suggestion-container {
+        padding: 0.1rem;
+    }
+
     .suggestion-item {
         flex-direction: column-reverse;
     }
@@ -59,10 +65,17 @@
     .suggestion-item > div {
         text-align: center;
         width: fit-content;
+        margin: 0.1rem;
     }
 
     .suggestion-item .large-btn {
-        display: inline;
+        display: block;
+        box-sizing: border-box;
+    }
+
+
+    .suggestion-container > i {
+        opacity: 0.5;
     }
 }
 

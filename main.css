@@ -133,7 +133,7 @@ nav button:active {
 }
 
 .nav-page-icon-wrapper img {
-    height: 2.25rem;
+    height: 2rem;
 }
 
 nav > .wrapper .user-nav {
@@ -172,6 +172,18 @@ nav > .wrapper .user-nav {
         display: flex;
         flex-flow: column-reverse nowrap;
     }
+
+    .nav-page-icon-wrapper img {
+        display: none;
+    }
+
+    .nav-page-icon-wrapper {
+        padding: 1rem;
+    }
+
+    .nav-page-icon-wrapper::after {
+        content: "Home";
+    }
 }
 
 #nav-search-box-wrapper {
@@ -188,6 +200,7 @@ nav > .wrapper .user-nav {
     padding: 3px 10px;
     height: 2rem;
     border: none;
+    width: 16vw;
 }
 
 #nav-search-box-wrapper .search-icon {
@@ -437,6 +450,7 @@ footer a {
     color: var(--light-1);
     border: none;
     cursor: pointer;
+    text-decoration: none;
     transition: transform 100ms;
 }
 
