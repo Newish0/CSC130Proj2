@@ -585,10 +585,15 @@ $(() => {
         initFilters();
         initSorting();
 
-        search.on("change", () => {
-            syncUserInputs();
-        });
 
+        // filter bar search box auto search on stop typing
+        let searchBoxKeyupWait = null;
+        search.on("keyup", (evt) => {
+            if (searchBoxKeyupWait) {
+                clearTimeout(searchBoxKeyupWait);
+            }
+            searchBoxKeyupWait = setTimeout(() => { syncUserInputs() }, 400); // wait 400 ms after typing
+        });
     }
 
     /**

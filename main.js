@@ -11,18 +11,20 @@ $(() => {
         });
     });
 
-    // initalize the minimized search button
-
+    // initialize the minimized search button
     $("#min-nav-search-icon").on("click", () => {
         $("#overtop-search").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
     });
 
+
+    // initialize  "X" exit button for overtop boxes
     $(".overtop-x-btn").each((i, obj) => {
         $(obj).on("click", (evt) => {
             $(obj).parent().parent().fadeOut(100);
         });
     });
 
+    // initialize exit on clicking outside of overtop boxes
     $(".overtop-x-bg").each((i, obj) => {
         $(obj).on("click", (evt) => {
             if (evt.target !== obj) {
@@ -33,6 +35,7 @@ $(() => {
         });
     });
 
+    // initialize navigation search box focus
     $("#nav-search-box").on("focus", () => {
         $("#nav-search-result").fadeIn(100);
     });
@@ -42,7 +45,7 @@ $(() => {
     });
   
 
-
+    // nav search box auto search on stop typing
     let searchBoxKeyupWait = null;
     $("#nav-search-box, #overtop-search-box").on("keyup", (evt) => {
         if (searchBoxKeyupWait) {
@@ -50,6 +53,7 @@ $(() => {
         }
         searchBoxKeyupWait = setTimeout(() => { displayQuickSearch(evt.target.value) }, 400); // wait 400 ms after typing
     });
+    
 
     setSearchBarsToSync();
 

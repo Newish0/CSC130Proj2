@@ -290,7 +290,9 @@ nav > .wrapper .user-nav {
     min-width: 100px;
     max-width: 350px;
     width: 20vw;
-    height: 2rem;
+    /* height: 2rem; */
+    height: calc(var(--step-0) * 2);
+    font-size: var(--step-0);
     padding: 5px 16px;
     border-radius: 0.5rem;
     outline: none;
