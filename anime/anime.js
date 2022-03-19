@@ -55,6 +55,7 @@ $(() => {
             title.html(data.title);
             altTitle.html(data.title_english);
             cover.attr("src", data.images.webp.image_url);
+            cover.fadeIn(200);
 
             let tagsHTMLText = "";
             for (let x in data.genres) {

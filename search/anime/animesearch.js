@@ -371,7 +371,7 @@ $(() => {
         }
 
         for (let i in data) {
-            container.append(addOneToDisplay(data[i]));
+            container.append(createOneCard(data[i]));
         }
 
         if (mal.hasNextPage()) {
@@ -381,7 +381,7 @@ $(() => {
         }
     }
 
-    function addOneToDisplay(oneData) {
+    function createOneCard(oneData) {
         let title = oneData.title;
         let titleHREF = "/anime/?id=" + oneData.mal_id;
 
@@ -389,7 +389,7 @@ $(() => {
         for (let i in oneData.genres) {
             let tag = `
                 <a class="tag clean-url" 
-                href="/search/anime/?genre=${oneData.genres[i].mal_id}-${encodeURIComponent(oneData.genres[i].name)}">
+                href="/search/anime/?genre=${oneData.genres[i].mal_id}~${encodeURIComponent(oneData.genres[i].name)}">
                 ${oneData.genres[i].name}
                 </a>
             `;
@@ -434,7 +434,7 @@ $(() => {
         for (let i in oneData.themes) {
             let tag = `
                 <a class="tag clean-url" 
-                href="/search/anime/?genre=${oneData.themes[i].mal_id}-${encodeURIComponent(oneData.themes[i].name)}">
+                href="/search/anime/?genre=${oneData.themes[i].mal_id}~${encodeURIComponent(oneData.themes[i].name)}">
                 ${oneData.themes[i].name}
                 </a>
             `;
