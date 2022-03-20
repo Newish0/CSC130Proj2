@@ -44,6 +44,11 @@ $(() => {
             birthday.html(new Date(data.birthday).getDate());
         }
 
+        altNames.html("");
+        for(let i in data.alternate_names) {
+            altNames.append(`<span>${data.alternate_names[i]}</span>`);
+        }
+
         favourite.html(data.favorites);
         about.html(data.about);
 
