@@ -79,6 +79,12 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .seasonal-gallery {
+        justify-content: center;
+    }
+}
+
 .min-card {
     position: relative;
     box-sizing: border-box;

@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Mangas - UsagiDB</title>
+    <title>Animes - UsagiDB</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
@@ -26,7 +26,7 @@
     <script src="/lib/jikan4.js"></script>
 
     <script src='/main.js'></script>
-    <script src="mangasearch.js"></script>
+    <script src="../cache_search.js"></script>
 </head>
 
 <body>
@@ -36,8 +36,8 @@
             <div class="page-nav">
                 <a class="nav-page-icon-wrapper" href="/index.html"> <img src="/assets/icons/logofull.svg" alt="UsagiDB logo"> </a>
                 <a href="/search/anime">Animes</a>
-                <a href="/search/manga" class="active-url">Mangas</a>
-                <a href="/search/companies">Companies</a>
+                <a href="/search/manga">Mangas</a>
+                <a href="/search/companies" class="active-url">Companies</a>
                 <a href="/search/magazines">Magazines</a>
                 <a id="nav-collap-icon"><i class="fas fa-bars"></i></a>
             </div>
@@ -103,144 +103,29 @@
 
     <main>
 
-
-        <div id="overtop-filters" class="overtop-popup overtop-x-bg sync-on-click">
-            <div class="overtop-content-wrapper light-bg">
-                <h1>Filter</h1>
-                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
-
-                <h3>Active Filters</h3>
-                <div class="filter-active margin-v-normal info-pond normal-gap">
-
-                </div>
-
-                <button class="large-btn w-50 overtop-x-btn sync-on-click">Apply</button>
-                <button class="large-btn inverted w-25 filters-reset">Reset</button>
-
-                <hr>
-
-                <h3>Score</h3>
-                <br>
-                <br>
-                <div id="score-range-slider"></div>
-
-                <h3>Genres</h3>
-                <div class="filter-genres info-pond normal-gap">
-                    <div class="loader-small"></div>
-                </div>
-                <br>
-                <h3>Themes</h3>
-                <div class="filter-themes info-pond normal-gap">
-                    <div class="loader-small"></div>
-                </div>
-                <br>
-                <h3>Magazines</h3>
-                <div class="filter-magazines info-pond normal-gap">
-                    <div class="loader-small"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="overtop-sorts" class="overtop-popup overtop-x-bg sync-on-click">
-            <div class="overtop-content-wrapper light-bg">
-                <h1>Sorting</h1>
-                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x sync-on-click"></i>
-
-                <h3>Order By</h3>
-                <div class="order-by info-pond normal-gap">
-                    <span>
-                        <input type="radio" id="sorting-order-by-score" class="filter-ix-tag" name="order-by" value="score" checked>
-                        <label for="sorting-order-by-score">Score</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-members" class="filter-ix-tag" name="order-by" value="members">
-                        <label for="sorting-order-by-members">User Count</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-id" class="filter-ix-tag" name="order-by" value="mal_id">
-                        <label for="sorting-order-by-id">ID</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-title" class="filter-ix-tag" name="order-by" value="title">
-                        <label for="sorting-order-by-title">Title</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-type" class="filter-ix-tag" name="order-by" value="type">
-                        <label for="sorting-order-by-type">Type</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-start-date" class="filter-ix-tag" name="order-by" value="start_date">
-                        <label for="sorting-order-by-start-date">Start Date</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-end-date" class="filter-ix-tag" name="order-by" value="end_date">
-                        <label for="sorting-order-by-end-date">End Date</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-order-by-episodes" class="filter-ix-tag" name="order-by" value="episodes">
-                        <label for="sorting-order-by-episodes">Episodes</label>
-                    </span>
-                    
-                </div>
-
-                <br>
-                <h3>Sort</h3>
-                <div class="sort-by info-pond normal-gap">
-                    <span>
-                        <input type="radio" id="sorting-sort-asc" class="filter-ix-tag" name="sort" value="asc">
-                        <label for="sorting-sort-asc">Ascending</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="sorting-sort-desc" class="filter-ix-tag" name="sort" value="desc" checked>
-                        <label for="sorting-sort-desc">Descending</label>
-                    </span>
-                </div>
-            </div>
-        </div>
-
+        
+        
 
 
 
         <div class="padding-medium">
             <div class="filters-bar container">
-                <div id="filters" class="filters-bar-item">
-                    <i class="fa-solid fa-filter"></i>
-
-                </div>
-
-
 
                 <div id="filters-bar-search-box-wrapper">
                     <i class="search-icon fa-solid fa-magnifying-glass"></i>
                     <input class="search-box" type="text" name="filters-bar-search-box" id="filters-bar-search-box"
                         placeholder="Search">
                 </div>
-
-                <div id="sort" class="filters-bar-item">
-                    <span>
-                        <i class="fa-solid fa-arrow-down-short-wide"></i>
-
-                    </span>
-
-                    <span id="cur-sort-out">Score</span>
-                </div>
+         
             </div>
         </div>
 
         <div class="padding-small">
-            <div id="posters-container" class="container">
+            <div id="output-nav" class="container seperate-by-dot auto-gallery "></div>
+            <div id="output-container" class="container">
 
             </div>
         </div>
-
-        <br>
-        <br>
-        <div class="container text-center">
-            <button id="load-more" class="large-btn">
-                Load More
-            </button>
-        </div>
-
 
     </main>
 

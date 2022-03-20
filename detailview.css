@@ -221,38 +221,6 @@ h6 {
     transition: height 1s;
 }
 
-.hide-rest {
-    max-height: 500px;
-    overflow: hidden;
-}
-
-.hide-rest-container {
-    position: relative;
-    border-radius: 0 0 0.5rem 0.5rem;
-}
-
-.click-to-show-more {
-    position: absolute;
-    bottom: 0;
-    display: block;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    background-color: var(--paradise-pink);
-    color: var(--honeydew);
-    border-radius: 0 0 0.5rem 0.5rem;
-    padding: 1rem 0;
-    border-bottom: 2px solid var(--paradise-pink);
-
-    box-shadow: -1px -2px 100px 39px #fff;
-    -webkit-box-shadow: -1px -2px 100px 39px #fff;
-    -moz-box-shadow: -1px -2px 100px 39px #fff;
-}
-
-.click-to-show-more:hover {
-    filter: brightness(120%);
-}
-
 .character-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 1rem;

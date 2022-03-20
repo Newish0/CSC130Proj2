@@ -1,6 +1,10 @@
 $(() => {
     let mal = new Jikan4();
 
+
+    initNavSearchBar();
+    initClickToShowMore();
+
     // add collapse and expand functionality to nav (bars icon)
     document.querySelector("#nav-collap-icon").addEventListener("click", (evt) => {
         document.querySelector("#nav-collap-icon").classList.toggle("nav-collap-icon-open");
@@ -43,17 +47,30 @@ $(() => {
     $("#nav-search-box").on("focusout", () => {
         $("#nav-search-result").fadeOut(100);
     });
-  
 
-    // nav search box auto search on stop typing
-    let searchBoxKeyupWait = null;
-    $("#nav-search-box, #overtop-search-box").on("keyup", (evt) => {
-        if (searchBoxKeyupWait) {
-            clearTimeout(searchBoxKeyupWait);
-        }
-        searchBoxKeyupWait = setTimeout(() => { displayQuickSearch(evt.target.value) }, 400); // wait 400 ms after typing
-    });
-    
+
+    function initNavSearchBar() {
+        // nav search box auto search on stop typing
+        let searchBoxKeyupWait = null;
+        $("#nav-search-box, #overtop-search-box").on("keyup", (evt) => {
+            if (searchBoxKeyupWait) {
+                clearTimeout(searchBoxKeyupWait);
+            }
+            searchBoxKeyupWait = setTimeout(() => { displayQuickSearch(evt.target.value) }, 400); // wait 400 ms after typing
+        });
+    }
+
+    function initClickToShowMore() {
+        $(".hide-rest-container").each(() => {
+            $(this) > $(".click-to-show-more").on("click", (evt) => {
+                if (evt.target.parentElement != null) {
+                    evt.target.parentElement.classList.remove("hide-rest");
+                }
+                evt.target.remove();
+            });
+        });
+    }
+
 
     setSearchBarsToSync();
 
@@ -203,3 +220,23 @@ $(() => {
         qsManga();
     }
 });
+
+
+function display404() {
+    displayErrorPage(404);
+}
+function displayErrorPage(code) {
+
+    let html = "";
+
+    fetch("/assets/error.svg").then(res => res.text()).then(text => {
+        html = `    
+        <div class="container">
+            ${text}
+        </div>`;
+
+        document.querySelector("main").innerHTML = html;
+        document.querySelector("#error-msg").innerHTML = code;
+    });
+    
+}

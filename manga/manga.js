@@ -12,7 +12,7 @@ $(() => {
 
 
 
-    
+
 
     function displayManga() {
 
@@ -337,7 +337,7 @@ $(() => {
                     if (err == "Jikan4 API errored with response: 429") {
                         setTimeout(loadExternalLinks, 1000);
                     } else {
-                        console.error(err);
+                        console.log(err);
                     }
                 });
             }
@@ -347,27 +347,16 @@ $(() => {
 
             console.log(res)
 
-
-            initClickToShowMore();
         }).catch(err => {
             if (err == "Jikan4 API errored with response: 429") {
                 setTimeout(displayManga, 1000)
             } else {
+                displayErrorPage(err.split(":")[1]);
                 console.log(err);
             }
         });;
     }
 
-    function initClickToShowMore() {
-        $(".hide-rest-container").each(() => {
-            $(this) > $(".click-to-show-more").on("click", (evt) => {
-                if (evt.target.parentElement != null) {
-                    evt.target.parentElement.classList.remove("hide-rest");
-                }
-                evt.target.remove();
-            });
-        });
-    }
 
 
     function initNumberLoadingAnimation(elnQueryString, number, timeLength, formatOutput, decimalPlaces) {

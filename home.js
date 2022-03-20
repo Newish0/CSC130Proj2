@@ -182,14 +182,14 @@ $(() => {
         // init next button
         $(".suggestion-container ").find(".suggestion-next").on("click", showPrevSuggestion);
 
-        initSuggestionSwipeEvt();
+        initSuggestionSwipeEvt($(".suggestion-container").get(0));
     }
 
 
 
 
     // Source: https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-    function initSuggestionSwipeEvt() {
+    function initSuggestionSwipeEvt(target) {
         document.addEventListener('touchstart', handleTouchStart, false);
         document.addEventListener('touchmove', handleTouchMove, false);
 
@@ -205,12 +205,20 @@ $(() => {
         }
 
         function handleTouchStart(evt) {
-            const firstTouch = getTouches(evt)[0];
-            xDown = firstTouch.clientX;
-            yDown = firstTouch.clientY;
+
+            if (evt.target = target) {
+                const firstTouch = getTouches(evt)[0];
+                xDown = firstTouch.clientX;
+                yDown = firstTouch.clientY;
+            }
         };
 
         function handleTouchMove(evt) {
+
+            if (evt.target != target) {
+                return;
+            }
+
             if (!xDown || !yDown) {
                 return;
             }
@@ -220,9 +228,6 @@ $(() => {
 
             let xDiff = xDown - xUp;
             let yDiff = yDown - yUp;
-
-
-            console.log(Math.abs(xDiff))
 
             if (Math.abs(xDiff) > threshold || Math.abs(yDiff) > threshold) {
                 if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
@@ -241,7 +246,7 @@ $(() => {
                     }
                 }
             }
-            
+
             /* reset values */
             xDown = null;
             yDown = null;
@@ -249,7 +254,7 @@ $(() => {
     }
 
 
-    
+
 
 
 

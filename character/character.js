@@ -10,7 +10,6 @@ $(() => {
     // add in loader
     $("main").append('<div class="loader center"></div>');
 
-    initClickToShowMore();
 
 
     mal.getCharacterById(characterID).then(res => {
@@ -38,14 +37,18 @@ $(() => {
         nameKanji.html(data.name_kanji);
 
         altNames.html("");
-        for(let i in data.nicknames) {
+        for (let i in data.nicknames) {
             altNames.append(`<span>${data.nicknames[i]}</span>`);
         }
 
         favourite.html(data.favorites);
         about.html(data.about);
 
-    }).catch(err => console.error(err));
+    }).catch(err => {
+        displayErrorPage(err.split(":")[1]);
+        console.log(err);
+
+    });
 
 
     mal.getCharacterVoiceActors(characterID).then(res => {
@@ -139,16 +142,6 @@ $(() => {
     }).catch(err => console.error(err));
 
 
-    function initClickToShowMore() {
-        $(".hide-rest-container").each(() => {
-            $(this) > $(".click-to-show-more").on("click", (evt) => {
-                if (evt.target.parentElement != null) {
-                    evt.target.parentElement.classList.remove("hide-rest");
-                }
-                evt.target.remove();
-            });
-        });
-    }
 
 
 })
