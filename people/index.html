@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
+
+    <link rel="stylesheet" href="/main.css">
+
+    <link rel='stylesheet' type='text/css' media='screen' href='/simplesplit.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../lib/jikan4.js"></script>
+    <script src='people.js'></script>
+    <script src='/main.js'></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrapper">
+            <div class="page-nav">
+                <a class="nav-page-icon-wrapper" href="/index.html"> <img src="/assets/icons/logofull.svg"
+                        alt="UsagiDB logo"> </a>
+                <a href="/search/anime">Animes</a>
+                <a href="/search/manga">Mangas</a>
+                <a href="/search/character">Characters</a>
+                <a href="/search/people">People</a>
+                <a id="nav-collap-icon"><i class="fas fa-bars"></i></a>
+            </div>
+
+            <div class="user-nav">
+                <button id="min-nav-search-icon"><i class="search-icon fa-solid fa-magnifying-glass"></i></button>
+                <div id="nav-search-box-wrapper">
+                    <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="search-box" type="text" name="nav-search-box" id="nav-search-box"
+                        placeholder="Search">
+
+                    <div id="nav-search-result" class="search-result">
+                        <div>
+                            <div class="search-result-anime"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-manga"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-character"></div>
+                        </div>
+
+                        <div>
+                            <div class="search-result-people"></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="" id="login">Sign In</a>
+                <a href="" id="profile"><i class="fa-solid fa-user"></i></a>
+            </div>
+        </div>
+
+    </nav>
+
+    <div id="overtop-search" class="overtop-popup">
+        <div class="overtop-content-wrapper light-bg">
+            <h1>Search</h1>
+            <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+            <input type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
+                placeholder="Search">
+
+            <div id="overtop-search-result" class="search-result">
+                <div>
+                    <div class="search-result-anime"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-manga"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-character"></div>
+                </div>
+
+                <div>
+                    <div class="search-result-people"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="margin-medium">
+            <div class="simple-split container">
+                <div class="simple-split-side card">
+
+
+
+                    <div class="simple-split-side-top">
+                        <img id="picture" src="" alt="">
+                        <h2 id="name">Name</h2>
+                    </div>
+
+                    <div class="margin-normal">
+                        <div class="info-pond">
+                            <div>
+                                <h5>Given Name</h5>
+                                <div id="given-name"></div>
+                            </div>
+                            <div>
+                                <h5>Family Name</h5>
+                                <div id="family-name"></div>
+                            </div>
+
+                            <div>
+                                <h5>Alternate Names</h5>
+                                <div id="alternate-names">
+                                    <span>A</span>
+                                    <span>B</span>
+                                    <span>C</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5>Birthday</h5>
+                                <div id="birthday"></div>
+                            </div>
+
+                            <div>
+                                <h5>Users' Favourite</h5>
+                                <div id="favourite"></div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div>
+                            <h5>About</h5>
+                            <div id="about"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="simple-split-main card padding-normal">
+                    <h2>Voice Acting Roles</h2>
+                    <div class="hide-rest-container hide-rest">
+                        <div id="voices-container" class="auto-gallery justify-between align-items-start">
+
+                            <div class="loader"></div>
+    
+                        </div>
+                        <a class="click-to-show-more">Show more</a>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <h2>Anime Production Positions</h2>
+                    <div class="hide-rest-container hide-rest">
+                        <div id="anime-container" class="auto-gallery justify-between align-items-start">
+
+                            <div class="loader"></div>
+    
+                        </div>
+                        <a class="click-to-show-more">Show more</a>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <h2>Manga Production Positions</h2>
+                    <div class="hide-rest-container hide-rest">
+                        <div id="manga-container" class="auto-gallery justify-between align-items-start">
+
+                            <div class="loader"></div>
+    
+                        </div>
+                        <a class="click-to-show-more">Show more</a>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <br>
+
+    <footer>
+        <!-- social media links -->
+        <div class="container">
+            <br>
+            <div class="socials">
+                <a target="_blank" href=""><i class="fab fa-github color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-instagram color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-twitter color-white margin-medium hover-dim"></i></a>
+                <a target="_blank" href=""><i class="fab fa-linkedin-in color-white margin-medium hover-dim"></i></a>
+            </div>
+            <br>
+        </div>
+
+        <!-- site map -->
+        <div id="sitemap" class="container">
+            <div class="auto-gallery justify-center text-center margin-medium">
+                <div>
+                    <a href="/index.html">Home</a>
+                    <a href="/search/anime">Animes</a>
+                    <a href="/search/manga">Mangas</a>
+                    <a href="/search/character">Characters</a>
+                    <a href="/search/people">People</a>
+                    <span> | </span>
+                    <a href="/about/">About</a>
+                    <a href="/contact/">Contact</a>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- copyright notice  -->
+        <div class="container">
+            <div class="content-wrapper color-white text-center">
+                <div>Copyright &copy; Yours Truly</div>
+            </div>
+        </div>
+        <br>
+        </div>
+    </footer>
+</body>
+
+</html>

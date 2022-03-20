@@ -255,17 +255,20 @@ $(() => {
                         // load in JP VA first
                         for (let y in voiceActors) {
                             let vaName = voiceActors[y].person.name;
+                            let vaID = voiceActors[y].person.mal_id;
                             let vaImgURL = voiceActors[y].person.images.jpg.image_url;
 
 
 
                             let vaCardsHTMLText = `
-                                <div class="character-va-scard">
-                                    <img class="character-va-img" src="${vaImgURL}" 
-                                    alt="image of ${vaName}, voice actor for ${charName}" 
-                                    loading="lazy">
-                                    <div class="character-va-name">${vaName}</div>
-                                </div>
+                                <a href="/people/?id=${vaID}" class="clean-url black">
+                                    <div class="character-va-scard">
+                                        <img class="character-va-img" src="${vaImgURL}" 
+                                        alt="image of ${vaName}, voice actor for ${charName}" 
+                                        loading="lazy">
+                                        <div class="character-va-name">${vaName}</div>
+                                    </div>
+                                </a>
                                 `;
 
                             // load in JP VA first
@@ -326,13 +329,15 @@ $(() => {
 
 
                         let staffHTMLText = `
-                        <img class="character-img"
-                            src="${staffImgURL}"
-                            alt="character image of ${staffName}"
-                            loading="lazy">
-                        <div>
-                            <span class="character-name">${staffName}</span> (<span class="character-role">${staffRolesText}</span>)
-                        </div>
+                        <a href="/people/?id=${staffID}" class="clean-url black">
+                            <img class="character-img"
+                                src="${staffImgURL}"
+                                alt="character image of ${staffName}"
+                                loading="lazy">
+                            <div>
+                                <span class="character-name">${staffName}</span> (<span class="character-role">${staffRolesText}</span>)
+                            </div>
+                        </a>
                         `;
 
 

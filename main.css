@@ -422,6 +422,10 @@ footer a {
     justify-content: center;
 }
 
+.clean-url.black {
+    color: var(--dark-1);
+}
+
 .clean-url {
     color: var(--paradise-pink);
     text-decoration: none;

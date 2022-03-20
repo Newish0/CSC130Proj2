@@ -97,7 +97,7 @@ $(() => {
             for (let x in data.authors) {
                 let name = data.authors[x].name;
                 let id = data.authors[x].mal_id;
-                authorsHTMLText += `<a class="tag clean-url" href="/search/manga/?author=${id}~${name}">${name}</a>`
+                authorsHTMLText += `<a class="tag clean-url" href="/people/?id=${id}">${name}</a>`
             }
             authors.html(authorsHTMLText);
 
