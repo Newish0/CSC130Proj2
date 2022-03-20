@@ -227,13 +227,15 @@ $(() => {
                         charRole = charRole == undefined ? "n/a" : charRole;
 
                         let charHTMLText = `
-                        <img class="character-img"
-                            src="${charImgURL}"
-                            alt="character image of ${charName}"
-                            loading="lazy">
-                        <div>
-                            <span class="character-name">${charName}</span> (<span class="character-role">${charRole}</span>)
-                        </div>
+                        <a href="/character/?id=${charID}" class="clean-url black">
+                            <img class="character-img"
+                                src="${charImgURL}"
+                                alt="character image of ${charName}"
+                                loading="lazy">
+                            <div>
+                                <span class="character-name">${charName}</span> (<span class="character-role">${charRole}</span>)
+                            </div>
+                        </a>
                         `;
 
                         let vaWrapperHTMLText = "";
