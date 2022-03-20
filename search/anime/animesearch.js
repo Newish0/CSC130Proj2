@@ -609,23 +609,28 @@ $(() => {
         console.log("SYNC");
 
         searchParams.q = search.val();
+        
+        // only run filters when they are enabled
+        if($("#filters").is(":visible")) {
 
-        $(".filter-genres input").each((i, obj) => {
-            if (obj.checked && !obj.name.includes("any")) {
-                filterString += obj.value + ",";
-            }
-        });
+            $(".filter-genres input").each((i, obj) => {
+                if (obj.checked && !obj.name.includes("any")) {
+                    filterString += obj.value + ",";
+                }
+            });
+    
+            $(".filter-themes input").each((i, obj) => {
+                if (obj.checked && !obj.name.includes("any")) {
+                    filterString += obj.value + ",";
+                }
+            });
+            filterString = filterString.substring(0, filterString.length - 1);
+            searchParams.genres = filterString;
 
-        $(".filter-themes input").each((i, obj) => {
-            if (obj.checked && !obj.name.includes("any")) {
-                filterString += obj.value + ",";
-            }
-        });
 
-        filterString = filterString.substring(0, filterString.length - 1);
-
-        searchParams.genres = filterString;
-
+            searchParams.producers = $(".filter-studios input[name='filter-studios']:checked").val();
+        }
+       
         searchParams.minScore = scoreRangeValues[0];
         searchParams.maxScore = scoreRangeValues[1];
 
@@ -649,9 +654,6 @@ $(() => {
                 }
             }
         });
-
-        searchParams.producers = $(".filter-studios input[name='filter-studios']:checked").val();
-
 
         displaySearch(searchParams);
     }

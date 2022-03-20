@@ -81,7 +81,7 @@ $(() => {
             if (synopsis.length > maxSynopsisCharLength) {
                 synopsis = synopsis.substring(0, synopsis.indexOf(" ", maxSynopsisCharLength));
 
-                if(synopsis[synopsis.length - 1].match(/[^A-Za-z0-9]/g)) {
+                if (synopsis[synopsis.length - 1].match(/[^A-Za-z0-9]/g)) {
                     synopsis = synopsis.substring(0, synopsis.length - 1);
                 }
 
@@ -143,19 +143,12 @@ $(() => {
 
     function autoAdvanceOnSuggestion() {
         let interval = setInterval(() => {
-            let index = getActiveSuggestion();
-            if (index == $(".suggestion-container .suggestion-item").length - 1) {
-                index = 0;
-            } else {
-                index++;
-            }
-
-            showSuggestions(index, "left", 400);
+            showNextSuggestion(400);
         }, 10000);
 
-        $(".suggestion-container ").find(".suggestion-prev").on("click", () => {clearInterval(interval)})
-        $(".suggestion-container ").find(".suggestion-next").on("click", () => {clearInterval(interval)})
-        $(".suggestion-indicators").find(".indicator-dot").on("click", () => {clearInterval(interval)})
+        $(".suggestion-container ").find(".suggestion-prev").on("click", () => { clearInterval(interval) })
+        $(".suggestion-container ").find(".suggestion-next").on("click", () => { clearInterval(interval) })
+        $(".suggestion-indicators").find(".indicator-dot").on("click", () => { clearInterval(interval) })
     }
 
     function getActiveSuggestion() {
@@ -184,44 +177,118 @@ $(() => {
         });
 
         // init prev button
-        $(".suggestion-container ").find(".suggestion-prev").on("click", () => {
-            let index = getActiveSuggestion();
-
-            if (index == 0) {
-                index = $(".suggestion-container .suggestion-item").last().index();
-            } else {
-                index--;
-            }
-
-            showSuggestions(index, "right");
-        });
-
+        $(".suggestion-container").find(".suggestion-prev").on("click", showNextSuggestion);
 
         // init next button
-        $(".suggestion-container ").find(".suggestion-next").on("click", () => {
-            let index = getActiveSuggestion();
+        $(".suggestion-container ").find(".suggestion-next").on("click", showPrevSuggestion);
 
-            if (index == $(".suggestion-container .suggestion-item").length - 1) {
-                index = 0;
-            } else {
-                index++;
-            }
-
-            showSuggestions(index, "left");
-        });
+        initSuggestionSwipeEvt();
     }
 
-    function showSuggestions(n, direction, animemationLength=200) {
-        
+
+
+
+    // Source: https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+    function initSuggestionSwipeEvt() {
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        // const threshold = Math.sqrt(window.innerHeight * window.innerHeight + window.innerWidth * window.innerWidth) * 0.005;
+        const threshold = 5;
+
+        let xDown = null;
+        let yDown = null;
+
+        function getTouches(evt) {
+            return evt.touches ||             // browser API
+                evt.originalEvent.touches; // jQuery
+        }
+
+        function handleTouchStart(evt) {
+            const firstTouch = getTouches(evt)[0];
+            xDown = firstTouch.clientX;
+            yDown = firstTouch.clientY;
+        };
+
+        function handleTouchMove(evt) {
+            if (!xDown || !yDown) {
+                return;
+            }
+
+            let xUp = evt.touches[0].clientX;
+            let yUp = evt.touches[0].clientY;
+
+            let xDiff = xDown - xUp;
+            let yDiff = yDown - yUp;
+
+
+            console.log(Math.abs(xDiff))
+
+            if (Math.abs(xDiff) > threshold || Math.abs(yDiff) > threshold) {
+                if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+                    if (xDiff > 0) {
+                        /* right swipe */
+                        showNextSuggestion();
+                    } else {
+                        /* left swipe */
+                        showPrevSuggestion();
+                    }
+                } else {
+                    if (yDiff > 0) {
+                        /* down swipe */
+                    } else {
+                        /* up swipe */
+                    }
+                }
+            }
+            
+            /* reset values */
+            xDown = null;
+            yDown = null;
+        };
+    }
+
+
+    
+
+
+
+
+    function showNextSuggestion(transition = 200) {
+        let index = getActiveSuggestion();
+
+        if (index == $(".suggestion-container .suggestion-item").length - 1) {
+            index = 0;
+        } else {
+            index++;
+        }
+
+        showSuggestions(index, "left", transition);
+    }
+
+    function showPrevSuggestion(transition = 200) {
+        let index = getActiveSuggestion();
+
+        if (index == 0) {
+            index = $(".suggestion-container .suggestion-item").last().index();
+        } else {
+            index--;
+        }
+
+        showSuggestions(index, "right", transition);
+    }
+
+    function showSuggestions(n, direction, animemationLength = 200) {
+
         $(".suggestion-container .suggestion-item").each((i, eln) => {
             if (n == i) {
                 // fixed height for transition
                 $(".suggestion-container").height($(".suggestion-container").height());
 
-                setTimeout(() => { 
+                setTimeout(() => {
                     // auto height after transition
                     $(".suggestion-container").css("height", "auto");
-                    $(eln).show("slide", { direction: direction }, animemationLength); 
+                    $(eln).show("slide", { direction: direction }, animemationLength);
                 }, animemationLength);
                 $(".indicator-dot").eq(i).addClass("indicator-dot-active");
 

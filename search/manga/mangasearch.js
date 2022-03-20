@@ -18,19 +18,19 @@ $(() => {
 
     armFilterBar();
 
-    if(urlParams.genre) {
+    if (urlParams.genre) {
         let params = urlParams.genre.split("~");
         searchParams.genres = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
-    } else if(urlParams.magazine) {
+    } else if (urlParams.magazine) {
         let params = urlParams.magazine.split("~");
         searchParams.magazines = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
-    } else if(urlParams.demographic) {
+    } else if (urlParams.demographic) {
         let params = urlParams.demographic.split("~");
         searchParams.genres = params[0];
         disableFiltersAndSearch();
@@ -38,7 +38,7 @@ $(() => {
         insertBackIntoFilterBar();
     }
 
-    
+
 
 
     try {
@@ -254,7 +254,7 @@ $(() => {
                         </span>
                         `;
                     $(".filter-active").append(aTag);
-                    
+
                 });
 
 
@@ -266,7 +266,7 @@ $(() => {
                 </span>`;
 
                 filterMagazines.append(anyTag);
-                
+
 
             }).catch((err) => {
                 if (err == "Jikan4 API errored with response: 429") {
@@ -328,7 +328,7 @@ $(() => {
             `;
             $(obj).html(html);
         });
-        
+
         $(".filter-active").html("");
 
         $(".filter-genres .filter-ix-tag:not(#filter-genre-any):checked").prop("checked", false);
@@ -399,13 +399,13 @@ $(() => {
 
 
         let date = "";
-        if(oneData.published) {
+        if (oneData.published) {
             date = oneData.published.string;
         }
         date = date === "" ? "Unknown" : date
 
-        let chapters =  oneData.chapters == null ? "Unknown" : `${oneData.chapters} Ch`;
-        
+        let chapters = oneData.chapters == null ? "Unknown" : `${oneData.chapters} Ch`;
+
         let volumes = oneData.volumes == null ? "Unknown" : `${oneData.volumes} Vol`;
 
         let imgSrc = "";
@@ -444,7 +444,7 @@ $(() => {
         }
 
         serializations = serializations == "" ? "Unknown" : serializations;
-        
+
 
         let description = (oneData.synopsis == null ? "n/a" : oneData.synopsis);
 
@@ -538,7 +538,7 @@ $(() => {
                 if (container.find(".loader").length == 0 && mal.hasNextPage()) {
                     if (!loadingMore) {
                         insertLoader();
-                        const getMore =() => {
+                        const getMore = () => {
                             mal.getMore().then((res) => {
                                 addDataToDisplay(res.data);
                                 removeLoader();
@@ -612,21 +612,29 @@ $(() => {
 
         searchParams.q = search.val();
 
-        $(".filter-genres input").each((i, obj) => {
-            if (obj.checked && !obj.name.includes("any")) {
-                filterString += obj.value + ",";
-            }
-        });
 
-        $(".filter-themes input").each((i, obj) => {
-            if (obj.checked && !obj.name.includes("any")) {
-                filterString += obj.value + ",";
-            }
-        });
+        // only run filters when they are enabled
+        if ($("#filters").is(":visible")) {
 
-        filterString = filterString.substring(0, filterString.length - 1);
+            $(".filter-genres input").each((i, obj) => {
+                if (obj.checked && !obj.name.includes("any")) {
+                    filterString += obj.value + ",";
+                }
+            });
 
-        searchParams.genres = filterString;
+            $(".filter-themes input").each((i, obj) => {
+                if (obj.checked && !obj.name.includes("any")) {
+                    filterString += obj.value + ",";
+                }
+            });
+
+            filterString = filterString.substring(0, filterString.length - 1);
+
+            searchParams.genres = filterString;
+
+
+            searchParams.magazine = $(".filter-magazines input[name='filter-magazines']:checked").val();
+        }
 
         searchParams.minScore = scoreRangeValues[0];
         searchParams.maxScore = scoreRangeValues[1];
@@ -652,7 +660,7 @@ $(() => {
             }
         });
 
-        searchParams.magazine = $(".filter-magazines input[name='filter-magazines']:checked").val();
+        
 
 
         displaySearch(searchParams);
