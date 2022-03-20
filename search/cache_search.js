@@ -51,13 +51,6 @@ $(() => {
         });
     }
 
-    function setAsLoading(target) {
-        target.parent().prepend('<div class="loader center"></div>');
-    }
-
-    function setAsReady(target) {
-        target.parent().find(".loader").remove();
-    }
 
     function applySearch(query) {
         let outputContainer = $("#output-container");
@@ -106,12 +99,15 @@ $(() => {
 
 
         if (res.status != 200) {
+            displayErrorPage(res.status);
             throw "Failed to fetch data from " + dataURL;
         }
 
         // fill output container with 0-A-Z section containers
         let outputContainer = $("#output-container");
         sections = {};
+
+        outputContainer.find(".loader").remove();
 
         // seperate data into sections
         for (let i in data) {
@@ -126,6 +122,10 @@ $(() => {
         // sort sections
         let sortable = [];
         for (let key in sections) {
+
+            // sort by name
+            sections[key].sort((a, b) => (a.name > b.name ? 1 : -1));
+
             sortable.push(key);
         }
         sortable.sort((a, b) => (a > b ? 1 : -1));
@@ -135,6 +135,8 @@ $(() => {
             newSections[sortable[i]] = sections[sortable[i]];
         }
         sections = newSections;
+
+        
 
         // display sections
         displaySections(outputContainer, sections);
