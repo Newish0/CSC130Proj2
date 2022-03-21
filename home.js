@@ -3,7 +3,6 @@ $(() => {
     let loadingMore = true;
 
     hideLoadMore();
-    initSuggestions();
 
 
     // load suggestions
@@ -29,7 +28,7 @@ $(() => {
                 animeSelection.push(dataConcat[selectionIndexes[i]]);
             }
 
-            clearSuggestionsDisplay();
+            // clearSuggestionsDisplay();
             displaySuggestions(animeSelection);
 
         });
@@ -57,14 +56,13 @@ $(() => {
         return Math.random() * (max - min) + min;
     }
 
-    function clearSuggestionsDisplay() {
-        $(".suggestion-item").remove();
-        $(".indicator-dot").remove();
-    }
+    // function clearSuggestionsDisplay() {
+    //     $(".suggestion-item").remove();
+    //     $(".indicator-dot").remove();
+    // }
 
     function displaySuggestions(data) {
-        let suggestionCon = $(".suggestion-items");
-        let indicatorDotContainer = $(".indicator-dot-container ");
+        let suggestionCon = $(".suggestions-out");
 
         suggestionCon.find($(".loader")).remove();
 
@@ -113,8 +111,8 @@ $(() => {
 
 
             let html = `
-            <div class="suggestion-item center auto-gallery align-items-center justify-evenly w-100">
-            <div class="w-50 margin-large">
+            <div class="swiper-slide suggestion-item center auto-gallery align-items-center justify-evenly w-100">
+            <div class="w-25 margin-large content">
                 <h1>${title}</h1>
                 <h3>${altTitle}</h3>
                 <div class="margin-v-large">
@@ -134,178 +132,31 @@ $(() => {
 
             suggestionCon.append(html);
 
-            indicatorDotContainer.append('<div class="indicator-dot"></div>');
         }
 
-        initSuggestions();
-        autoAdvanceOnSuggestion();
-    }
-
-    function autoAdvanceOnSuggestion() {
-        let interval = setInterval(() => {
-            showNextSuggestion(400);
-        }, 10000);
-
-        $(".suggestion-container ").find(".suggestion-prev").on("click", () => { clearInterval(interval) })
-        $(".suggestion-container ").find(".suggestion-next").on("click", () => { clearInterval(interval) })
-        $(".suggestion-indicators").find(".indicator-dot").on("click", () => { clearInterval(interval) })
-    }
-
-    function getActiveSuggestion() {
-        let index = 0;
-        $(".suggestion-container .suggestion-item").each((i, eln) => {
-            if ($(eln).is(":visible")) {
-                index = i;
-            }
+        let swiper = new Swiper(".suggestions-box-swiper", {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 100,
+                depth: 800,
+                modifier: 1,
+                slideShadows: false,
+            },
         });
 
-        return index;
     }
-
-    function initSuggestions() {
-
-        // hide all suggestions
-        $(".suggestion-item").hide();
-
-        // show only the first suggestion
-        $(".suggestion-item").first().show();
-        $(".suggestion-indicators").find(".indicator-dot").first().addClass("indicator-dot-active");
-
-        // initialize dots to have on click that takes it to that suggestion
-        $(".suggestion-indicators").find(".indicator-dot").each((i, eln) => {
-            $(eln).on("click", () => { showSuggestions(i) });
-        });
-
-        // init prev button
-        $(".suggestion-container").find(".suggestion-prev").on("click", showNextSuggestion);
-
-        // init next button
-        $(".suggestion-container ").find(".suggestion-next").on("click", showPrevSuggestion);
-
-        initSuggestionSwipeEvt($(".suggestion-container").get(0));
-    }
-
-
-
-
-    // Source: https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-    function initSuggestionSwipeEvt(target) {
-        document.addEventListener('touchstart', handleTouchStart, false);
-        document.addEventListener('touchmove', handleTouchMove, false);
-
-        // const threshold = Math.sqrt(window.innerHeight * window.innerHeight + window.innerWidth * window.innerWidth) * 0.005;
-        const threshold = 5;
-
-        let xDown = null;
-        let yDown = null;
-
-        function getTouches(evt) {
-            return evt.touches ||             // browser API
-                evt.originalEvent.touches; // jQuery
-        }
-
-        function handleTouchStart(evt) {
-
-            if (evt.target = target) {
-                const firstTouch = getTouches(evt)[0];
-                xDown = firstTouch.clientX;
-                yDown = firstTouch.clientY;
-            }
-        };
-
-        function handleTouchMove(evt) {
-
-            if (evt.target != target) {
-                return;
-            }
-
-            if (!xDown || !yDown) {
-                return;
-            }
-
-            let xUp = evt.touches[0].clientX;
-            let yUp = evt.touches[0].clientY;
-
-            let xDiff = xDown - xUp;
-            let yDiff = yDown - yUp;
-
-            if (Math.abs(xDiff) > threshold || Math.abs(yDiff) > threshold) {
-                if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
-                    if (xDiff > 0) {
-                        /* right swipe */
-                        showNextSuggestion();
-                    } else {
-                        /* left swipe */
-                        showPrevSuggestion();
-                    }
-                } else {
-                    if (yDiff > 0) {
-                        /* down swipe */
-                    } else {
-                        /* up swipe */
-                    }
-                }
-            }
-
-            /* reset values */
-            xDown = null;
-            yDown = null;
-        };
-    }
-
-
-
-
-
-
-
-    function showNextSuggestion(transition = 200) {
-        let index = getActiveSuggestion();
-
-        if (index == $(".suggestion-container .suggestion-item").length - 1) {
-            index = 0;
-        } else {
-            index++;
-        }
-
-        showSuggestions(index, "left", transition);
-    }
-
-    function showPrevSuggestion(transition = 200) {
-        let index = getActiveSuggestion();
-
-        if (index == 0) {
-            index = $(".suggestion-container .suggestion-item").last().index();
-        } else {
-            index--;
-        }
-
-        showSuggestions(index, "right", transition);
-    }
-
-    function showSuggestions(n, direction, animemationLength = 200) {
-
-        $(".suggestion-container .suggestion-item").each((i, eln) => {
-            if (n == i) {
-                // fixed height for transition
-                $(".suggestion-container").height($(".suggestion-container").height());
-
-                setTimeout(() => {
-                    // auto height after transition
-                    $(".suggestion-container").css("height", "auto");
-                    $(eln).show("slide", { direction: direction }, animemationLength);
-                }, animemationLength);
-                $(".indicator-dot").eq(i).addClass("indicator-dot-active");
-
-            } else {
-                if ($(eln).is(":visible")) {
-                    $(eln).hide("slide", { direction: (direction == "left" ? "right" : "left") }, animemationLength - 20);
-                    $(".indicator-dot").eq(i).removeClass("indicator-dot-active");
-                }
-            }
-        })
-    }
-
 
     function displaySeason(data) {
         let gallery = $(".seasonal-gallery");
