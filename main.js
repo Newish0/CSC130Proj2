@@ -108,35 +108,32 @@ $(() => {
             return;
         }
 
-        // TMP TODO
-        charOut.html("<h5>Character</h5>");
-        pplOut.html("<h5>People</h5>");
 
-        const qsAnime = () => {
-            // clear current result and add heading
-            animeOut.html("<h5>Anime</h5>");
+        // ** anime search **
 
-            // add loader
-            animeOut.append('<div class="loader-small"></div>');
+        // clear current result and add heading
+        animeOut.html("<h5>Anime</h5>");
 
+        // add loader
+        animeOut.append('<div class="loader-small"></div>');
 
-            mal.getAnimeSearch({
-                q: query,
-                limit: 4
-            }).then((res) => {
+        mal.getAnimeSearch({
+            q: query,
+            limit: 4
+        }).then((res) => {
 
-                // only show results if result matches ID
-                // aka only show when results are the latest
-                if (searchID == currentSearchID) {
-                    animeOut > $(".loader-small").remove(); // remove loader
-                    let data = res.data;
-                    for (let x in data) {
-                        let imgSrc = data[x].images.webp.small_image_url;
-                        let title = data[x].title;
-                        let altTitle = data[x].title_english != null ? data[x].title_english : "";
-                        let id = data[x].mal_id;
+            // only show results if result matches ID
+            // aka only show when results are the latest
+            if (searchID == currentSearchID) {
+                animeOut.find($(".loader-small")).remove(); // remove loader
+                let data = res.data;
+                for (let x in data) {
+                    let imgSrc = data[x].images.webp.small_image_url;
+                    let title = data[x].title;
+                    let altTitle = data[x].title_english != null ? data[x].title_english : "";
+                    let id = data[x].mal_id;
 
-                        let htmlText = `
+                    let htmlText = `
                         <div class="search-result-item">
                         <img src="${imgSrc}">
                        
@@ -147,49 +144,43 @@ $(() => {
                         
                         </div>
                     `;
-                        animeOut.append(htmlText);
-                    }
-
-                    if (data.length == 0) {
-                        animeOut.append(`<div class="margin-small">No anime results found.</div>`);
-                    }
+                    animeOut.append(htmlText);
                 }
-            }).catch((err) => {
-                if (err == "Jikan4 API errored with response: 429") {
-                    setTimeout(qsAnime, 1000);
-                } else {
-                    console.error(err);
+
+                if (data.length == 0) {
+                    animeOut.append(`<div class="margin-small">No anime results found.</div>`);
                 }
-            });
-        }
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
 
-        qsAnime();
 
+        // ** manga search **
 
-        const qsManga = () => {
-            // clear current result and add heading
-            mangaOut.html("<h5>Manga</h5>");
+        // clear current result and add heading
+        mangaOut.html("<h5>Manga</h5>");
 
-            // add loader 
-            mangaOut.append('<div class="loader-small"></div>');
+        // add loader 
+        mangaOut.append('<div class="loader-small"></div>');
 
-            mal.getMangaSearch({
-                q: query,
-                limit: 4
-            }).then((res) => {
+        mal.getMangaSearch({
+            q: query,
+            limit: 4
+        }).then((res) => {
 
-                // only show results if result matches ID
-                // aka only show when results are the latest
-                if (searchID == currentSearchID) {
-                    mangaOut > $(".loader-small").remove(); // remove loader
-                    let data = res.data;
-                    for (let x in data) {
-                        let imgSrc = data[x].images.webp.small_image_url;
-                        let title = data[x].title;
-                        let altTitle = data[x].title_english != null ? data[x].title_english : "";
-                        let id = data[x].mal_id;
+            // only show results if result matches ID
+            // aka only show when results are the latest
+            if (searchID == currentSearchID) {
+                mangaOut.find($(".loader-small")).remove(); // remove loader
+                let data = res.data;
+                for (let x in data) {
+                    let imgSrc = data[x].images.webp.small_image_url;
+                    let title = data[x].title;
+                    let altTitle = data[x].title_english != null ? data[x].title_english : "";
+                    let id = data[x].mal_id;
 
-                        let htmlText = `
+                    let htmlText = `
                             <div class="search-result-item">
                             <img src="${imgSrc}">
                             
@@ -201,23 +192,113 @@ $(() => {
                             
                             </div>
                         `;
-                        mangaOut.append(htmlText);
-                    }
-
-                    if (data.length == 0) {
-                        mangaOut.append(`<div class="margin-small">No manga results found.</div>`);
-                    }
+                    mangaOut.append(htmlText);
                 }
-            }).catch((err) => {
-                if (err == "Jikan4 API errored with response: 429") {
-                    setTimeout(qsManga, 1000);
-                } else {
-                    console.error(err);
-                }
-            });
-        }
 
-        qsManga();
+                if (data.length == 0) {
+                    mangaOut.append(`<div class="margin-small">No manga results found.</div>`);
+                }
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
+
+
+
+        // ** Character search **
+
+        // clear current result and add heading
+        charOut.html("<h5>Character</h5>");
+
+        // add loader 
+        charOut.append('<div class="loader-small"></div>');
+
+        mal.getCharactersSearch({
+            q: query,
+            limit: 4
+        }).then((res) => {
+
+            // only show results if result matches ID
+            // aka only show when results are the latest
+            if (searchID == currentSearchID) {
+                charOut.find($(".loader-small")).remove(); // remove loader
+                let data = res.data;
+                for (let x in data) {
+                    let imgSrc = data[x].images.webp.small_image_url;
+                    let name = data[x].name;
+                    let nameKanji = data[x].name_kanji != null ? data[x].name_kanji : "";
+                    let id = data[x].mal_id;
+
+                    let htmlText = `
+                            <div class="search-result-item">
+                            <img src="${imgSrc}">
+                            
+                            <div>
+                                <a href="/character/?id=${id}">${name}</a>
+                                <div class="text-alt">${nameKanji}</div>
+                            </div>
+                                
+                            </div>
+                        `;
+                    charOut.append(htmlText);
+                }
+
+                if (data.length == 0) {
+                    charOut.append(`<div class="margin-small">No character results found.</div>`);
+                }
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
+
+
+
+        // ** people search **
+
+        // clear current result and add heading
+        pplOut.html("<h5>People</h5>");
+
+        // add loader 
+        pplOut.append('<div class="loader-small"></div>');
+
+        mal.getPeopleSearch({
+            q: query,
+            limit: 4
+        }).then((res) => {
+
+            // only show results if result matches ID
+            // aka only show when results are the latest
+            if (searchID == currentSearchID) {
+                pplOut.find($(".loader-small")).remove(); // remove loader
+                let data = res.data;
+                for (let x in data) {
+                    let imgSrc = data[x].images.jpg.image_url;
+                    let name = data[x].name;
+                    let nameKanji = data[x].given_name != null && data[x].family_name != null ? data[x].family_name + data[x].given_name : "";
+                    let id = data[x].mal_id;
+
+                    let htmlText = `
+                            <div class="search-result-item">
+                            <img src="${imgSrc}">
+                            
+                            <div>
+                                <a href="/character/?id=${id}">${name}</a>
+                                <div class="text-alt">${nameKanji}</div>
+                            </div>
+                                
+                            </div>
+                        `;
+                    pplOut.append(htmlText);
+                }
+
+                if (data.length == 0) {
+                    pplOut.append(`<div class="margin-small">No people results found.</div>`);
+                }
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
+
     }
 });
 
@@ -225,6 +306,7 @@ $(() => {
 function display404() {
     displayErrorPage(404);
 }
+
 function displayErrorPage(code) {
 
     let html = "";
@@ -238,5 +320,5 @@ function displayErrorPage(code) {
         document.querySelector("main").innerHTML = html;
         document.querySelector("#error-msg").innerHTML = code;
     });
-    
+
 }
