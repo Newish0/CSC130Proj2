@@ -40,6 +40,10 @@
     position: relative;
 }
 
+.suggestions-box .swiper-pagination .swiper-pagination-bullet-active {
+    background: var(--paradise-pink);
+}
+
 @media screen and (max-width: 820px) {
     .suggestion-item {
         flex-direction: column-reverse;
