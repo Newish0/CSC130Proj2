@@ -13,6 +13,9 @@
     position: relative;
 }
 
+.simple-split .card { 
+    overflow: hidden;
+}
 
 
 @media screen and (max-width: 600px) {
