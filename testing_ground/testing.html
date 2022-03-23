@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+
+
+    <script>
+
+        /**
+         * A token bucket for 429 retries and throttling for API rate-limits.
+         * 
+         * It was made following Ben Ogle's guide, with some modifications.
+         * Source: https://www.useanvil.com/blog/engineering/throttling-and-consuming-apis-with-429-rate-limits/
+         */
+
+        class TokenBucketRateLimiter {
+            constructor({
+                maxRequests,
+                timeFrame
+            }) {
+
+                this.maxRequests = maxRequests;
+                this.timeFrame = timeFrame;
+                this.reset();
+
+            }
+
+            reset() {
+                this.waitTimeout = null;
+                this.count = 0;
+                this.waitStartTime = performance.now();
+            }
+
+            scheduleReset() {
+                if (!this.waitTimeout) {
+                    this.waitStartTime = performance.now();
+                    this.waitTimeout = setTimeout(() => {
+                        this.reset();
+                    }, this.timeFrame);
+                }
+            }
+
+            async nextTick() {
+                let waitTime = performance.now() - this.waitStartTime;
+                await this.#sleep(waitTime);
+            }
+
+
+            async acquireToken(fn) {
+                if (this.count >= this.maxRequests) {
+                    console.log("WAIT");
+                    await this.#sleep(this.timeFrame);
+                    return this.acquireToken(fn);
+                }
+
+                this.count += 1;
+                await this.nextTick();
+                this.scheduleReset();
+                return fn();
+            }
+
+            /**
+             * Inmitate thread.sleep using a promise
+             * Used for throttling request to avoid rate limit 
+             * @param {Number} ms length of sleep in millisecond
+             * @returns {Promise} returns promise when finish sleeping
+             */
+            async #sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+        }
+
+
+
+        const start = window.performance.now();
+        let callCount = 0;
+
+
+        let bucket = new TokenBucketRateLimiter({
+            maxRequests: 3,
+            timeFrame: 1200 // in ms
+        });
+
+        function apiCall() {
+            let d = new Date();
+            console.log(`[${callCount}] Called at ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}:${d.getMilliseconds()}, time delta: ${performance.now() - start}ms`)
+            callCount++;
+        }
+
+        async function realApiCall() {
+            let d = new Date();
+            console.log(`[${callCount}] Called at ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}:${d.getMilliseconds()}, time delta: ${performance.now() - start}ms`)
+            callCount++;
+            let res = await fetch("https://api.jikan.moe/v4/anime");
+            console.log(res);
+        }
+
+        
+        for(let i = 0; i < 10; i++) {
+            bucket.acquireToken(realApiCall);
+        }
+
+
+    </script>
+</body>
+
+</html>
