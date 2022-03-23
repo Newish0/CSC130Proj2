@@ -29,7 +29,9 @@
 
     <script src="/lib/jikan4.js"></script>
 
-    <script src='/main.js'></script>
+    <script src="/firebase.js" type="module"></script>
+    <script src="/main.js"></script>
+    <script src="/account/account.js" type="module"></script>
 
 </head>
 
@@ -72,8 +74,10 @@
                         </div>
                     </div>
                 </div>
-                <a href="" id="login">Sign In</a>
-                <a href="" id="profile"><i class="fa-solid fa-user"></i></a>
+                <a href="/account/signin/" class="nav-signin-btn">Sign In</a>
+                <a href="/account/profile/" class="profile-btn">
+                    <i class="fa-solid fa-user"></i>
+                </a>
             </div>
         </div>
 
@@ -108,26 +112,29 @@
 
     <main>
 
-        
+
         <div class="container margin-v-normal">
             <div class="card padding-normal">
                 <h1>About</h1>
                 <hr>
                 <div>
                     <p>
-                        UsagiDB is an API project made for CSC 130 Project 2. 
-                        It is a site where you can search for all anime, manga, light novel related. 
-                        The motivation behind the project was to create a frontend that any one of the 
-                        single existing solutions lacks. Essentially, I want to combine all the good 
-                        features of other sites into one. 
+                        UsagiDB is an API project made for CSC 130 Project 2.
+                        It is a site where you can search for all anime, manga, light novel related.
+                        The motivation behind the project was to create a frontend that any one of the
+                        single existing solutions lacks. Essentially, I want to combine all the good
+                        features of other sites into one.
                         However, there is much more to the story behind it.
                     </p>
 
                     <p>
-                        I confess the UsagiDB's development time spanned more than the given two weeks (but it is doable in two weeks
+                        I confess the UsagiDB's development time spanned more than the given two weeks (but it is doable
+                        in two weeks
                         if I focus on this and nothing else).
-                        When development began, no prompts nor project descriptions were given, so I decided <i>it should be fine 
-                        as long as I include every concept taught in CSC 130</i>. Additionally, I will spice things up 
+                        When development began, no prompts nor project descriptions were given, so I decided <i>it
+                            should be fine
+                            as long as I include every concept taught in CSC 130</i>. Additionally, I will spice things
+                        up
                         with content not covered by the course. At that point, I had no idea how deep of a rabbit hole
                         I was heading into.
                     </p>
@@ -138,23 +145,25 @@
                     </p>
 
                     <p>
-                        Although I am calling this a database, nowhere does it store any of the primary content (no data about anime, books, etc, except for a bit of 
+                        Although I am calling this a database, nowhere does it store any of the primary content (no data
+                        about anime, books, etc, except for a bit of
                         caching to speed things up and some user data); content is accessed via an API.
-                        Furthermore, the API I am using is an unofficial API to MyAnimeList, the actual database. 
+                        Furthermore, the API I am using is an unofficial API to MyAnimeList, the actual database.
                         Therefore, you could say this is an unofficial database, or "underground" if you will.
                     </p>
 
                     <p>
-                        Therefore, when you add the meanings together, UsagiDB is simply the underground rabbit database or a gigantic rabbit hole.
+                        Therefore, when you add the meanings together, UsagiDB is simply the underground rabbit database
+                        or a gigantic rabbit hole.
                     </p>
 
                 </div>
             </div>
-            
+
             <br>
 
         </div>
-        
+
     </main>
 
     <br>

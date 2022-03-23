@@ -20,7 +20,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../lib/jikan4.js"></script>
     <script src='manga.js'></script>
-    <script src='/main.js'></script>
+    <script src="/firebase.js" type="module"></script>
+    <script src="/main.js"></script>
+    <script src="/account/account.js" type="module"></script>
 </head>
 
 <body>
@@ -61,8 +63,10 @@
                         </div>
                     </div>
                 </div>
-                <a href="" id="login">Sign In</a>
-                <a href="" id="profile"><i class="fa-solid fa-user"></i></a>
+                <a href="/account/signin/" class="nav-signin-btn">Sign In</a>
+                <a href="/account/profile/" class="profile-btn">
+                    <i class="fa-solid fa-user"></i>
+                </a>
             </div>
         </div>
 

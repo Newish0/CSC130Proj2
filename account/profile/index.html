@@ -4,25 +4,36 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Home - UsagiDB</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
 
     <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="../account.css">
+    <link rel="stylesheet" href="/simplesplit.css">
 
-    <link rel='stylesheet' type='text/css' media='screen' href='/simplesplit.css'>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="../lib/jikan4.js"></script>
-    <script src='character.js'></script>
+
+
+    <!-- Swiper JS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+    <script src="/lib/jikan4.js"></script>
+
     <script src="/firebase.js" type="module"></script>
+
     <script src="/main.js"></script>
     <script src="/account/account.js" type="module"></script>
+    <script src="profile.js" type="module"></script>
 </head>
 
 <body>
@@ -30,7 +41,7 @@
     <nav>
         <div class="wrapper">
             <div class="page-nav">
-                <a class="nav-page-icon-wrapper" href="/index.html"> <img src="/assets/icons/logofull.svg"
+                <a class="nav-page-icon-wrapper active-url" href="/index.html"> <img src="/assets/icons/logofull.svg"
                         alt="UsagiDB logo"> </a>
                 <a href="/search/anime">Animes</a>
                 <a href="/search/manga">Mangas</a>
@@ -65,9 +76,11 @@
                     </div>
                 </div>
                 <a href="/account/signin/" class="nav-signin-btn">Sign In</a>
+                
                 <a href="/account/profile/" class="profile-btn">
                     <i class="fa-solid fa-user"></i>
                 </a>
+                
             </div>
         </div>
 
@@ -101,6 +114,7 @@
     </div>
 
     <main>
+
         <div class="margin-medium">
             <div class="simple-split container">
                 <div class="simple-split-side card">
@@ -108,43 +122,40 @@
 
 
                     <div class="simple-split-side-top">
-                        <img id="picture" src="" alt="">
+                        <img id="picture" src="" alt="profile picture">
                         <h2 id="name">Name</h2>
                     </div>
 
                     <div class="margin-normal">
-                        <div class="info-pond">
-                            <div>
-                                <h5>Kanji Name</h5>
-                                <div id="name-kanji"></div>
-                            </div>
 
-                            <div>
-                                <h5>Alternate Names</h5>
-                                <div id="alternate-names">
-                                    <span>A</span>
-                                    <span>B</span>
-                                    <span>C</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h5>Users' Favourite</h5>
-                                <div id="favourite"></div>
-                            </div>
-                        </div>
-
-                        <br>
 
                         <div>
-                            <h5>About</h5>
-                            <div id="about"></div>
+                            <h5>Email</h5>
+                            <div id="email">
+                            </div>
                         </div>
+                        <br>
+                        <div>
+                            <h5>UID</h5>
+                            <div id="uid"></div>
+                        </div>
+                        <br>
+                        <div>
+                            <h5>Joined since</h5>
+                            <div id="join-date"></div>
+                        </div>
+
+
+                        <div class="margin-v-large">
+                            <button class="signout-btn large-btn text-center w-100 block box">Sign out</button>
+                        </div>
+
                     </div>
 
                 </div>
                 <div class="simple-split-main card padding-normal">
-                    <h2>Voice Actors</h2>
+                    
+                    <h2>History</h2>
                     <div class="hide-rest-container hide-rest">
                         <div id="voices-container" class="auto-gallery justify-start align-items-start">
 
@@ -157,7 +168,7 @@
                     <br>
                     <br>
 
-                    <h2>Anime Appearances</h2>
+                    <h2>Watching List</h2>
                     <div class="hide-rest-container hide-rest">
                         <div id="anime-container" class="auto-gallery justify-start align-items-start">
 
@@ -170,7 +181,7 @@
                     <br>
                     <br>
 
-                    <h2>Manga Appearances</h2>
+                    <h2>Reading List</h2>
                     <div class="hide-rest-container hide-rest">
                         <div id="manga-container" class="auto-gallery justify-start align-items-start">
 
@@ -183,6 +194,7 @@
                 </div>
             </div>
         </div>
+
 
     </main>
 

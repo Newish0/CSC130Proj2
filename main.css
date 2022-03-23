@@ -491,11 +491,17 @@ footer a {
     margin: auto;
 }
 
+.place-center-wrapper {
+    display: flex;
+    place-items: center;
+}
+
 .banner {
     position: relative;
     width: 100%;
     box-sizing: border-box;
 }
+
 
 
 .w-100 {
@@ -642,6 +648,10 @@ footer a {
 
 .block {
     display: block;
+}
+
+.box {
+    box-sizing: border-box;
 }
 
 .auto-gallery {
