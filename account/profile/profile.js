@@ -68,7 +68,7 @@ $(() => {
 
         } else {
             // User is signed out
-            window.location = "/account/signup";
+            window.location = "/account/signin";
         }
     });
 
