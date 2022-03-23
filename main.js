@@ -313,7 +313,7 @@ function displayErrorPage(code) {
 
     fetch("/assets/error.svg").then(res => res.text()).then(text => {
         html = `    
-        <div class="container">
+        <div class="container margin-v-large">
             ${text}
         </div>`;
 

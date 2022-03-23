@@ -182,7 +182,7 @@
     position: absolute;
     bottom: 0.5rem;
     left: 0.5rem;
-    font-size: var(--step--3);
+    font-size: var(--step--2);
     color: var(--light-1);
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0.25rem 0.66rem;

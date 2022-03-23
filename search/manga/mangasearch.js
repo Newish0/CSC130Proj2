@@ -20,18 +20,33 @@ $(() => {
 
     if (urlParams.genre) {
         let params = urlParams.genre.split("~");
+
+        if(params[0] == undefined || params[0] == "" || params[1] == undefined || params[1] == "") {
+            display404();
+        }
+
         searchParams.genres = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
     } else if (urlParams.magazine) {
         let params = urlParams.magazine.split("~");
+
+        if(params[0] == undefined || params[0] == "" || params[1] == undefined || params[1] == "") {
+            display404();
+        }
+
         searchParams.magazines = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
         insertBackIntoFilterBar();
     } else if (urlParams.demographic) {
         let params = urlParams.demographic.split("~");
+
+        if(params[0] == undefined || params[0] == "" || params[1] == undefined || params[1] == "") {
+            display404();
+        }
+
         searchParams.genres = params[0];
         disableFiltersAndSearch();
         insertHeadingIntoFilterBar(params[1]);
@@ -608,7 +623,6 @@ $(() => {
 
         let filterString = "";
 
-        console.log("SYNC");
 
         searchParams.q = search.val();
 
