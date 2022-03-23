@@ -1,0 +1,32 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    width: min(420px, 100%);
+    margin: auto;
+}
+
+.auth-form {
+    position: relative;
+}
+
+.auth-form input, button{
+    display: block;
+    padding: 1rem;
+    margin: 1rem 0;
+    outline: none;
+    border: 1px solid #666;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+#loggedin-stuff {
+    display: none;
+}
+
+#error-msg {
+    color: red;
+}

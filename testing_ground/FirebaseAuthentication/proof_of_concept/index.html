@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+        
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrRvT65ma6JFu08FSJ1KRiqvydI0TH7hQ",
+            authDomain: "fir-authentication-4960e.firebaseapp.com",
+            projectId: "fir-authentication-4960e",
+            storageBucket: "fir-authentication-4960e.appspot.com",
+            messagingSenderId: "779664290418",
+            appId: "1:779664290418:web:09b744d3f3ef95add148eb",
+            measurementId: "G-GDBCVRZYY1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="center-wrapper">
+            <h1>Using Firebase to Login</h1>
+            <div class="auth-form" id="login-form">
+                <h2>Login with existing account or create a new account!</h2>
+                <input type="email" name="user-email" id="user-email" placeholder="Email...">
+                <input type="password" name="user-password" id="user-password" placeholder="Password...">
+                <button id="login-btn">Login</button>
+                <button id="signup-btn">Sign up</button>
+                <br>
+                <div id="error-msg"></div>
+            </div>
+
+            
+
+
+            <div id="loggedin-stuff">
+                <div>
+                    <h2 id="greeting"></h2>
+                    <h2>You are in!</h2>
+                    <h4>Your info:</h4>
+                    <div id="your-info"></div>
+                </div>
+    
+                <button class="auth-form" id="logout-btn">
+                    Logout
+                </button>
+
+
+                <div>
+                    <h2>Store some info!</h2>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <button id="save-data">Save</button>
+                </div>
+
+                <div>
+                    <h2>Get your data!</h2>
+                    <textarea id="some-text-data" readonly></textarea>
+                    <button id="get-data">Get</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src='main.js' type="module"></script>
+</body>
+
+</html>

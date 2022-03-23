@@ -1,0 +1,16 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+      
+      "users": {
+				"$uid" : {
+          ".validate": "newData.isString() && newData.val().length < 2500000", // 2.5 MB write limit
+          ".write" : "auth.uid == $uid",
+          ".read" : "auth.uid == $uid"
+        }
+			}
+    
+    
+  }
+}
