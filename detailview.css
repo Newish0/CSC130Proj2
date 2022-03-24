@@ -318,32 +318,36 @@ select option:hover:not(:checked) {
     transform: scale(102%) translateY(0.2rem);
 }
 
-input[type="number"] {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-size: var(--step-2);
-    width: 4rem;
-    overflow: hidden;
-    border: none;
-    border-bottom: 1px solid var(--dark-2);
-    outline: none;
-    text-align: right;
-    transition: all 100ms;
-    cursor: pointer;
-}
-
-input[type="number"]:hover {
-    color: var(--paradise-pink);
-    border-bottom: 1px solid var(--paradise-pink);
-}
-
-input[type="number"]:focus {
-    border: 1px solid var(--paradise-pink);
-    border-radius: 0.5rem;
-}
 
 .user-progress-wrapper {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
     padding: 1rem;
+}
+
+
+.user-progress-radio {
+    display: none;
+}
+
+.user-progress-radio:checked ~ label {
+    background-color: var(--paradise-pink);
+    color: var(--light-0);
+}
+
+.user-progress-radio ~ label {
+    padding: 0.33rem 0.66rem;
+    background-color: var(--light-1);
+    color: var(--dark-2);
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+
+#overtop-set-score {
+    display: none;
+}
+
+#overtop-add-current {
+    display: none;
 }

@@ -19,7 +19,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../lib/jikan4.js"></script>
-    <script src='anime.js'></script>
+    <script src="anime.js" type="module"></script>
     <script src="/firebase.js" type="module"></script>
     <script src="/main.js"></script>
     <script src="/account/account.js" type="module"></script>
@@ -102,6 +102,63 @@
 
     <main>
 
+        <div id="overtop-add-current" class="overtop-popup">
+            <div class="overtop-content-wrapper margin-v-normal light-bg">
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                <h1>Add to List</h1>
+
+                <h3><label for="user-set-as">Set as</label></h3>
+                <div>
+                    <select id="user-set-as" name="user-set-as" size="5" multiple>
+                        <option value="considering" selected>Considering</option>
+                        <option value="watching">Watching</option>
+                        <option value="completed">Completed</option>
+                        <option value="hold">On Hold</option>
+                        <option value="dropped">Dropped</option>
+                    </select><br><br>
+                </div>
+
+                <h3>Progess</h3>
+                <div class="user-progress-wrapper">
+                    <div class="auto-gallery normal-gap" id="user-progress-out">
+                        <div class="loader-small"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="overtop-set-score" class="overtop-popup">
+            <div class="overtop-content-wrapper margin-v-normal light-bg">
+                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                <h1>Set score</h1>
+                <p>Given it a score</p>
+                <div>
+                    <select id="user-score" name="user-score" size="10" multiple>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
         <div class="panel-container">
 
             <div class="top-panel card padding-medium">
@@ -137,32 +194,6 @@
                     </div>
                 </div>
             </div>
-
-            <div id="overtop-add-current" class="overtop-popup">
-                <div class="overtop-content-wrapper light-bg">
-                    <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
-
-                    <h1>Add to List</h1>
-
-                    <h3><label for="user-set-as">Set as</label></h3>
-                    <div>
-                        <select id="user-set-as" name="user-set-as" size="5" multiple>
-                            <option value="considering" selected>Considering</option>
-                            <option value="watching">Watching</option>
-                            <option value="completed">Completed</option>
-                            <option value="hold">On Hold</option>
-                            <option value="dropped">Dropped</option>
-                        </select><br><br>
-                    </div>
-
-                    <h3>Progess</h3>
-                    <div class="user-progress-wrapper">
-                        <input type="number" name="user-progress" id="user-progress"> / 
-                        <span class="num-episodes-out">25</span> episodes
-                    </div>
-                </div>
-            </div>
-
 
             <div class="left-panel card padding-medium">
                 <div class="info-pond" id="side-info">
