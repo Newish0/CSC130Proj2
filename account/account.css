@@ -7,7 +7,7 @@
 }
 
 
-.auth-form input, .auth-form button{
+.auth-form input{
     display: block;
     width: 100%;
     box-sizing: border-box;

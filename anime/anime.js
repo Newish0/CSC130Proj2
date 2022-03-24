@@ -17,7 +17,7 @@ $(() => {
     function displayAnime() {
 
         // hide panel till ready
-        $(".panel-container *").hide();
+        $(".panel-container > *").hide();
 
         // add in loader
         $("main").append('<div class="loader center"></div>');
@@ -161,7 +161,7 @@ $(() => {
 
 
             // now ready to display the basic data
-            $(".panel-container *").fadeIn(100);
+            $(".panel-container > *").fadeIn(100);
 
             $("main > .loader").remove();
 
@@ -498,15 +498,12 @@ $(() => {
             loadVidoes();
 
 
-            console.log(res)
-
-
         }).catch(err => {
             if (err == "Jikan4 API errored with response: 429") {
                 setTimeout(displayAnime, 1000)
             } else {
                 displayErrorPage(err.split(":")[1]);
-                console.log(err);
+                console.error(err);
             }
         });
     }

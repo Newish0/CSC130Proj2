@@ -117,6 +117,31 @@ nav button {
     cursor: pointer;
 }
 
+.nav-item {
+    position: relative;
+    color: var(--light-1);
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: all 100ms;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.nav-user-collapse-menu {
+    position: absolute;
+    right: 0;
+    margin: 0.5rem 0;
+    padding: 1rem 2rem;
+    width: max-content;
+    background-color: var(--light-0);
+    color: var(--dark-1);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
 nav a:hover,
 nav button:hover {
     color: var(--light-0);
@@ -462,17 +487,60 @@ footer a {
     transition: transform 100ms;
 }
 
-.large-btn.inverted {
+.large-btn.inverted, .medium-btn.inverted, .small-btn.inverted {
     background-color: transparent;
     color: var(--paradise-pink);
     box-shadow: inset 0px 0px 0px 2px var(--paradise-pink); /* inward border trick */
 }
+
+.medium-btn {
+    font-size: var(--step-0);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    outline: none;
+    background-color: var(--paradise-pink);
+    color: var(--light-1);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 100ms;
+}
+
+.small-btn {
+    font-size: var(--step--1);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    outline: none;
+    background-color: var(--paradise-pink);
+    color: var(--light-1);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 100ms;
+}
+
 
 .large-btn:hover {
     filter: brightness(120%);
 }
 
 .large-btn:active {
+    transform: translateY(5px) scale(102%);
+}
+
+.medium-btn:hover {
+    filter: brightness(120%);
+}
+
+.medium-btn:active {
+    transform: translateY(5px) scale(102%);
+}
+
+.small-btn:hover {
+    filter: brightness(120%);
+}
+
+.small-btn:active {
     transform: translateY(5px) scale(102%);
 }
 
@@ -567,6 +635,35 @@ footer a {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
+
+
+
+.margin-h-none {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.margin-h-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.margin-h-small {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.margin-h-medium,
+.margin-h-normal {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.margin-h-large {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+}
+
 
 .padding-none {
     padding: 0;

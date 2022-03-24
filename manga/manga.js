@@ -17,7 +17,7 @@ $(() => {
     function displayManga() {
 
         // hide panel till ready
-        $(".panel-container *").hide();
+        $(".panel-container > *").hide();
 
         // add in loader
         $("main").append('<div class="loader center"></div>');
@@ -150,7 +150,7 @@ $(() => {
             
 
             // now ready to display the basic data
-            $(".panel-container *").fadeIn(100);
+            $(".panel-container > *").fadeIn(100);
 
             $("main > .loader").remove();
 

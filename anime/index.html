@@ -10,7 +10,7 @@
     <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
 
     <link rel="stylesheet" href="/main.css">
-    
+
     <link rel='stylesheet' type='text/css' media='screen' href='/detailview.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -30,7 +30,8 @@
     <nav>
         <div class="wrapper">
             <div class="page-nav">
-                <a class="nav-page-icon-wrapper" href="/index.html"> <img src="/assets/icons/logofull.svg" alt="UsagiDB logo"> </a>
+                <a class="nav-page-icon-wrapper" href="/index.html"> <img src="/assets/icons/logofull.svg"
+                        alt="UsagiDB logo"> </a>
                 <a href="/search/anime">Animes</a>
                 <a href="/search/manga">Mangas</a>
                 <a href="/search/companies">Companies</a>
@@ -76,7 +77,8 @@
         <div class="overtop-content-wrapper light-bg">
             <h1>Search</h1>
             <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
-            <input type="text" name="overtop-search-box" id="overtop-search-box" class="search-box" placeholder="Search">
+            <input type="text" name="overtop-search-box" id="overtop-search-box" class="search-box"
+                placeholder="Search">
 
             <div id="overtop-search-result" class="search-result">
                 <div>
@@ -97,7 +99,7 @@
             </div>
         </div>
     </div>
-    
+
     <main>
 
         <div class="panel-container">
@@ -128,16 +130,39 @@
                     </div>
 
                     <div class="quick-access-menu">
-                        <button class="large-btn">Main Menu Item</button>
-                        <div class="quick-access-submenu">
-                            <button class="large-btn inverted quick-access-submenu-toggle">Sub Menu Item 1</button>
-                            <button class="large-btn">Sub Menu Item 1</button>
-                            <button class="large-btn">Sub Menu Item 2</button>
-                            <button class="large-btn">Sub Menu Item 3</button>
-                        </div>
+                        <button class="large-btn user-add-current"><i class="fa-solid fa-list-ul margin-h-small"></i>
+                            Add to List</button>
+                        <button class="large-btn user-set-score inverted"><i
+                                class="fa-solid fa-star margin-h-small"></i> Give Score</button>
                     </div>
                 </div>
             </div>
+
+            <div id="overtop-add-current" class="overtop-popup">
+                <div class="overtop-content-wrapper light-bg">
+                    <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                    <h1>Add to List</h1>
+
+                    <h3><label for="user-set-as">Set as</label></h3>
+                    <div>
+                        <select id="user-set-as" name="user-set-as" size="5" multiple>
+                            <option value="considering" selected>Considering</option>
+                            <option value="watching">Watching</option>
+                            <option value="completed">Completed</option>
+                            <option value="hold">On Hold</option>
+                            <option value="dropped">Dropped</option>
+                        </select><br><br>
+                    </div>
+
+                    <h3>Progess</h3>
+                    <div class="user-progress-wrapper">
+                        <input type="number" name="user-progress" id="user-progress"> / 
+                        <span class="num-episodes-out">25</span> episodes
+                    </div>
+                </div>
+            </div>
+
 
             <div class="left-panel card padding-medium">
                 <div class="info-pond" id="side-info">

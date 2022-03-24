@@ -109,13 +109,15 @@ div {
     gap: 1rem;
 }
 
-.top-panel-main .quick-access-submenu > * {
+.quick-access-submenu > * {
     flex-grow: 1;
     flex-shrink: 1;
 }
 
-.quick-access-submenu-toggle {
+.top-panel-main .quick-access-menu .quick-access-submenu-toggle {
     display: none;
+    width: min-content;
+    flex-grow: 0;
 }
 
 @media screen and (max-width: 750px) {
@@ -124,7 +126,7 @@ div {
         margin-top: 1rem;
     }
 
-    .quick-access-submenu-toggle {
+    .top-panel-main .quick-access-menu .quick-access-submenu-toggle {
         display: block;
     }
 
@@ -132,6 +134,18 @@ div {
         .quick-access-submenu
         > *:not(.quick-access-submenu-toggle) {
         display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .panel-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-panel-main .quick-access-items {
+        position: relative;
+        margin-top: 1rem;
     }
 }
 
@@ -271,14 +285,65 @@ h6 {
     min-width: 150px;
 }
 
-@media screen and (max-width: 600px) {
-    .panel-container {
-        display: flex;
-        flex-direction: column;
-    }
+select {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-size: var(--step-0);
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 
-    .top-panel-main .quick-access-items {
-        position: relative;
-        margin-top: 1rem;
-    }
+select option {
+    padding: 1rem;
+    border-radius: 1rem;
+    color: var(--dark-1);
+    text-align: center;
+    cursor: pointer;
+    transition: all 100ms;
+}
+
+select option:checked {
+    background-color: var(--paradise-pink);
+    color: var(--light-1);
+    box-shadow: 0 0 10px 100px var(--paradise-pink) inset;
+}
+
+select option:hover:not(:checked) {
+    color: var(--paradise-pink);
+    transform: scale(102%) translateY(0.2rem);
+}
+
+input[type="number"] {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-size: var(--step-2);
+    width: 4rem;
+    overflow: hidden;
+    border: none;
+    border-bottom: 1px solid var(--dark-2);
+    outline: none;
+    text-align: right;
+    transition: all 100ms;
+    cursor: pointer;
+}
+
+input[type="number"]:hover {
+    color: var(--paradise-pink);
+    border-bottom: 1px solid var(--paradise-pink);
+}
+
+input[type="number"]:focus {
+    border: 1px solid var(--paradise-pink);
+    border-radius: 0.5rem;
+}
+
+.user-progress-wrapper {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    padding: 1rem;
 }
