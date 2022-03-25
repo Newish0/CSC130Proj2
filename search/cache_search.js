@@ -1,26 +1,19 @@
-
-
-
 $(() => {
-
     let dataURL = "";
 
-
-    if(document.URL.includes("/search/companies")) {
+    if (document.URL.includes("/search/companies")) {
         dataURL = "/data/producers.json";
-    } else if(document.URL.includes("/search/magazines")) {
+    } else if (document.URL.includes("/search/magazines")) {
         dataURL = "/data/magazines.json";
-    } else{
+    } else {
         display404();
     }
-
 
     let sections = null;
 
     fillOutFrameWithData();
 
     initFilterBarSeachBox();
-
 
     function generateNav(sections) {
         for (let key in sections) {
@@ -51,15 +44,12 @@ $(() => {
         });
     }
 
-
     function applySearch(query) {
         let outputContainer = $("#output-container");
 
         query = query.toLowerCase();
 
         // setAsLoading(outputContainer);
-
-
 
         let tmp = {};
         if (sections != null) {
@@ -75,10 +65,7 @@ $(() => {
         resetSections();
         displaySections(outputContainer, tmp);
 
-
         // setAsReady(outputContainer);
-
-
     }
 
     function resetSearch() {
@@ -91,56 +78,50 @@ $(() => {
         $("#output-container").html("");
     }
 
+    function fillOutFrameWithData() {
+        $.get(dataURL, (data) => {
+            // fill output container with 0-A-Z section containers
+            let outputContainer = $("#output-container");
+            sections = {};
 
-    async function fillOutFrameWithData() {
-        let res = await fetch(dataURL);
-        let data = await res.json();
+            outputContainer.find(".loader").remove();
 
-
-
-        if (res.status != 200) {
-            displayErrorPage(res.status);
-            throw "Failed to fetch data from " + dataURL;
-        }
-
-        // fill output container with 0-A-Z section containers
-        let outputContainer = $("#output-container");
-        sections = {};
-
-        outputContainer.find(".loader").remove();
-
-        // seperate data into sections
-        for (let i in data) {
-            let firstCharCode = data[i].name.toUpperCase().charCodeAt(0);
-            if (firstCharCode < 65 || firstCharCode > 90) {
-                addToSection(sections, "#", data[i]);
-            } else {
-                addToSection(sections, data[i].name.toUpperCase()[0], data[i]);
+            // seperate data into sections
+            for (let i in data) {
+                let firstCharCode = data[i].name.toUpperCase().charCodeAt(0);
+                if (firstCharCode < 65 || firstCharCode > 90) {
+                    addToSection(sections, "#", data[i]);
+                } else {
+                    addToSection(
+                        sections,
+                        data[i].name.toUpperCase()[0],
+                        data[i]
+                    );
+                }
             }
-        }
 
-        // sort sections
-        let sortable = [];
-        for (let key in sections) {
+            // sort sections
+            let sortable = [];
+            for (let key in sections) {
+                // sort by name
+                sections[key].sort((a, b) => (a.name > b.name ? 1 : -1));
 
-            // sort by name
-            sections[key].sort((a, b) => (a.name > b.name ? 1 : -1));
+                sortable.push(key);
+            }
+            sortable.sort((a, b) => (a > b ? 1 : -1));
 
-            sortable.push(key);
-        }
-        sortable.sort((a, b) => (a > b ? 1 : -1));
+            let newSections = {};
+            for (let i in sortable) {
+                newSections[sortable[i]] = sections[sortable[i]];
+            }
+            sections = newSections;
 
-        let newSections = {};
-        for (let i in sortable) {
-            newSections[sortable[i]] = sections[sortable[i]];
-        }
-        sections = newSections;
-
-        
-
-        // display sections
-        displaySections(outputContainer, sections);
-        generateNav(sections);
+            // display sections
+            displaySections(outputContainer, sections);
+            generateNav(sections);
+        }).fail((err) => {
+           displayErrorPage(err.status);
+        });
     }
 
     function displaySections(outputContainer, sections) {
@@ -155,9 +136,11 @@ $(() => {
 
                 let html = `
                     <span class="tag">
-                       <a class="clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(name)}"><h5 class="margin-small">${name} (${count})</h5></a>
+                       <a class="clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(
+                    name
+                )}"><h5 class="margin-small">${name} (${count})</h5></a>
                     </span>
-                `
+                `;
 
                 content += html;
             }
@@ -179,7 +162,7 @@ $(() => {
             <h3 id="section-${heading.replace(" ", "-")}">${heading}</h3>
             <div class="auto-gallery  align-items-start justify-start">${content}</div>
         </div>
-        `
+        `;
 
         if (hideRest) {
             html = `
@@ -187,10 +170,9 @@ $(() => {
                 ${html}
                 <a class="click-to-show-more">Show more</a>
             </div>
-            `
+            `;
         }
 
         return html;
     }
-
 });
