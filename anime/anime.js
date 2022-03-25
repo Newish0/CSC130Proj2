@@ -132,9 +132,19 @@ $(() => {
         });
     }
 
+    function removeFromList(user, list, contentID) {
+        const dataRef = ref(db, `users/${user.uid}/${list}/${contentID}`);
+
+        remove(dataRef).then( () => window.location = window.location);
+    }
+
 
     function initQuickAccessMenu(user) {
         if (user != undefined) {
+            $(".user-remove-from-list").on("click", (evt) => {
+                removeFromList(user, "watchinglist", animeID);
+            });
+
             $(".user-add-current").on("click", (evt) => {
                 $("#overtop-add-current").fadeIn(100);
             });
