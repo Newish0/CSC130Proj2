@@ -9,6 +9,14 @@
     --honeydew: #f3fcf0ff;
     --pine-tree: #1f271bff;
 
+
+    --light-blue: rgb(66, 224, 238);
+    --light-green: rgb(66, 238, 103);
+    --light-orange: rgb(238, 149, 66);
+    --light-red: rgb(238, 66, 66);
+    --light-purple: rgb(204, 66, 238);
+
+
     --light-0: rgb(255, 255, 255);
     --light-1: rgb(233, 233, 233);
     --light-2: rgb(213, 213, 213);
@@ -82,6 +90,38 @@ h5 {
 p, div, span {
     font-size: var(--step-0);
     font-weight: 100;
+}
+
+
+
+
+[class^="status-"] {
+    display: inline-block;
+    position: relative;
+    border-radius: 100%;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin: 0 0.5rem;
+}
+
+.status-completed {
+    background-color: var(--light-blue);
+}
+
+.status-ongoing {
+    background-color: var(--light-green);
+}
+
+.status-hiatus {
+    background-color: var(--light-orange);
+}
+
+.status-dropped {
+    background-color: var(--light-red);
+}
+
+.status-considering {
+    background-color: var(--light-purple);
 }
 
 

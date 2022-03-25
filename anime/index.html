@@ -102,16 +102,17 @@
 
     <main>
 
-        <div id="overtop-add-current" class="overtop-popup">
+        <div id="overtop-add-current" class="overtop-popup overtop-x-bg sync-on-click">
             <div class="overtop-content-wrapper margin-v-normal light-bg">
-                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+                <i class="top-right x-btn sync-on-click overtop-x-btn margin-medium fa-solid fa-x"></i>
 
                 <h1>Add to List</h1>
 
                 <h3><label for="user-set-as">Set as</label></h3>
                 <div>
-                    <select id="user-set-as" name="user-set-as" size="5" multiple>
-                        <option value="considering" selected>Considering</option>
+                    <select id="user-set-as" name="user-set-as" size="5">
+                        <option value="none" selected>None</option>
+                        <option value="considering">Considering</option>
                         <option value="watching">Watching</option>
                         <option value="completed">Completed</option>
                         <option value="hold">On Hold</option>
@@ -130,14 +131,14 @@
         </div>
 
 
-        <div id="overtop-set-score" class="overtop-popup">
+        <div id="overtop-set-score" class="overtop-popup overtop-x-bg sync-on-click">
             <div class="overtop-content-wrapper margin-v-normal light-bg">
-                <i class="top-right x-btn overtop-x-btn margin-medium fa-solid fa-x"></i>
+                <i class="top-right x-btn sync-on-click overtop-x-btn margin-medium fa-solid fa-x"></i>
 
                 <h1>Set score</h1>
                 <p>Given it a score</p>
                 <div>
-                    <select id="user-score" name="user-score" size="10" multiple>
+                    <select id="user-score" name="user-score" size="10">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

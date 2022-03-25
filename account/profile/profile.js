@@ -3,7 +3,7 @@
 
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+import { getDatabase, ref, set, onValue, child, get, remove } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 
 
@@ -60,17 +60,86 @@ $(() => {
             $("#email").html(email);
             $("#uid").html(uid);
 
-            console.log(user.metadata.createdAt)
-
             $("#join-date").html(new Date(parseInt(user.metadata.createdAt)).toLocaleDateString())
 
-
+            displayUserLists(user);
 
         } else {
             // User is signed out
             window.location = "/account/signin";
         }
     });
+
+
+    async function displayUserLists(user) {
+        const dataRef = ref(db, `users/${user.uid}/watchinglist`);
+
+        get(dataRef).then((snapshot) => {
+            console.log(snapshot.val());
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                let watchingListContainer = $("#anime-container");
+
+                console.log(data)
+
+                watchingListContainer.html("");
+
+                for (let id in data) {
+
+                    let statusClass = "considering";
+
+                    switch (data[id].status) {
+                        case "watching":
+                            statusClass = "ongoing";
+                            break;
+                        case "completed":
+                            statusClass = "completed";
+                            break;
+                        case "considering":
+                            statusClass = "considering";
+                            break;
+                        case "hold":
+                            statusClass = "haitus";
+                            break;
+                        case "dropped":
+                            statusClass = "dropped";
+                            break;
+                    }
+                    
+                    // TODO  tmp solution
+                    if(data[id].status == "none") {
+                        return;
+                    } 
+
+                    let thisScore = data[id].score;
+
+                    if(data[id].score == -1) {
+                        thisScore = "n/a"
+                    }
+
+
+                    let htmlTxt = `
+                    <div class="role-card">
+                    <div class="min-box size-m">
+                        <img src="${data[id].cover}" alt="image of ${data[id].title}" loading="lazy">
+                        <a href="/anime/?id=${id}">${data[id].title} - <i class="fa-solid fa-star margin-h-small"></i>${thisScore} (You)</a> 
+                        <div class="status-${statusClass} status"></div>
+                    </div>
+                    `;
+
+                    watchingListContainer.append(htmlTxt);
+                }
+
+
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
 
 
     function logout() {

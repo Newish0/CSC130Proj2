@@ -1,32 +1,26 @@
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signOut,
-    updateProfile,
-} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
-import {
-    getDatabase,
-    ref,
-    set,
-    onValue,
-} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+import { getDatabase, ref, set, onValue, child, get, remove, update } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 $(() => {
+    // -------------------------------------------------------------------------
+    // page UI related
+    // -------------------------------------------------------------------------
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
     });
 
-    // page UI related
     let mal = new Jikan4();
     let animeID = params.id;
+    let animeTitle = null;
+    let animeCover = null;
 
     displayAnime();
 
 
-
+    // -------------------------------------------------------------------------
     // Firebase related
+    // -------------------------------------------------------------------------
+
     const auth = getAuth();
     const db = getDatabase();
 
@@ -47,21 +41,100 @@ $(() => {
 
             generateUserProgressForm().then(() => {
                 // sync input form with user DB 
-                
+
+                const dataRef = ref(db, `users/${user.uid}/watchinglist/${animeID}`);
+
+                get(dataRef).then((snapshot) => {
+                    console.log(snapshot.val());
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        $("#user-score").val(data.score);
+                        $("#user-set-as").val(data.status);
+                        $(`#user-nav-progress-ep-${data.progress}`).prop("checked", true);
+
+                        if (data.score != -1) {
+                            $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${data.score}`);
+                        }
+
+                        if (data.status != "none") {
+                            $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> ${data.status[0].toUpperCase()}${data.status.substring(1, data.status.length)}`);
+                        }
+
+                    } else {
+                        console.log("No data available");
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                });
             });
 
-            initQuickAccessMenu(true);
+            initQuickAccessMenu(user);
         } else {
             console.log("[Anime onAuthStateChanged] User not logged in:");
 
-            initQuickAccessMenu(false);
+            initQuickAccessMenu();
         }
     });
 
-    function initQuickAccessMenu(signedIn) {
-        console.log(signedIn);
 
-        if (signedIn) {
+    async function updateUserProgressAndScore(user, list, contentID) {
+        let userScore = $("#user-score").val();
+        let userStatus = $("#user-set-as").val();
+        let userProgress = $("#user-progress-out input[name='user-nav-progress']:checked").val();
+
+        const dataRef = ref(db, `users/${user.uid}/${list}/${contentID}`);
+
+        userScore = userScore == null || userScore == undefined ? -1 : userScore;
+        userStatus = userStatus == null || userStatus == undefined ? "none" : userStatus;
+        userProgress = userProgress == null || userProgress == undefined ? 0 : userProgress;
+
+        if (userScore != -1 && userStatus == "none") {
+            userStatus = "watching";
+        } 
+
+
+
+        get(dataRef).then((snapshot) => {
+            let sendObj = {};
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                sendObj = {
+                    progress: parseInt(userProgress),
+                    score: parseInt(userScore),
+                    status: userStatus
+                }
+                update(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
+            } else if (userScore != -1 || userStatus != "" || userProgress != -1) {
+                sendObj = {
+                    progress: parseInt(userProgress),
+                    score: parseInt(userScore),
+                    status: userStatus,
+                    title: animeTitle,
+                    cover: animeCover,
+                    timeAdded: new Date().getTime()
+                }
+                set(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
+            }
+
+            
+
+            if (sendObj.score != -1) {
+                $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${sendObj.score}`);
+            }
+
+            if (sendObj.status != "none") {
+                $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> ${sendObj.status[0].toUpperCase()}${sendObj.status.substring(1, sendObj.status.length)}`);
+            } else {
+                $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> Add to List`);
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+
+    function initQuickAccessMenu(user) {
+        if (user != undefined) {
             $(".user-add-current").on("click", (evt) => {
                 $("#overtop-add-current").fadeIn(100);
             });
@@ -69,6 +142,16 @@ $(() => {
             $(".user-set-score").on("click", (evt) => {
                 $("#overtop-set-score").fadeIn(100);
             });
+
+            $(".sync-on-click").each((i, obj) => {
+                $(obj).on("click", (evt) => {
+                    if (evt.target !== obj) {
+                        return;
+                    }
+                    updateUserProgressAndScore(user, "watchinglist", animeID);
+                });
+            });
+
         } else {
             $(".user-add-current").on("click", (evt) => {
                 window.location = "/account/signin";
@@ -102,12 +185,18 @@ $(() => {
     }
 
     function generateUserProgressFormFromData(data) {
-        let htmlReturn = "";
+        let htmlReturn = `
+        <span>      
+            <input class="user-progress-radio" type="radio" name="user-nav-progress" value="0" id="user-nav-progress-ep-0">
+            <label class="unselectable" for="user-nav-progress-ep-0">0</label>
+        </span>
+        `;
+
         for (let i = 0; i < data.length; i++) {
             let epCount = data[i].mal_id;
             let htmlTxt = `
                 <span>      
-                    <input class="user-progress-radio" type="radio" name="user-nav-progress-ep-${epCount}" id="user-nav-progress-ep-${epCount}">
+                    <input class="user-progress-radio" type="radio" name="user-nav-progress" value="${epCount}" id="user-nav-progress-ep-${epCount}">
                     <label class="unselectable" for="user-nav-progress-ep-${epCount}">${epCount}</label>
                 </span>
             `;
@@ -115,6 +204,11 @@ $(() => {
         }
         return htmlReturn;
     }
+
+
+    // -------------------------------------------------------------------------
+    // Page content related
+    // -------------------------------------------------------------------------
 
     function displayAnime() {
         // hide panel till ready
@@ -157,14 +251,17 @@ $(() => {
 
                 pageTitle += data.title;
                 if (data.title_english != null) {
-                    pageTitle += data.title_english;
+                    pageTitle += " (" + data.title_english + ") ";
                 }
                 $("title").html(`${pageTitle} - UsagiDB`);
 
                 title.html(data.title);
+                animeTitle = data.title;
+
                 altTitle.html(data.title_english);
                 cover.attr("src", data.images.webp.image_url);
                 cover.fadeIn(200);
+                animeCover = data.images.webp.image_url;
 
                 let tagsHTMLText = "";
                 for (let x in data.genres) {
@@ -540,9 +637,8 @@ $(() => {
 
                             externalsHTMLText += `
                         <a class="tag clean-url" href="${data.url}">
-                            <img src="https://www.google.com/s2/favicons?domain=${
-                                new URL(data.url).hostname
-                            }?size=64">
+                            <img src="https://www.google.com/s2/favicons?domain=${new URL(data.url).hostname
+                                }?size=64">
                             MyAnimeList
                         </a>
                         `;
@@ -592,36 +688,32 @@ $(() => {
                             for (let i in themeData.openings) {
                                 opHTMLText += `
                         <a href="//music.youtube.com/search?q=${encodeURI(
-                            themeData.openings[i].replace(/\d*(: )/, "")
-                        )}" class="clean-url url-item">${
-                                    themeData.openings[i]
-                                }</a>
+                                    themeData.openings[i].replace(/\d*(: )/, "")
+                                )}" class="clean-url url-item">${themeData.openings[i]
+                                    }</a>
                         `;
                             }
 
-                            opHTMLText = `<div class="tags-container">Openings: ${
-                                opHTMLText == ""
-                                    ? "No opening found."
-                                    : opHTMLText
-                            }</div>`;
+                            opHTMLText = `<div class="tags-container">Openings: ${opHTMLText == ""
+                                ? "No opening found."
+                                : opHTMLText
+                                }</div>`;
 
                             let edHTMLText = "";
 
                             for (let i in themeData.endings) {
                                 edHTMLText += `
                         <a href="//music.youtube.com/search?q=${encodeURI(
-                            themeData.endings[i].replace(/\d*(: )/, "")
-                        )}" class="clean-url url-item">${
-                                    themeData.endings[i]
-                                }</a>
+                                    themeData.endings[i].replace(/\d*(: )/, "")
+                                )}" class="clean-url url-item">${themeData.endings[i]
+                                    }</a>
                         `;
                             }
 
-                            edHTMLText = `<div class="tags-container">Endings: ${
-                                edHTMLText == ""
-                                    ? "No ending found."
-                                    : edHTMLText
-                            }</div>`;
+                            edHTMLText = `<div class="tags-container">Endings: ${edHTMLText == ""
+                                ? "No ending found."
+                                : edHTMLText
+                                }</div>`;
 
                             themesHTMLText += opHTMLText;
                             themesHTMLText += edHTMLText;

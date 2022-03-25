@@ -1,7 +1,4 @@
 :root {
-    --light-blue: rgb(66, 224, 238);
-    --light-green: rgb(66, 238, 103);
-    --light-orange: rgb(238, 149, 66);
     /* --light-blue: rgb(137, 231, 255);
     --light-green: rgb(137, 255, 147);
     --light-orange: rgb(255, 204, 137); */
@@ -9,27 +6,6 @@
 
 div {
     /* border: 1px solid red; */
-}
-
-[class^="status-"] {
-    display: inline-block;
-    position: relative;
-    border-radius: 100%;
-    width: 0.6rem;
-    height: 0.6rem;
-    margin: 0 0.5rem;
-}
-
-.status-completed {
-    background-color: var(--light-blue);
-}
-
-.status-ongoing {
-    background-color: var(--light-green);
-}
-
-.status-hiatus {
-    background-color: var(--light-orange);
 }
 
 .tags-container {
@@ -341,6 +317,7 @@ select option:hover:not(:checked) {
     color: var(--dark-2);
     border-radius: 1rem;
     margin: 1rem 0;
+    cursor: pointer;
 }
 
 
