@@ -75,7 +75,7 @@ $(() => {
         const dataRef = ref(db, `users/${user.uid}/watchinglist`);
 
         get(dataRef).then((snapshot) => {
-            console.log(snapshot.val());
+
             if (snapshot.exists()) {
                 const data = snapshot.val();
 
@@ -83,7 +83,21 @@ $(() => {
 
                 console.log(data)
 
-                watchingListContainer.html("");
+                watchingListContainer.html(""); // clear loader
+
+                // generate sections
+                watchingListContainer.append('<h4>Watching</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="wl-watching"></div><br>');
+                watchingListContainer.append('<h4>Completed</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="wl-completed"></div><br>');
+                watchingListContainer.append('<h4>Considering</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="wl-considering"></div><br>');
+                watchingListContainer.append('<h4>On Hold</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="wl-hold"></div><br>');
+                watchingListContainer.append('<h4>Dropped</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="wl-dropped"></div><br>');
+
+                let watchingContainer = $("#wl-watching");
+                let completedContainer = $("#wl-completed");
+                let consideringContainer = $("#wl-considering");
+                let holdContainer = $("#wl-hold");
+                let droppedContainer = $("#wl-dropped");
+
 
                 for (let id in data) {
 
@@ -100,24 +114,21 @@ $(() => {
                             statusClass = "considering";
                             break;
                         case "hold":
-                            statusClass = "haitus";
+                            statusClass = "hiatus";
                             break;
                         case "dropped":
                             statusClass = "dropped";
                             break;
+                        default: // status == "none"
+                            continue;
                     }
-                    
-                    // TODO  tmp solution
-                    if(data[id].status == "none") {
-                        return;
-                    } 
+
 
                     let thisScore = data[id].score;
 
-                    if(data[id].score == -1) {
+                    if (data[id].score == -1) {
                         thisScore = "n/a"
                     }
-
 
                     let htmlTxt = `
                     <div class="role-card">
@@ -128,7 +139,44 @@ $(() => {
                     </div>
                     `;
 
-                    watchingListContainer.append(htmlTxt);
+                    switch (data[id].status) {
+                        case "watching":
+                            watchingContainer.append(htmlTxt);
+                            break;
+                        case "completed":
+                            completedContainer.append(htmlTxt);
+                            break;
+                        case "considering":
+                            consideringContainer.append(htmlTxt);
+                            break;
+                        case "hold":
+                            holdContainer.append(htmlTxt);
+                            break;
+                        case "dropped":
+                            droppedContainer.append(htmlTxt);
+                            break;
+                    }
+                }
+
+
+                if(watchingContainer.html() == "") {
+                    watchingContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(completedContainer.html() == "") {
+                    completedContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(consideringContainer.html() == "") {
+                    consideringContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(holdContainer.html() == "") {
+                    holdContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(droppedContainer.html() == "") {
+                    droppedContainer.append("<p>You have none here! Go add some.</p>");
                 }
 
 

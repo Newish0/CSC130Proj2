@@ -51,7 +51,6 @@ $(() => {
             let pageTitle = "";
 
             pageTitle += data.title;
-            if (data.title_english != null) { pageTitle += data.title_english };
             $("title").html(`${pageTitle} - UsagiDB`);
 
 
@@ -136,18 +135,18 @@ $(() => {
             background.html(data.background != null ? data.background : "n/a");
 
 
-            if(data.scored != null) {
+            if (data.scored != null) {
                 initNumberLoadingAnimation("#score", data.scored, 1000, false, 2);
             } else {
                 score.html("n/a");
             }
 
-            if(data.scored_by != null) {
+            if (data.scored_by != null) {
                 initNumberLoadingAnimation("#score-population", data.scored_by, 2000, true, 0);
             } else {
                 scorePopulation.html("n/a");
             }
-            
+
 
             // now ready to display the basic data
             $(".panel-container > *").fadeIn(100);

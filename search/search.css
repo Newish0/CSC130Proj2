@@ -344,8 +344,3 @@
     width: 64px;
     height: 64px;
 }
-
-
-.seperate-by-dot > *:not(:last-child)::after {
-    content: " · ";
-}

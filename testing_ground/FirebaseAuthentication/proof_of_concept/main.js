@@ -71,7 +71,6 @@ onAuthStateChanged(auth, (user) => {
         document.querySelector("#greeting").innerText = `Hello ${displayName}!`;
 
         document.querySelector("#your-info").innerHTML = `
-            
             Name:${displayName}
             <br>
             Email:${email}

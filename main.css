@@ -14,7 +14,7 @@
     --light-green: rgb(66, 238, 103);
     --light-orange: rgb(238, 149, 66);
     --light-red: rgb(238, 66, 66);
-    --light-purple: rgb(204, 66, 238);
+    --light-purple: rgb(224, 66, 238);
 
 
     --light-0: rgb(255, 255, 255);
@@ -126,6 +126,9 @@ p, div, span {
 
 
 
+.seperate-by-dot > *:not(:last-child)::after {
+    content: " · ";
+}
 
 
 nav {
@@ -832,23 +835,23 @@ footer a {
 }
 
 .justify-start {
-    justify-content: flex-start;
+    justify-content: flex-start !important;
 }
 
 .justify-end {
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
 
 .justify-center {
-    justify-content: center;
+    justify-content: center !important;
 }
 
 .justify-evenly {
-    justify-content: space-evenly;
+    justify-content: space-evenly !important;
 }
 
 .justify-between {
-    justify-content: space-between;
+    justify-content: space-between !important;
 }
 
 
