@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
 
     <link rel="stylesheet" href="/main.css">
 
-    <link rel='stylesheet' type='text/css' media='screen' href='/detailview.css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/detailview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -130,10 +130,10 @@
                 <br>
                 <br>
 
-                
+
                 <button class="large-btn sync-on-click overtop-x-btn w-50">Save</button>
                 <button class="user-remove-from-list large-btn overtop-x-btn inverted w-25">Remove</button>
-                
+
 
             </div>
         </div>
@@ -196,10 +196,14 @@
                     </div>
 
                     <div class="quick-access-menu">
-                        <button class="large-btn user-add-current"><i class="fa-solid fa-list-ul margin-h-small"></i>
-                            Add to List</button>
-                        <button class="large-btn user-set-score inverted"><i
-                                class="fa-solid fa-star margin-h-small"></i> Give Score</button>
+                        <button class="large-btn user-add-current">
+                            <i class="fa-solid fa-list-ul margin-h-small"></i>
+                            Add to List
+                        </button>
+                        <button class="large-btn user-set-score inverted">
+                            <i class="fa-solid fa-star margin-h-small"></i>
+                            Give Score
+                        </button>
                     </div>
                 </div>
             </div>
@@ -431,6 +435,7 @@
                 <div class="card padding-medium">
                     <h5>Related</h5>
                     <div id="related">
+                        <div class="loader"></div>
                         <!-- content here. -->
                     </div>
                 </div>

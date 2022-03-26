@@ -81,7 +81,7 @@ h6 {
     object-fit: cover;
 }
 
-.min-box a {
+.min-box a, .min-box span {
     position: absolute;
     bottom: 0;
     left: 0;

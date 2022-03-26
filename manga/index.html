@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="/assets/icons/logo.svg" type="image/gif" sizes="96x96">
 
     <link rel="stylesheet" href="/main.css">
     
-    <link rel='stylesheet' type='text/css' media='screen' href='/detailview.css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/detailview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,7 +19,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../lib/jikan4.js"></script>
-    <script src='manga.js'></script>
+    <script src="manga.js" type="module"></script>
     <script src="/firebase.js" type="module"></script>
     <script src="/main.js"></script>
     <script src="/account/account.js" type="module"></script>
@@ -101,6 +101,72 @@
 
     <main>
 
+
+        
+        <div id="overtop-add-current" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper margin-v-normal light-bg">
+                <i class="top-right x-btn sync-on-click overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                <h1>Add to List</h1>
+
+                <h3><label for="user-set-as">Set as</label></h3>
+                <div>
+                    <select id="user-set-as" name="user-set-as" size="5">
+                        <option value="considering" selected>Considering</option>
+                        <option value="watching">Watching</option>
+                        <option value="completed">Completed</option>
+                        <option value="hold">On Hold</option>
+                        <option value="dropped">Dropped</option>
+                    </select><br><br>
+                </div>
+
+                <h3>Progess</h3>
+                <div class="user-progress-wrapper">
+                    <div class="auto-gallery normal-gap" id="user-progress-out">
+                        <div class="loader-small"></div>
+
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+
+                <button class="large-btn sync-on-click overtop-x-btn w-50">Save</button>
+                <button class="user-remove-from-list large-btn overtop-x-btn inverted w-25">Remove</button>
+
+
+            </div>
+        </div>
+
+
+        <div id="overtop-set-score" class="overtop-popup overtop-x-bg sync-on-click">
+            <div class="overtop-content-wrapper margin-v-normal light-bg">
+                <i class="top-right x-btn sync-on-click overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                <h1>Set score</h1>
+                <p>Given it a score</p>
+                <div>
+                    <select id="user-score" name="user-score" size="10">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
         <div class="panel-container">
 
             <div class="top-panel card padding-medium">
@@ -129,8 +195,14 @@
                     </div>
 
                     <div class="quick-access-menu">
-                        <button class="large-btn user-add-current"><i class="fa-solid fa-list-ul margin-h-small"></i> Add to List</button>
-                        <button class="large-btn user-set-score inverted"><i class="fa-solid fa-star margin-h-small"></i> Give Score</button>
+                        <button class="large-btn user-add-current">
+                            <i class="fa-solid fa-list-ul margin-h-small"></i>
+                            Add to List
+                        </button>
+                        <button class="large-btn user-set-score inverted">
+                            <i class="fa-solid fa-star margin-h-small"></i>
+                            Give Score
+                        </button>
                     </div>
                 </div>
             </div>
