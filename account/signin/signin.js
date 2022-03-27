@@ -38,7 +38,7 @@ $(() => {
             console.log("[onAuthStateChanged] User is logged in:")
             console.log(user)
 
-            window.location = "/account/profile";
+            window.location = "../profile";
 
         } else {
             // User is signed out

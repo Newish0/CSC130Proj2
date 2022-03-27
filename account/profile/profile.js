@@ -66,7 +66,7 @@ $(() => {
 
         } else {
             // User is signed out
-            window.location = "/account/signin";
+            window.location = "../signin";
         }
     });
 
@@ -134,7 +134,7 @@ $(() => {
                     <div class="role-card">
                     <div class="min-box size-m">
                         <img src="${data[id].cover}" alt="image of ${data[id].title}" loading="lazy">
-                        <a href="/anime/?id=${id}">${data[id].title} - <i class="fa-solid fa-star margin-h-small"></i>${thisScore} (You)</a> 
+                        <a href="../../anime/?id=${id}">${data[id].title} - <i class="fa-solid fa-star margin-h-small"></i>${thisScore} (You)</a> 
                         <div class="status-${statusClass} status"></div>
                     </div>
                     `;
@@ -192,7 +192,7 @@ $(() => {
 
     function logout() {
         signOut(auth).then(() => {
-            window.location = "/account/signin"
+            window.location = "../signin"
         }).catch((error) => {
             // An error happened.
         });
