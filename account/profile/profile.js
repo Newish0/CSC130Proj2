@@ -62,7 +62,8 @@ $(() => {
 
             $("#join-date").html(new Date(parseInt(user.metadata.createdAt)).toLocaleDateString())
 
-            displayUserLists(user);
+            displayUserWatchingList(user);
+            displayUserReadingList(user);
 
         } else {
             // User is signed out
@@ -71,7 +72,7 @@ $(() => {
     });
 
 
-    async function displayUserLists(user) {
+    async function displayUserWatchingList(user) {
         const dataRef = ref(db, `users/${user.uid}/watchinglist`);
 
         get(dataRef).then((snapshot) => {
@@ -81,7 +82,6 @@ $(() => {
 
                 let watchingListContainer = $("#anime-container");
 
-                console.log(data)
 
                 watchingListContainer.html(""); // clear loader
 
@@ -187,6 +187,127 @@ $(() => {
             console.error(error);
         });
     }
+
+
+
+
+    async function displayUserReadingList(user) {
+        const dataRef = ref(db, `users/${user.uid}/readinglist`);
+
+        get(dataRef).then((snapshot) => {
+
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                let readingListContainer = $("#manga-container");
+                
+
+                readingListContainer.html(""); // clear loader
+
+                // generate sections
+                readingListContainer.append('<h4>Reading</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="rl-watching"></div><br>');
+                readingListContainer.append('<h4>Completed</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="rl-completed"></div><br>');
+                readingListContainer.append('<h4>Considering</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="rl-considering"></div><br>');
+                readingListContainer.append('<h4>On Hold</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="rl-hold"></div><br>');
+                readingListContainer.append('<h4>Dropped</h4><div class="auto-gallery justify-start align-items-start margin-v-small" id="rl-dropped"></div><br>');
+
+                let readingContainer = $("#rl-watching");
+                let completedContainer = $("#rl-completed");
+                let consideringContainer = $("#rl-considering");
+                let holdContainer = $("#rl-hold");
+                let droppedContainer = $("#rl-dropped");
+
+
+                for (let id in data) {
+
+                    let statusClass = "considering";
+
+                    switch (data[id].status) {
+                        case "reading":
+                            statusClass = "ongoing";
+                            break;
+                        case "completed":
+                            statusClass = "completed";
+                            break;
+                        case "considering":
+                            statusClass = "considering";
+                            break;
+                        case "hold":
+                            statusClass = "hiatus";
+                            break;
+                        case "dropped":
+                            statusClass = "dropped";
+                            break;
+                        default: // status == "none"
+                            continue;
+                    }
+
+
+                    let thisScore = data[id].score;
+
+                    if (data[id].score == -1) {
+                        thisScore = "n/a"
+                    }
+
+                    let htmlTxt = `
+                    <div class="role-card">
+                    <div class="min-box size-m">
+                        <img src="${data[id].cover}" alt="image of ${data[id].title}" loading="lazy">
+                        <a href="../../manga/?id=${id}">${data[id].title} - <i class="fa-solid fa-star margin-h-small"></i>${thisScore} (You)</a> 
+                        <div class="status-${statusClass} status"></div>
+                    </div>
+                    `;
+
+                    switch (data[id].status) {
+                        case "reading":
+                            readingContainer.append(htmlTxt);
+                            break;
+                        case "completed":
+                            completedContainer.append(htmlTxt);
+                            break;
+                        case "considering":
+                            consideringContainer.append(htmlTxt);
+                            break;
+                        case "hold":
+                            holdContainer.append(htmlTxt);
+                            break;
+                        case "dropped":
+                            droppedContainer.append(htmlTxt);
+                            break;
+                    }
+                }
+
+
+                if(readingContainer.html() == "") {
+                    readingContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(completedContainer.html() == "") {
+                    completedContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(consideringContainer.html() == "") {
+                    consideringContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(holdContainer.html() == "") {
+                    holdContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+                if(droppedContainer.html() == "") {
+                    droppedContainer.append("<p>You have none here! Go add some.</p>");
+                }
+
+
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+
 
 
 

@@ -31,7 +31,7 @@
     <nav>
         <div class="wrapper">
             <div class="page-nav">
-                <a class="nav-page-icon-wrapper" href="../index.html"> <img src="../assets/icons/logofull.svg" alt="UsagiDB logo"> </a>
+                <a class="nav-page-icon-wrapper" href="../index.html"> <img src="../assets/icons/logofull.gif" alt="UsagiDB logo"> </a>
                 <a href="../search/anime">Animes</a>
                 <a href="../search/manga">Mangas</a>
                 <a href="../search/companies">Companies</a>
@@ -114,7 +114,7 @@
                 <div>
                     <select id="user-set-as" name="user-set-as" size="5">
                         <option value="considering" selected>Considering</option>
-                        <option value="watching">Watching</option>
+                        <option value="reading">Reading</option>
                         <option value="completed">Completed</option>
                         <option value="hold">On Hold</option>
                         <option value="dropped">Dropped</option>
@@ -123,8 +123,21 @@
 
                 <h3>Progess</h3>
                 <div class="user-progress-wrapper">
-                    <div class="auto-gallery normal-gap" id="user-progress-out">
-                        <div class="loader-small"></div>
+                    <div class="auto-gallery normal-gap align-items-center" id="user-progress-out">
+                        
+                        <label for="user-progress-chapter">Chapters</label>
+                        <span class="custom-number-input">
+                            <button class="plus"><i class="fa fa-plus"></i></button>
+                            <input type="number" name="user-progress-chapter" id="user-progress-chapter" min="0" value="0">
+                            <button class="minus"><i class="fa fa-minus"></i></button>
+                        </span>
+
+                        <label for="user-progress-volume">Volumes</label>
+                        <span class="custom-number-input">
+                            <button class="plus"><i class="fa fa-plus"></i></button>
+                            <input type="number" name="user-progress-volume" id="user-progress-volume" min="0" value="0">
+                            <button class="minus"><i class="fa fa-minus"></i></button>
+                        </span>
 
                     </div>
                 </div>

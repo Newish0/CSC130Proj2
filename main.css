@@ -369,6 +369,66 @@ nav > .wrapper .user-nav {
     border: 1px solid var(--light-2);
 }
 
+
+/* custom number input element */
+
+
+.custom-number-input {
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.custom-number-input button {
+    background-color: transparent;
+    border: none;
+    font-size: var(--step-0);
+    color: var(--paradise-pink);
+    width: 50px;
+    height: 50px;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 100ms;
+}
+
+.custom-number-input button i {
+    pointer-events: none;
+}
+
+.custom-number-input button:hover {
+    background-color: var(--paradise-pink);
+    color: var(--light-1);
+}
+
+.custom-number-input input {
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: var(--step-0);
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 100ms;
+}
+
+
+.custom-number-input input::-webkit-outer-spin-button,
+.custom-number-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.custom-number-input input[type=number].no-spinner {
+  -moz-appearance: textfield;
+}
+
+
+
+
+
+
+
 footer {
     background-color: var(--paradise-pink);
     color: var(--light-1);

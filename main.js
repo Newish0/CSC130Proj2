@@ -4,6 +4,7 @@ $(() => {
 
     initNavSearchBar();
     initClickToShowMore();
+    initCustomNumberInput();
 
     // add collapse and expand functionality to nav (bars icon)
     document.querySelector("#nav-collap-icon").addEventListener("click", (evt) => {
@@ -47,6 +48,35 @@ $(() => {
     $("#nav-search-box").on("focusout", () => {
         $("#nav-search-result").fadeOut(100);
     });
+
+
+
+    function initCustomNumberInput() {
+        let wrapper = $(".custom-number-input");
+        let plus = wrapper.find($(".plus"));
+        let minus = wrapper.find($(".minus"));
+
+        plus.on("click", (evt) => {
+            let input = $(evt.target).parent().find($("input[type='number']"));
+            let max = parseInt(input.attr("max"));
+
+            if(isNaN(max) || input.val() + 1 <= max) {
+                input.val(parseInt(input.val()) + 1);
+            }
+            
+        });
+
+        minus.on("click", (evt) => {
+            let input = $(evt.target).parent().find($("input[type='number']"));
+            let min = parseInt(input.attr("min"));
+
+            
+            if(isNaN(min) || input.val() - 1 >= min) {
+                input.val(parseInt(input.val()) - 1);
+            }
+        });
+
+    }
 
 
     function initNavSearchBar() {

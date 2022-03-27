@@ -33,10 +33,11 @@ $(() => {
 
 
             $(".nav-signin-btn").hide();
+            $(".profile-btn").show();
 
         } else {
-            // User is signed out
-            // ...
+            $(".nav-signin-btn").show();
+            $(".profile-btn").hide();
         }
     });
 })

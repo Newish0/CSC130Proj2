@@ -30,42 +30,32 @@ $(() => {
             const photoURL = user.photoURL;
             const emailVerified = user.emailVerified;
 
-            console.log("[Anime onAuthStateChanged] User is logged in:");
+            console.log("[Manga onAuthStateChanged] User is logged in:");
 
-            generateUserProgressForm().then(() => {
-                // sync input form with user DB 
 
-                const dataRef = ref(db, `users/${user.uid}/watchinglist/${mangaID}`);
+            // sync input form with user DB 
 
-                get(dataRef).then((snapshot) => {
-                    console.log(snapshot.val());
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        $("#user-score").val(data.score);
-                        $("#user-set-as").val(data.status);
-                        $(`#user-nav-progress-ep-${data.progress}`).prop("checked", true);
+            const dataRef = ref(db, `users/${user.uid}/readinglist/${mangaID}`);
 
-                        if (data.score != -1) {
-                            $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${data.score}`);
-                        }
+            get(dataRef).then((snapshot) => {
+                console.log(snapshot.val());
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    $("#user-score").val(data.score);
+                    $("#user-set-as").val(data.status);
 
-                        if (data.status != "none") {
-                            let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${data.status[0].toUpperCase()}${data.status.substring(1, data.status.length)}`;
+                    $(`#user-nav-progress-chapter`).val(data.progress.chapter);
+                    $(`#user-nav-progress-volume`).val(data.progress.volume);
 
-                            if (data.progress != 0) {
-                                statusBtnInfoHTML += ` (${data.progress})`;
-                            }
+                    updateQuickMenuWithData(data);
 
-                            $(".user-add-current").html(statusBtnInfoHTML);
-                        }
-
-                    } else {
-                        console.log("No data available");
-                    }
-                }).catch((error) => {
-                    console.error(error);
-                });
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
             });
+
 
             initQuickAccessMenu(user);
         } else {
@@ -79,17 +69,20 @@ $(() => {
     async function updateUserProgressAndScore(user, list, contentID) {
         let userScore = $("#user-score").val();
         let userStatus = $("#user-set-as").val();
-        let userProgress = $("#user-progress-out input[name='user-nav-progress']:checked").val();
+        let userProgressChapter = $("#user-progress-chapter").val();
+        let userProgressVolume = $("#user-progress-volume").val();
 
         const dataRef = ref(db, `users/${user.uid}/${list}/${contentID}`);
 
         userScore = userScore == null || userScore == undefined ? -1 : userScore;
         userStatus = userStatus == null || userStatus == undefined ? "none" : userStatus;
-        userProgress = userProgress == null || userProgress == undefined ? 0 : userProgress;
+        userProgressChapter = userProgressChapter == null || userProgressChapter == undefined ? 0 : userProgressChapter;
+        userProgressVolume = userProgressVolume == null || userProgressVolume == undefined ? 0 : userProgressVolume;
 
         if (userScore != -1 && userStatus == "none") {
-            userStatus = "watching";
+            userStatus = "reading";
         }
+
 
 
 
@@ -98,55 +91,65 @@ $(() => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
                 sendObj = {
-                    progress: parseInt(userProgress),
+                    progress: {
+                        chapter: parseInt(userProgressChapter),
+                        volume: parseInt(userProgressVolume)
+                    },
                     score: parseInt(userScore),
                     status: userStatus
                 }
                 update(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
-            } else if (userScore != -1 || userStatus != "" || userProgress != 0) {
-                let animeTitle = null;
-                let animeCover = null;
+                updateQuickMenuWithData(sendObj);
+            } else if (userScore != -1 || userStatus != "" || userProgressChapter != 0 || userProgressVolume != 0) {
+                let mangaTitle = null;
+                let mangaCover = null;
+                
                 let data = mal.getMangaById(mangaID).then(res => {
                     data = res.data;
 
-                    animeCover = data.images.webp.image_url;
-                    animeCover = data.title;
+                    mangaCover = data.images.webp.image_url;
+                    mangaTitle = data.title;
 
                     sendObj = {
-                        progress: parseInt(userProgress),
+                        progress: {
+                            chapter: parseInt(userProgressChapter),
+                            volume: parseInt(userProgressVolume)
+                        },
                         score: parseInt(userScore),
                         status: userStatus,
-                        title: animeTitle,
-                        cover: animeCover,
+                        title: mangaTitle,
+                        cover: mangaCover,
                         timeAdded: new Date().getTime()
                     }
                     set(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
+                    updateQuickMenuWithData(sendObj);
                 });
             }
-
-
-
-            if (sendObj.score != -1) {
-                $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${sendObj.score}`);
-            }
-
-            if (sendObj.status != "none") {
-
-                let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${sendObj.status[0].toUpperCase()}${sendObj.status.substring(1, sendObj.status.length)}`;
-
-                if (sendObj.progress != 0) {
-                    statusBtnInfoHTML += ` (${sendObj.progress})`;
-                }
-
-                $(".user-add-current").html(statusBtnInfoHTML);
-
-
-            } else {
-                $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> Add to List`);
-            }
+            
         }).catch((error) => {
             console.error(error);
         });
+    }
+
+    function updateQuickMenuWithData (data) {
+        if (data.score != -1) {
+            $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${data.score}`);
+        }
+
+        if (data.status != "none") {
+            
+            let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${data.status[0].toUpperCase()}${data.status.substring(1, data.status.length)}`;
+
+            if (data.progress != 0) {
+                statusBtnInfoHTML += ` (${data.progress.chapter}ch, ${data.progress.volume}v)`;
+            }
+
+            $(".user-add-current").html(statusBtnInfoHTML);
+
+
+        } else {
+            $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> Add to List`);
+        }
     }
 
     function removeFromList(user, list, contentID) {
@@ -159,7 +162,7 @@ $(() => {
     function initQuickAccessMenu(user) {
         if (user != undefined) {
             $(".user-remove-from-list").on("click", (evt) => {
-                removeFromList(user, "watchinglist", mangaID);
+                removeFromList(user, "readinglist", mangaID);
             });
 
             $(".user-add-current").on("click", (evt) => {
@@ -175,7 +178,7 @@ $(() => {
                     if (evt.target !== obj) {
                         return;
                     }
-                    updateUserProgressAndScore(user, "watchinglist", mangaID);
+                    updateUserProgressAndScore(user, "readinglist", mangaID);
                 });
             });
 
@@ -189,58 +192,5 @@ $(() => {
             });
         }
     }
-
-    async function generateUserProgressForm() {
-
-        let data = await mal.getMangaById(mangaID);
-        data = data.data;
-
-        // generate user progress form based on episodes count
-        let progressOut = $("#user-progress-out");
-        let progressHTML = "";
-
-        if (!data.episodes) {
-            data = await mal.getMangaEpisodes(mangaID);
-            data = data.data;
-
-            progressHTML += generateUserProgressFormFromData(data);
-
-            while (mal.hasNextPage()) {
-                data = await mal.getMore();
-                data = data.data;
-                progressHTML += generateUserProgressFormFromData(data);
-            }
-        } else {
-            for (let i = 1; i <= data.episodes; i++) {
-                let htmlTxt = `
-                        <span>      
-                            <input class="user-progress-radio" type="radio" name="user-nav-progress" value="${i}" id="user-nav-progress-ep-${i}">
-                            <label class="unselectable" for="user-nav-progress-ep-${i}">${i}</label>
-                        </span>
-                    `;
-                progressHTML += htmlTxt;
-            }
-        }
-
-
-        progressOut.html(progressHTML); // clear loader & add content
-    }
-
-    function generateUserProgressFormFromData(data) {
-        let htmlReturn = "";
-
-        for (let i = 0; i < data.length; i++) {
-            let epCount = data[i].mal_id;
-            let htmlTxt = `
-                    <span>      
-                        <input class="user-progress-radio" type="radio" name="user-nav-progress" value="${epCount}" id="user-nav-progress-ep-${epCount}">
-                        <label class="unselectable" for="user-nav-progress-ep-${epCount}">${epCount}</label>
-                    </span>
-                `;
-            htmlReturn += htmlTxt;
-        }
-        return htmlReturn;
-    }
-
 
 });

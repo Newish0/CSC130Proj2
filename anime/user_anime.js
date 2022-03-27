@@ -48,19 +48,7 @@ $(() => {
                         $("#user-set-as").val(data.status);
                         $(`#user-nav-progress-ep-${data.progress}`).prop("checked", true);
 
-                        if (data.score != -1) {
-                            $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${data.score}`);
-                        }
-
-                        if (data.status != "none") {
-                            let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${data.status[0].toUpperCase()}${data.status.substring(1, data.status.length)}`;
-
-                            if (data.progress != 0) {
-                                statusBtnInfoHTML += ` (${data.progress})`;
-                            }
-
-                            $(".user-add-current").html(statusBtnInfoHTML);
-                        }
+                        updateQuickMenuWithData(data);
 
                     } else {
                         console.log("No data available");
@@ -106,6 +94,7 @@ $(() => {
                     status: userStatus
                 }
                 update(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
+                updateQuickMenuWithData(sendObj);
             } else if (userScore != -1 || userStatus != "" || userProgress != 0) {
                 let animeTitle = null;
                 let animeCover = null;
@@ -113,7 +102,7 @@ $(() => {
                     data = res.data;
 
                     animeCover = data.images.webp.image_url;
-                    animeCover = data.title;
+                    animeTitle = data.title;
 
                     sendObj = {
                         progress: parseInt(userProgress),
@@ -124,32 +113,34 @@ $(() => {
                         timeAdded: new Date().getTime()
                     }
                     set(ref(db, `users/${user.uid}/${list}/${contentID}`), sendObj);
+                    updateQuickMenuWithData(sendObj);
                 });
             }
-
-
-
-            if (sendObj.score != -1) {
-                $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${sendObj.score}`);
-            }
-
-            if (sendObj.status != "none") {
-
-                let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${sendObj.status[0].toUpperCase()}${sendObj.status.substring(1, sendObj.status.length)}`;
-
-                if (sendObj.progress != 0) {
-                    statusBtnInfoHTML += ` (${sendObj.progress})`;
-                }
-
-                $(".user-add-current").html(statusBtnInfoHTML);
-
-
-            } else {
-                $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> Add to List`);
-            }
+            
         }).catch((error) => {
             console.error(error);
         });
+    }
+
+    function updateQuickMenuWithData(data) {
+        if (data.score != -1) {
+            $(".user-set-score").html(`<i class="fa-solid fa-star margin-h-small"></i> ${data.score}`);
+        }
+
+        if (data.status != "none") {
+
+            let statusBtnInfoHTML = `<i class="fa-solid fa-list-ul margin-h-small"></i> ${data.status[0].toUpperCase()}${data.status.substring(1, data.status.length)}`;
+
+            if (data.progress != 0) {
+                statusBtnInfoHTML += ` (${data.progress})`;
+            }
+
+            $(".user-add-current").html(statusBtnInfoHTML);
+
+
+        } else {
+            $(".user-add-current").html(`<i class="fa-solid fa-list-ul margin-h-small"></i> Add to List`);
+        }
     }
 
     function removeFromList(user, list, contentID) {
