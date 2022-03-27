@@ -26,6 +26,7 @@ $(() => {
     $(".overtop-x-btn").each((i, obj) => {
         $(obj).on("click", (evt) => {
             $(obj).parent().parent().fadeOut(100);
+            enableScroll();
         });
     });
 
@@ -37,6 +38,7 @@ $(() => {
             }
 
             $(obj).fadeOut(100);
+            enableScroll();
         });
     });
 
@@ -60,18 +62,18 @@ $(() => {
             let input = $(evt.target).parent().find($("input[type='number']"));
             let max = parseInt(input.attr("max"));
 
-            if(isNaN(max) || input.val() + 1 <= max) {
+            if (isNaN(max) || input.val() + 1 <= max) {
                 input.val(parseInt(input.val()) + 1);
             }
-            
+
         });
 
         minus.on("click", (evt) => {
             let input = $(evt.target).parent().find($("input[type='number']"));
             let min = parseInt(input.attr("min"));
 
-            
-            if(isNaN(min) || input.val() - 1 >= min) {
+
+            if (isNaN(min) || input.val() - 1 >= min) {
                 input.val(parseInt(input.val()) - 1);
             }
         });
@@ -351,4 +353,17 @@ function displayErrorPage(code) {
         document.querySelector("#error-msg").innerHTML = code;
     });
 
+}
+
+function disableScroll() {
+    $("html, body").css({
+        overflow: "hidden",
+        height: "100%"
+    });
+}
+function enableScroll() {
+    $("html, body").css({
+        overflow: "auto",
+        height: "auto"
+    });
 }

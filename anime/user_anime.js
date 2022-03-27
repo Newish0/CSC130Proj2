@@ -157,11 +157,13 @@ $(() => {
             });
 
             $(".user-add-current").on("click", (evt) => {
-                $("#overtop-add-current").fadeIn(100);
+                $("#overtop-add-current").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+                disableScroll();
             });
 
             $(".user-set-score").on("click", (evt) => {
-                $("#overtop-set-score").fadeIn(100);
+                $("#overtop-set-score").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+                disableScroll();
             });
 
             $(".sync-on-click").each((i, obj) => {

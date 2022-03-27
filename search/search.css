@@ -137,6 +137,7 @@
     color: var(--dark-2);
     border-radius: 1rem;
     margin: 1rem 0;
+    cursor: pointer;
 }
 
 .filter-i-tag {
@@ -145,6 +146,7 @@
     color: var(--light-1);
     border-radius: 1rem;
     margin: 1rem 0;
+    cursor: pointer;
 }
 
 .filter-i-tag::before {

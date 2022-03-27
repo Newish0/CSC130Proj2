@@ -12,7 +12,7 @@ $(() => {
 
 
     const auth = getAuth();
-    const db = getDatabase();
+    // const db = getDatabase();
 
 
     // When user logged in or out 

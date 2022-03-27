@@ -86,6 +86,7 @@ $(() => {
     function initSorting() {
         $("#sort").on("click", () => {
             $("#overtop-sorts").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+            disableScroll();
         });
     }
 
@@ -93,6 +94,7 @@ $(() => {
     function initFilters() {
         $("#filters").on("click", () => {
             $("#overtop-filters").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+            disableScroll();
         });
 
         $(".sync-on-click").each((i, obj) => {
