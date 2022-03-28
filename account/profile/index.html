@@ -115,6 +115,25 @@
 
     <main>
 
+        <div id="overtop-delete-account" class="overtop-popup overtop-x-bg">
+            <div class="overtop-content-wrapper light-bg">
+                <i class="top-right x-btn  overtop-x-btn margin-medium fa-solid fa-x"></i>
+
+                <h1 class="text-center">Delete Account</h1>
+                <div class="auth-form">
+                    <p>All data attached to this account will be remove. Process is irreversible!</p>
+                    <p>Type in "DELETE" and press comfirm to complete the deletion process.</p>
+                    <div id="delete-account-msg-box" class="auth-msg-box error"></div>
+                    <input id="delete-account-input" type="text" placeholder="DELETE">
+                    <br>
+                    
+                    <button id="comfirm-delete-account" class="large-btn w-100">Comfirm</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loader"></div>
+
         <div class="margin-medium">
             <div class="simple-split container">
                 <div class="simple-split-side card">
@@ -148,6 +167,10 @@
 
                         <div class="margin-v-large">
                             <button class="signout-btn large-btn text-center w-100 block box">Sign out</button>
+                        </div>
+
+                        <div class="margin-v-large">
+                            <button class="delete-account-popup-btn large-btn inverted text-center w-100 block box">DELETE ACCOUNT</button>
                         </div>
 
                     </div>

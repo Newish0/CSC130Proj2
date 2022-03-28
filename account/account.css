@@ -44,3 +44,10 @@
     border: 2px solid rgb(192, 255, 173);
     color: rgb(16, 180, 38);
 }
+
+
+
+
+#overtop-delete-account {
+    display: none;
+}

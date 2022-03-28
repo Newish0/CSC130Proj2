@@ -14,6 +14,8 @@ See more info at https://jikan.moe/
         - User can create an account with an email address and password
         - User can set a username
         - User can reset their password via *Forget password*.
+        - Basic sign in/out form
+        - The ability to delete one's account
     - Firebase Realtime Database
         - User can add an anime or manga to their reading/watching list
         - User can add a status to an anime or manga (ie. watching, considering...)
@@ -39,6 +41,9 @@ See more info at https://jikan.moe/
 ## Not so special features 
 1. **All tags are clickable:** if an item looks like a tag or glow on hover like a link, then it is probably clickable.
 2. **A good looking filtering input form:** many hours were directed at styling the filter form (on the anime/manga search pages). Please take a look.
+3. **Jikan4 Class (API Wrapper)** Wrote a wrapper for Jikan API
+    - Caches API responses for a short amount of time to greatly improve performance
+    - Added expiration to data cached in local or session storage (to ensure cached data is up to date)
 
 ## Fetch and $.get
 Since a pure JavaScript wrapper was written for Jikan V4 API, all API calls uses *fetch* instead of *\$.get/ajax*. 
