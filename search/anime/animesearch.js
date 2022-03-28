@@ -646,6 +646,20 @@ $(() => {
             filterString = filterString.substring(0, filterString.length - 1);
             searchParams.genres = filterString;
 
+            // $(".filter-genres input").each((i, obj) => {
+            //     if (!obj.checked && !obj.name.includes("any")) {
+            //         filterString += obj.value + ",";
+            //     }
+            // });
+    
+            // $(".filter-themes input").each((i, obj) => {
+            //     if (!obj.checked && !obj.name.includes("any")) {
+            //         filterString += obj.value + ",";
+            //     }
+            // });
+            // filterString = filterString.substring(0, filterString.length - 1);
+            // searchParams.genresExclude = filterString;
+
 
             searchParams.producers = $(".filter-studios input[name='filter-studios']:checked").val();
         }
