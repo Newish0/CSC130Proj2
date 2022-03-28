@@ -1,5 +1,44 @@
 # README
 
+## About Jikan (API)
+The API this webpage uses is Jikan V4. 
+
+> Jikan (時間) is an open-source PHP & REST API for the “most active online anime + manga community and database” — MyAnimeList.net. It parses the website to satisfy the need for an API. 
+
+See more info at https://jikan.moe/ 
+
+
+## Special Features
+1. [Firebase](https://firebase.google.com/)
+    - User authentication via Firebase
+        - User can create an account with an email address and password
+        - User can set a username
+        - User can reset their password via *Forget password*.
+    - Firebase Realtime Database
+        - User can add an anime or manga to their reading/watching list
+        - User can add a status to an anime or manga (ie. watching, considering...)
+        - User can give an anime or manga a score (not linked to MyAnimeList in any way)
+        - User can set their progress on an anime or manga (ie. 5 episodes completed).
+2. [Swiper](https://swiperjs.com/)
+    - The suggestion section on the home page uses Swiper to allow a desktop and mobile friendly swiping experience
+    - Used Swiper's *Effect coverflow* to creat an eye catching landing page.
+3. Infinite Scrolling with Intersection Observer
+    - The Anime and Manga search page (access via navigation at the top) has infinite scrolling.
+    - Infinite scrolling was achived using an Intersection Observer on the load more button
+    - See the documentation on *getMore()* in the Jikan4 class for determining the next page and the API calls.  
+4. Score Distribution Graph
+    - Feature is on the detail view page of an anime or manga
+    - Visualize the score distribution given by the API
+    - Hover mouse over solid bars to see tooltp for raw numbers.
+5. Number loading animation 
+    - Feature is on the detail view page of an anime or manga.
+    - Both the score and data population size loadings in with an incrementing animation
+    - See *initNumberLoadingAnimation()* and *easeOutQuart()* in *anime.js* or *manga.js* for the inner workings
+    - Note: *easeOutQuart()* was translated from the Typescript implementation given by https://easings.net/.
+
+## Not so special features 
+1. **All tags are clickable:** if an item looks like a tag or glow on hover like a link, then it is probably clickable.
+2. **A good looking filtering input form:** many hours were directed at styling the filter form (on the anime/manga search pages). Please take a look.
 
 ## Fetch and $.get
 Since a pure JavaScript wrapper was written for Jikan V4 API, all API calls uses *fetch* instead of *\$.get/ajax*. 
