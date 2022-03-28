@@ -25,7 +25,7 @@
 }
 
 
-.auth-error-msg-box {
+.auth-error-msg-box, .auth-msg-box  {
     display: none;
     width: 100%;
     box-sizing: border-box;

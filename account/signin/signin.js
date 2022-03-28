@@ -50,7 +50,7 @@ $(() => {
     $(".signin-btn").on("click", signin);
 
 
-    // hwo to add user name: https://stackoverflow.com/questions/43509021/how-to-add-username-with-email-and-password-in-firebase
+
     function signin() {
         let email = $("#user-email").val();
         let password = $("#user-password").val();

@@ -2,7 +2,7 @@
 
 
 
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile  } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 
@@ -20,6 +20,7 @@ $(() => {
 
     const auth = getAuth();
     const db = getDatabase();
+    let signingUp = false;
 
 
     // When user logged in or out 
@@ -38,7 +39,9 @@ $(() => {
             console.log("[onAuthStateChanged] User is logged in:")
             console.log(user)
 
-            window.location = "/account/profile";
+            if(!signingUp) {
+                window.location = "/account/profile";
+            }
 
         } else {
             // User is signed out
@@ -48,7 +51,7 @@ $(() => {
 
 
     $(".signup-btn").on("click", signup);
-    
+
 
     // hwo to add user name: https://stackoverflow.com/questions/43509021/how-to-add-username-with-email-and-password-in-firebase
     function signup() {
@@ -56,37 +59,30 @@ $(() => {
         let email = $("#user-email").val();
         let password = $("#user-password").val();
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-                console.log("[signup] User is logged in:")
-                console.log(user)
+        signingUp = true;
 
-                updateProfile(user, {
-                    displayName: username
-                });
+        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+            console.log("[signup] User is logged in:")
+            console.log(user)
 
-                // if (user) {
-
-                //     // add user name to DB
-                //     set(ref(db, "users/" + user.uid + "/username"), username);
-                //     set(ref(db, "users/" + user.uid + "/email"), user.email);
-                //     set(ref(db, "users/" + user.uid + "/uid"), user.uid);
-
-                //     window.location = "/account/profile";
-
-                // }
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                console.log(error)
-
-                showErrorMsg(errorMessage + `(${errorCode})`)
+            updateProfile(user, {
+                displayName: username
+            }).then(() => {
+                signingUp = false;
+                window.location = "/account/profile";
             });
+
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            signingUp = false;
+
+            showErrorMsg(errorMessage + `(${errorCode})`)
+        });
     }
 
     function showErrorMsg(msg) {

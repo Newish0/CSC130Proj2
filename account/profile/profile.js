@@ -47,7 +47,8 @@ $(() => {
             // auto generate a user profile img; tmp solution
             let avatarText = "";
 
-            if (displayName.indexOf(" ") != -1) {
+
+            if (displayName != null && displayName.indexOf(" ") != -1) {
                 let split = displayName.split(" ");
                 avatarText = split[0][0] + split[1][0];
             } else {
@@ -76,12 +77,10 @@ $(() => {
         const dataRef = ref(db, `users/${user.uid}/watchinglist`);
 
         get(dataRef).then((snapshot) => {
+            let watchingListContainer = $("#anime-container");
 
             if (snapshot.exists()) {
                 const data = snapshot.val();
-
-                let watchingListContainer = $("#anime-container");
-
 
                 watchingListContainer.html(""); // clear loader
 
@@ -181,7 +180,7 @@ $(() => {
 
 
             } else {
-                console.log("No data available");
+                watchingListContainer.html("<p>You have none here! Go add some.</p>");
             }
         }).catch((error) => {
             console.error(error);
@@ -195,12 +194,10 @@ $(() => {
         const dataRef = ref(db, `users/${user.uid}/readinglist`);
 
         get(dataRef).then((snapshot) => {
+            let readingListContainer = $("#manga-container");
 
             if (snapshot.exists()) {
                 const data = snapshot.val();
-
-                let readingListContainer = $("#manga-container");
-                
 
                 readingListContainer.html(""); // clear loader
 
@@ -300,7 +297,7 @@ $(() => {
 
 
             } else {
-                console.log("No data available");
+                readingListContainer.html("<p>You have none here! Go add some.</p>");
             }
         }).catch((error) => {
             console.error(error);
