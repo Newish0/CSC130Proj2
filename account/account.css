@@ -1,9 +1,8 @@
 
 
 .auth-form {
-    margin: 25% auto;
+    margin: auto;
     width: min(500px, 100%);
-    min-height: 50vh;
 }
 
 

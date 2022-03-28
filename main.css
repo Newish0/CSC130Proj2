@@ -664,7 +664,17 @@ footer a {
     box-sizing: border-box;
 }
 
+.h-50v {
+    height: 50vh;
+}
 
+.h-75v {
+    height: 75vh;
+}
+
+.h-80v {
+    height: 80vh;
+}
 
 .w-100 {
     width: 100%;
