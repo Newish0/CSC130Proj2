@@ -69,7 +69,7 @@ $(() => {
 
 
     function insertBackIntoFilterBar() {
-        $(".filters-bar").prepend(`<a href="${window.location.href.split("?")[0]}"><h1"><i class="fa-solid fa-angle-left dark-color text-large"></i></h1></a>`);
+        $(".filters-bar").prepend(`<a href="javascript:history.back()"><h1"><i class="fa-solid fa-angle-left dark-color text-large"></i></h1></a>`);
     }
 
     function insertHeadingIntoFilterBar(headingText) {
