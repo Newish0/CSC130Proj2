@@ -168,7 +168,9 @@
     position: relative;
     display: grid;
 
-    width: min(500px, 100%);
+    /* width: min(500px, 100%); */
+    width: 32%;
+
     height: clamp(350px, 400px, 500px);
     min-height: 350px;
 
@@ -179,6 +181,19 @@
 
     border-radius: 1rem;
 }
+
+@media screen and (max-width: 1250px) {
+    .poster-card {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 815px) {
+    .poster-card {
+        width: min(500px, 100%);
+    }
+}
+
 
 .poster-score {
     position: absolute;

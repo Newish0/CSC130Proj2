@@ -324,4 +324,10 @@ select option:hover:not(:checked) {
     display: none;
 }
 
+#user-score option {
+    font-weight: 400;
+    font-family: FontAwesome;
+    font-style: normal;
+    word-spacing: 5px;
+}
 

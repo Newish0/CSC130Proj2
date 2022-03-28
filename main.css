@@ -1,13 +1,9 @@
 :root {
     /* Color palette: https://coolors.co/540d6e-ee4266-ffd23f-f3fcf0-1f271b*/
-    --blue-violet-color-wheel: #540d6eff;
     --paradise-pink: rgb(238, 66, 102);
     --paradise-pink-a1: rgba(238, 66, 102, 0.1);
     --paradise-pink-d1: rgb(187, 51, 80);
     --paradise-pink-l1: rgb(255, 69, 109);
-    --sunglow: #ffd23fff;
-    --honeydew: #f3fcf0ff;
-    --pine-tree: #1f271bff;
 
 
     --light-blue: rgb(66, 224, 238);
@@ -39,11 +35,6 @@
     --step-2: clamp(1.11rem, calc(0.93rem + 0.58vw), 1.44rem);
     --step-3: clamp(1.25rem, calc(0.99rem + 0.84vw), 1.73rem);
     --step-4: clamp(1.40rem, calc(1.05rem + 1.17vw), 2.07rem);
-
-
-    --poster-img-scale: 0.85;
-    --poster-img-width: 225px;
-    --poster-img-height: 320px;
 }
 
 body {
