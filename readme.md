@@ -70,5 +70,5 @@ The API used, Jikan v4, has a strict rate limiting of 3 request per second. In a
 
 Occasionally, Jikan v4 will send a code 500 . From experience, it apears that most of the time, retrying after a second solve the issue. Hence, this suggest this to be another API bug. Becuase error code 500 can be legitimate, this the Jikan 4 class with only retry once when faced with an 500 HTTP response.
 
-If you see an 404 error like "https://t2.gstatic.com/faviconV2?...", please ignore it. It is caused by Google not being able to find the favicon of an external site provided by the API.  
+If you see an 404 error like "GET https://t2.gstatic.com/faviconV2?...", please ignore it. It is caused by Google not being able to find the favicon of an external site provided by the API.  
 
