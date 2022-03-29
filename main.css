@@ -347,6 +347,7 @@ nav > .wrapper .user-nav {
     }
 }
 
+
 .search-box {
     min-width: 100px;
     max-width: 350px;
@@ -664,7 +665,17 @@ footer a {
     box-sizing: border-box;
 }
 
+.h-50v {
+    height: 50vh;
+}
 
+.h-75v {
+    height: 75vh;
+}
+
+.h-80v {
+    height: 80vh;
+}
 
 .w-100 {
     width: 100%;

@@ -55,6 +55,12 @@ $(() => {
         let email = $("#user-email").val();
         let password = $("#user-password").val();
 
+        // handle some error to limit error given by Firebase
+        if($("#user-email").is(":invalid")) {
+            showErrorMsg("Email entered is not valid.")
+            return;
+        }
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
