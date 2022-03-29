@@ -7,12 +7,6 @@ import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebase
 
 
 
-
-
-
-
-
-
 $(() => {
 
 
@@ -40,7 +34,7 @@ $(() => {
             console.log(user)
 
             if(!signingUp) {
-                window.location = "/account/profile";
+                window.location = "../profile";
             }
 
         } else {
@@ -72,7 +66,7 @@ $(() => {
                 displayName: username
             }).then(() => {
                 signingUp = false;
-                window.location = "/account/profile";
+                window.location = "../profile";
             });
 
         }).catch((error) => {
