@@ -77,18 +77,18 @@ $(() => {
             <div class="role-card">
                 <div class="min-box">
                     <img src="${characterImage}" alt="image of ${characterImage}" loading="lazy">
-                    <a href="/character/?id=${characterID}">${characterName} (${role})</a> 
+                    <a href="/~huanyangl/character/?id=${characterID}">${characterName} (${role})</a> 
                 </div>
                 <div class="min-box half top-bottom">
                     <img src="${animeCover}" alt="cover for ${animeTitle}" loading="lazy">
-                    <a href="/anime/?id=${animeID}">${animeTitle}</a>
+                    <a href="/~huanyangl/anime/?id=${animeID}">${animeTitle}</a>
                 </div>
             </div>
             `;
 
             // <div class="horizontal-box">
             //         <img src="${animeCover}" alt="cover for ${animeTitle}">
-            //         <a href="/anime/?id=${animeID}">${animeTitle}</a>
+            //         <a href="/~huanyangl/anime/?id=${animeID}">${animeTitle}</a>
             //     </div>
 
             $("#voices-container").append(htmlTxt);
@@ -123,7 +123,7 @@ $(() => {
             <div class="role-card">
             <div class="min-box size-m">
                 <img src="${animeCover}" alt="image of ${animeTitle}" loading="lazy">
-                <a href="/anime/?id=${animeID}">${animeTitle} - <b>${position}</b></a> 
+                <a href="/~huanyangl/anime/?id=${animeID}">${animeTitle} - <b>${position}</b></a> 
             </div>
             `;
             $("#anime-container").append(htmlTxt);
@@ -158,7 +158,7 @@ $(() => {
             <div class="role-card">
             <div class="min-box size-m">
                 <img src="${mangaCover}" alt="image of ${mangaTitle}" loading="lazy">
-                <a href="/manga/?id=${mangaID}">${mangaTitle} - <b>${position}</b></a> 
+                <a href="/~huanyangl/manga/?id=${mangaID}">${mangaTitle} - <b>${position}</b></a> 
             </div>
             `;
             $("#manga-container").append(htmlTxt);

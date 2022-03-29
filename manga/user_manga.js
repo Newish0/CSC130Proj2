@@ -186,11 +186,11 @@ $(() => {
 
         } else {
             $(".user-add-current").on("click", (evt) => {
-                window.location = "/account/signin";
+                window.location = "/~huanyangl/account/signin";
             });
 
             $(".user-set-score").on("click", (evt) => {
-                window.location = "/account/signin";
+                window.location = "/~huanyangl/account/signin";
             });
         }
     }

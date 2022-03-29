@@ -69,13 +69,13 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                tagsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
 
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                tagsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
 
             tags.html(tagsHTMLText);
@@ -96,7 +96,7 @@ $(() => {
             for (let x in data.producers) {
                 let name = data.producers[x].name;
                 let id = data.producers[x].mal_id;
-                producersHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                producersHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
             producers.html(producersHTMLText);
 
@@ -104,7 +104,7 @@ $(() => {
             for (let x in data.studios) {
                 let name = data.studios[x].name;
                 let id = data.studios[x].mal_id;
-                studiosHTMLText += `<a class="tag clean-url" href="/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                studiosHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?producer=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
             studios.html(studiosHTMLText);
 
@@ -114,7 +114,7 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                genresHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                genresHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
             genres.html(genresHTMLText);
 
@@ -122,7 +122,7 @@ $(() => {
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                themesHTMLText += `<a class="tag clean-url" href="/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                themesHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?genre=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
 
             themesHTMLText = themesHTMLText == "" ? "n/a" : themesHTMLText;
@@ -135,7 +135,7 @@ $(() => {
             for (let x in data.demographics) {
                 let name = data.demographics[x].name;
                 let id = data.demographics[x].mal_id;
-                demographicsHTMLText += `<a class="tag clean-url" href="/search/anime/?demographic=${id}~${encodeURIComponent(name)}">${name}</a>`;
+                demographicsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/anime/?demographic=${id}~${encodeURIComponent(name)}">${name}</a>`;
             }
 
             demographicsHTMLText = demographicsHTMLText == "" ? "n/a" : demographicsHTMLText;
@@ -199,7 +199,7 @@ $(() => {
                             let entry = entries[y];
                             let entryHTMLText = "";
 
-                            entryHTMLText = `<a href="/${entry.type}/?id=${entry.mal_id}" class="clean-url url-item">${entry.name}</a>`;
+                            entryHTMLText = `<a href="/~huanyangl/${entry.type}/?id=${entry.mal_id}" class="clean-url url-item">${entry.name}</a>`;
 
                             relationBlockHTMLText += entryHTMLText;
                         }
@@ -237,7 +237,7 @@ $(() => {
                         charRole = charRole == undefined ? "n/a" : charRole;
 
                         let charHTMLText = `
-                        <a href="/character/?id=${charID}" class="clean-url black">
+                        <a href="/~huanyangl/character/?id=${charID}" class="clean-url black">
                             <img class="character-img"
                                 src="${charImgURL}"
                                 alt="character image of ${charName}"
@@ -261,7 +261,7 @@ $(() => {
                                     .image_url;
 
                             let vaCardsHTMLText = `
-                                <a href="/people/?id=${vaID}" class="clean-url black">
+                                <a href="/~huanyangl/people/?id=${vaID}" class="clean-url black">
                                     <div class="character-va-scard">
                                         <img class="character-va-img" src="${vaImgURL}" 
                                         alt="image of ${vaName}, voice actor for ${charName}" 
@@ -334,7 +334,7 @@ $(() => {
                             );
 
                             let staffHTMLText = `
-                        <a href="/people/?id=${staffID}" class="clean-url black">
+                        <a href="/~huanyangl/people/?id=${staffID}" class="clean-url black">
                             <img class="character-img"
                                 src="${staffImgURL}"
                                 alt="character image of ${staffName}"
@@ -425,7 +425,7 @@ $(() => {
                     let opHTMLText = "";
 
                     for (let i in themeData.openings) {
-                        opHTMLText += `<a href="//music.youtube.com/search?q=${encodeURI(themeData.openings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.openings[i]}</a>`;
+                        opHTMLText += `<a href="/~huanyangl//music.youtube.com/search?q=${encodeURI(themeData.openings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.openings[i]}</a>`;
                     }
 
                     opHTMLText = `<div class="tags-container">Openings: ${opHTMLText == "" ? "No opening found." : opHTMLText}</div>`;
@@ -434,7 +434,7 @@ $(() => {
 
                     for (let i in themeData.endings) {
                         edHTMLText += `
-                        <a href="//music.youtube.com/search?q=${encodeURI(themeData.endings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.endings[i]}</a>`;
+                        <a href="/~huanyangl//music.youtube.com/search?q=${encodeURI(themeData.endings[i].replace(/\d*(: )/, ""))}" class="clean-url url-item">${themeData.endings[i]}</a>`;
                     }
 
                     edHTMLText = `<div class="tags-container">Endings: ${edHTMLText == "" ? "No ending found." : edHTMLText}</div>`;

@@ -170,7 +170,7 @@ $(() => {
                         <img src="${imgSrc}">
                        
                         <div>
-                            <a href="/anime/?id=${id}">${title}</a>
+                            <a href="/~huanyangl/anime/?id=${id}">${title}</a>
                             <div class="text-alt">${altTitle}</div>
                         </div>         
                         
@@ -217,7 +217,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/manga/?id=${id}">${title}</a>
+                                <a href="/~huanyangl/manga/?id=${id}">${title}</a>
                                 <div class="text-alt">${altTitle}</div>
                             </div>
                                 
@@ -266,7 +266,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/character/?id=${id}">${name}</a>
+                                <a href="/~huanyangl/character/?id=${id}">${name}</a>
                                 <div class="text-alt">${nameKanji}</div>
                             </div>
                                 
@@ -314,7 +314,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/character/?id=${id}">${name}</a>
+                                <a href="/~huanyangl/character/?id=${id}">${name}</a>
                                 <div class="text-alt">${nameKanji}</div>
                             </div>
                                 
@@ -343,7 +343,7 @@ function displayErrorPage(code) {
 
     let html = "";
 
-    fetch("/assets/error.svg").then(res => res.text()).then(text => {
+    fetch("/~huanyangl/assets/error.svg").then(res => res.text()).then(text => {
         html = `    
         <div class="container margin-v-large">
             ${text}
