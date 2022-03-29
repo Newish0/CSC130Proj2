@@ -85,8 +85,12 @@ $(() => {
                 }).catch(error => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-    
-                    showErrorMsg(errorMessage + `(${errorCode})`)
+
+                    if(errorCode == "auth/requires-recent-login") {
+                        showErrorMsg("Recent sign in is required. Please retry after signing out then sign back in.");
+                    } else {
+                        showErrorMsg(errorMessage + `(${errorCode})`)
+                    }
                 });
             } else {
                 showErrorMsg("Please enter \"DELETE\" to comfirm");
