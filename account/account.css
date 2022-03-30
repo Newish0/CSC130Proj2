@@ -9,25 +9,32 @@
 .auth-form input{
     display: block;
     width: 100%;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     margin: 1rem 0rem;
     padding: 1rem;
     font-size: var(--step-0);
     border-radius: 0.5rem;
     border: 1px solid var(--dark-2);
+    -webkit-transition: all 200ms;
+    -o-transition: all 200ms;
     transition: all 200ms;
 }
 
 .auth-form input:focus {
-    transform: scale(102%) translateY(0.1rem);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transform: scale(102%) translateY(0.1rem);
+        -ms-transform: scale(102%) translateY(0.1rem);
+            transform: scale(102%) translateY(0.1rem);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 
 .auth-error-msg-box, .auth-msg-box  {
     display: none;
     width: 100%;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     margin: 1rem 0rem;
     padding: 1rem;
     border-radius: 0.5rem;
