@@ -86,11 +86,6 @@ $(() => {
             </div>
             `;
 
-            // <div class="horizontal-box">
-            //         <img src="${animeCover}" alt="cover for ${animeTitle}">
-            //         <a href="/~huanyangl/anime/?id=${animeID}">${animeTitle}</a>
-            //     </div>
-
             $("#voices-container").append(htmlTxt);
         }
 
