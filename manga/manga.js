@@ -349,22 +349,19 @@ $(() => {
                     if (err == "Jikan4 API errored with response: 429") {
                         setTimeout(loadExternalLinks, 1000);
                     } else {
-                        console.log(err);
+                        console.error(err);
                     }
                 });
             }
 
             loadExternalLinks();
 
-
-            console.log(res)
-
         }).catch(err => {
             if (err == "Jikan4 API errored with response: 429") {
                 setTimeout(displayManga, 1000)
             } else {
                 displayErrorPage(err.split(":")[1]);
-                console.log(err);
+                console.error(err);
             }
         });;
     }

@@ -28,8 +28,6 @@ $(() => {
             const photoURL = user.photoURL;
             const emailVerified = user.emailVerified;
 
-            console.log("[onAuthStateChanged] User is logged in:")
-            console.log(user)
 
 
             $(".nav-signin-btn").hide();

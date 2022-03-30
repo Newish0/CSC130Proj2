@@ -30,8 +30,6 @@ $(() => {
             const photoURL = user.photoURL;
             const emailVerified = user.emailVerified;
 
-            console.log("[onAuthStateChanged] User is logged in:")
-            console.log(user)
 
             if(!signingUp) {
                 window.location = "../profile";

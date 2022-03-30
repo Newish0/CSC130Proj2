@@ -30,15 +30,12 @@ $(() => {
             const photoURL = user.photoURL;
             const emailVerified = user.emailVerified;
 
-            console.log("[Manga onAuthStateChanged] User is logged in:");
-
 
             // sync input form with user DB 
 
             const dataRef = ref(db, `users/${user.uid}/readinglist/${mangaID}`);
 
             get(dataRef).then((snapshot) => {
-                console.log(snapshot.val());
                 if (snapshot.exists()) {
                     const data = snapshot.val();
                     $("#user-score").val(data.score);
@@ -49,9 +46,7 @@ $(() => {
 
                     updateQuickMenuWithData(data);
 
-                } else {
-                    console.log("No data available");
-                }
+                } 
             }).catch((error) => {
                 console.error(error);
             });
@@ -59,7 +54,6 @@ $(() => {
 
             initQuickAccessMenu(user);
         } else {
-            console.log("[Manga onAuthStateChanged] User not logged in:");
 
             initQuickAccessMenu();
         }

@@ -33,7 +33,6 @@ $(() => {
             const photoURL = user.photoURL;
             const emailVerified = user.emailVerified;
 
-            console.log("[Anime onAuthStateChanged] User is logged in:");
 
             generateUserProgressForm().then(() => {
                 // sync input form with user DB 
@@ -41,7 +40,6 @@ $(() => {
                 const dataRef = ref(db, `users/${user.uid}/watchinglist/${animeID}`);
 
                 get(dataRef).then((snapshot) => {
-                    console.log(snapshot.val());
                     if (snapshot.exists()) {
                         const data = snapshot.val();
                         $("#user-score").val(data.score);
@@ -50,9 +48,7 @@ $(() => {
 
                         updateQuickMenuWithData(data);
 
-                    } else {
-                        console.log("No data available");
-                    }
+                    } 
                 }).catch((error) => {
                     console.error(error);
                 });
@@ -60,8 +56,6 @@ $(() => {
 
             initQuickAccessMenu(user);
         } else {
-            console.log("[Anime onAuthStateChanged] User not logged in:");
-
             initQuickAccessMenu();
         }
     });

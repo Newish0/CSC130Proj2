@@ -46,7 +46,7 @@ $(() => {
 
     }).catch(err => {
         displayErrorPage(err.split(":")[1]);
-        console.log(err);
+        console.error(err);
 
     });
 
