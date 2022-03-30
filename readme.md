@@ -1,5 +1,8 @@
 # README
 
+## About this website
+This site, UsagiDB, is a site where you can search for all anime, manga, light novel related. In addition to it being CSC 130's Project 2, the motivation behind the project was to create a frontend that any one of the single existing solutions lacks. Essentially, I want to combine all the good features of other sites into one.
+
 ## About Jikan (API)
 The API this webpage uses is Jikan V4. 
 
@@ -45,9 +48,11 @@ See more info at https://jikan.moe/
         - [Mecha](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?genre=18~Mecha) theme
         - [Kyoto Animation](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?producer=2~Kyoto%20Animation) studio
 2. **A good looking filtering input form:** many hours were directed at styling the filter form (on the anime/manga search pages). Please take a look.
-3. **Jikan4 Class (API Wrapper)** Wrote a wrapper for Jikan API ([Source code](http://webhome.csc.uvic.ca/~huanyangl/lib/jikan4.js))
+3. **Jikan4 Class (API Wrapper)@:** wrote a wrapper for Jikan API ([Source code](http://webhome.csc.uvic.ca/~huanyangl/lib/jikan4.js))
     - Caches API responses for a short amount of time to greatly improve performance
     - Added expiration to data cached in local or session storage (to ensure cached data is up to date)
+    - It has a Token Bucket to attempt to rate limit itself to Jikan API's specification, but without X-Rate-Limit-Limit in API response header, its effect is questionable. 
+4. **All pages are responsive:** all pages are responsive, so do be sure to try out the site on mobile too!
 
 ## Fetch and $.get
 Since a pure JavaScript wrapper was written for Jikan V4 API, all API calls uses *fetch* instead of *\$.get/ajax*. 
@@ -56,7 +61,7 @@ Although it is not an API call, beyond building the URL, it should practically b
 
 
 ## A note on search
-Note that all search will query both English and Japanese result. Hence, if search result may return what looks to be incorrect, it is likely that the query string matches some Japanese terms. 
+Note that all search query will **only** search the main title, which is usually in Japanese. Hence, unfortunately you cannot search the english translation of titles. However, it will work if the main title is in English.
 
 ## How filters work (on search pages)
 
@@ -66,9 +71,61 @@ When filtering by studio/company, due to limitation of the API (it may be an API
 
 ## API errors 
 
-The API used, Jikan v4, has a strict rate limiting of 3 request per second. In addition, the header Jikan sends does not appear to have X-Rate-Limit-Limit attached. As a result when loading detail information, or when user generates rapid search results, you may see 429 errors in the console. However, multiple methods were implemented to prevent such error from bricking the site. The Jikan4 class utilizes a Token Bucket to also have a client sided rate limit. In case the Token Bucket fails, The Jikan 4 class will retry until the data is obtained. 
+The API used, Jikan v4, has a strict rate limiting of 3 request per second. In addition, the header Jikan sends does not appear to have X-Rate-Limit-Limit attached. As a result when loading detail information, or when user generates rapid search queries, you may see 429 errors in the console. However, multiple methods were implemented to prevent such error from bricking the site. The Jikan4 class utilizes Token Bucket to also have a client sided rate limit. In case the Token Bucket fails, The Jikan 4 class will retry until the data is obtained. In the very unlikely event that all counter meausre fails, please refresh the page.
 
-Occasionally, Jikan v4 will send a code 500 . From experience, it apears that most of the time, retrying after a second solve the issue. Hence, this suggest this to be another API bug. Becuase error code 500 can be legitimate, this the Jikan 4 class with only retry once when faced with an 500 HTTP response.
+Occasionally, Jikan v4 will send a code 500. From experience, it apears that most of the time, retrying after a second solve the issue. Hence, this is believed to be another API bug. Becuase error code 500 can be legitimate, the Jikan 4 class with only retry once when faced with an 500 HTTP response.
 
 If you see an 404 error like "GET https://t2.gstatic.com/faviconV2?...", please ignore it. It is caused by Google not being able to find the favicon of an external site provided by the API.  
 
+## Sub Pages and Sample Search Terms
+- [Home](http://webhome.csc.uvic.ca/~huanyangl/index.html) 
+    - Can be reached by clicking on the UsagiDB logo in top navigation bar.
+- Anime 
+    - [Koe no Katachi - A Silent Voice](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=28851)
+        - Can be searched via navigation bar search box 
+        - Can be searched via [anime search page](http://webhome.csc.uvic.ca/~huanyangl/search/anime/)
+    - [Shigatsu wa Kimi no Uso - Your Lie in April](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=23273)
+        - Can be searched via navigation bar search box 
+        - Can be searched via [anime search page](http://webhome.csc.uvic.ca/~huanyangl/search/anime/)
+- Manga 
+    - [86 - 86—Eighty-Six](http://webhome.csc.uvic.ca/~huanyangl/manga/?id=104039)
+        - Can be searched via navigation bar search box 
+        - Can be searched via [manga search page](http://webhome.csc.uvic.ca/~huanyangl/search/manga/)
+    - [Horimiya](http://webhome.csc.uvic.ca/~huanyangl/manga/?id=42451)
+        - Can be searched via navigation bar search box 
+        - Can be searched via [manga search page](http://webhome.csc.uvic.ca/~huanyangl/search/manga/)
+- Companies/Studio
+    - [A-1 Pictures](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?producer=56~A-1%20Pictures)
+        - Can be reached via [companies page](http://webhome.csc.uvic.ca/~huanyangl/search/companies/)
+        - Can be reached via [anime search page](http://webhome.csc.uvic.ca/~huanyangl/search/anime/) by using the studio filter (Note: not all studios are available in filter)
+        - Can be reached by clicking on the studio tag via an anime by A-1 Pictures such as [Shigatsu wa Kimi no Uso - Your Lie in April](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=23273)
+    - [Kyoto Animation](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?producer=2~Kyoto%20Animation)
+        - Can be reached via [companies page](http://webhome.csc.uvic.ca/~huanyangl/search/companies/)
+        - Can be reached via [anime search page](http://webhome.csc.uvic.ca/~huanyangl/search/anime/) by using the studio filter (Note: not all studios are available in filter)
+        - Can be reached by clicking on the studio tag via an anime by Kyoto Animation such as [Koe no Katachi - A Silent Voice](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=28851)
+- Magazines/Publisher
+    - [GFantasy](http://webhome.csc.uvic.ca/~huanyangl/search/manga/?magazine=35~GFantasy)
+        - Can be reached via [magazines page](http://webhome.csc.uvic.ca/~huanyangl/search/magazines/)
+        - Can be reached via [manga search page](http://webhome.csc.uvic.ca/~huanyangl/search/manga/) by using the magazine filter (Note: not all magazines are available in filter)
+        - Can be reached by clicking on the publisher tag via an anime by A-1 Pictures such as [Horimiya](http://webhome.csc.uvic.ca/~huanyangl/manga/?id=42451)
+- People
+    - [Yoshiji Kigami](http://webhome.csc.uvic.ca/~huanyangl/people/?id=7025)
+         - Can be searched via navigation bar search box 
+         - Can be reached by clicking on the staff's name on an anime or manga that this person contributed to. In this case, [Koe no Katachi - A Silent Voice](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=28851).
+    - [Toshimasa Ishii](http://webhome.csc.uvic.ca/~huanyangl/people/?id=51059)
+         - Can be searched via navigation bar search box 
+         - Can be reached by clicking on the staff's name on an anime or manga that this person contributed to. In this case, [Shigatsu wa Kimi no Uso - Your Lie in April](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=23273).
+- Character
+    - [Shouya Ishida](http://webhome.csc.uvic.ca/~huanyangl/character/?id=80491)
+         - Can be searched via navigation bar search box 
+         - Can be reached by clicking on the character name on an anime or manga that this character appears in. In this case, [Koe no Katachi - A Silent Voice](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=28851).
+    - [Kaori Miyazono](http://webhome.csc.uvic.ca/~huanyangl/character/?id=69411)
+         - Can be searched via navigation bar search box 
+         - Can be reached by clicking on the character name on an anime or manga that this character appears in. In this case, [Shigatsu wa Kimi no Uso - Your Lie in April](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=23273).
+- Account Related
+    - [Sign In](http://webhome.csc.uvic.ca/~huanyangl/account/signin/)
+        - Accessed via navigation bar
+    - [Sign Up](http://webhome.csc.uvic.ca/~huanyangl/account/signup/)
+        - Accessed via "Create a new account" on [sign in page](http://webhome.csc.uvic.ca/~huanyangl/account/signin/)
+    - [Profile (Sign in required!)](http://webhome.csc.uvic.ca/~huanyangl/account/profile/)
+        - Accessed via navigation bar's person icon after signing in 
