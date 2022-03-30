@@ -48,7 +48,7 @@ See more info at https://jikan.moe/
         - [Mecha](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?genre=18~Mecha) theme
         - [Kyoto Animation](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?producer=2~Kyoto%20Animation) studio
 2. **A good looking filtering input form:** many hours were directed at styling the filter form (on the anime/manga search pages). Please take a look.
-3. **Jikan4 Class (API Wrapper)@:** wrote a wrapper for Jikan API ([Source code](http://webhome.csc.uvic.ca/~huanyangl/lib/jikan4.js))
+3. **Jikan4 Class (API Wrapper):** wrote a wrapper for Jikan API ([Source code](http://webhome.csc.uvic.ca/~huanyangl/lib/jikan4.js))
     - Caches API responses for a short amount of time to greatly improve performance
     - Added expiration to data cached in local or session storage (to ensure cached data is up to date)
     - It has a Token Bucket to attempt to rate limit itself to Jikan API's specification, but without X-Rate-Limit-Limit in API response header, its effect is questionable. 
@@ -129,3 +129,16 @@ If you see an 404 error like "GET https://t2.gstatic.com/faviconV2?...", please 
         - Accessed via "Create a new account" on [sign in page](http://webhome.csc.uvic.ca/~huanyangl/account/signin/)
     - [Profile (Sign in required!)](http://webhome.csc.uvic.ca/~huanyangl/account/profile/)
         - Accessed via navigation bar's person icon after signing in 
+
+## Testing Account 
+Below is an account created for testing only. Credential is the same for both the email account and UsagiDB account.
+
+Mail service: https://account.protonmail.com/login
+
+Email: usagidb.test1@protonmail.com
+
+Password: usagidbAcc4CSC130
+
+Creating a fresh account is strongly recommended. 
+
+
