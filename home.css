@@ -55,6 +55,10 @@
         margin: 0.1rem;
     }
 
+    .suggestion-item img {
+        max-height: 35vh;
+    }
+
     .suggestion-item .large-btn {
         display: block;
         box-sizing: border-box;
