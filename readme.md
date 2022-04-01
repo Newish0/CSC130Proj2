@@ -1,6 +1,6 @@
 # README
 
-## About this website
+## About This Website
 This site, UsagiDB, is a site where you can search for all anime, manga, light novel related. In addition to it being CSC 130's Project 2, the motivation behind the project was to create a frontend that any one of the single existing solutions lacks. Essentially, I want to combine all the good features of other sites into one.
 
 ## About Jikan (API)
@@ -41,7 +41,7 @@ See more info at https://jikan.moe/
     - See *initNumberLoadingAnimation()* and *easeOutQuart()* in [*anime.js*](http://webhome.csc.uvic.ca/~huanyangl/anime/anime.js) or [*manga.js*](https://webhome.csc.uvic.ca/~huanyangl/manga/manga.js) for the inner workings
     - Note: *easeOutQuart()* was translated from the Typescript implementation given by https://easings.net/.
 
-## Not so special features 
+## Not As Special Features 
 1. **All tags are clickable:** if an item looks like a tag or glow on hover like a link, then it is probably clickable. 
     - Sample links (all can be accessed by clicking corresponding tags)
         - [Fantasy](http://webhome.csc.uvic.ca/~huanyangl/search/anime/?genre=10~Fantasy) genre
@@ -52,34 +52,14 @@ See more info at https://jikan.moe/
     - Caches API responses for a short amount of time to greatly improve performance
     - Added expiration to data cached in local or session storage (to ensure cached data is up to date)
     - It has a Token Bucket to attempt to rate limit itself to Jikan API's specification, but without X-Rate-Limit-Limit in API response header, its effect is questionable. 
-4. **All pages are responsive:** all pages are responsive, so do be sure to try out the site on mobile too!
-
-## Fetch and $.get
-Since a pure JavaScript wrapper was written for Jikan V4 API, all API calls uses *fetch* instead of *\$.get/ajax*. 
-However, to demonstrate using *\$.get*, *fillOutFrameWithData()* from *cache\_search.js* used *$.get* to obtain a json file from the host. 
-Although it is not an API call, beyond building the URL, it should practically be the same.
+4. **All pages are responsive:** all pages are responsive. In fact, some functionalities were designed for mobile first. Please be sure to try out the site on mobile too!
 
 
-## A note on search
-Note that all search query will **only** search the main title, which is usually in Japanese. Hence, unfortunately you cannot search the english translation of titles. However, it will work if the main title is in English.
 
-## How filters work (on search pages)
-
-Filter tags are ***or*** operations. For example, if you have the filter "Action" and "Drama" on, it will search for items with the "Action" tag, ***or*** "Drama" tag.
-
-When filtering by studio/company, due to limitation of the API (it may be an API bug), it will only search one studio/company ID. Therefore, the filter input for studio/company uses *radio* intead of *checkbox*.
-
-## API errors 
-
-The API used, Jikan v4, has a strict rate limiting of 3 request per second. In addition, the header Jikan sends does not appear to have X-Rate-Limit-Limit attached. As a result when loading detail information, or when user generates rapid search queries, you may see 429 errors in the console. However, multiple methods were implemented to prevent such error from bricking the site. The Jikan4 class utilizes Token Bucket to also have a client sided rate limit. In case the Token Bucket fails, The Jikan 4 class will retry until the data is obtained. In the very unlikely event that all counter meausre fails, please refresh the page.
-
-Occasionally, Jikan v4 will send a code 500. From experience, it apears that most of the time, retrying after a second solve the issue. Hence, this is believed to be another API bug. Becuase error code 500 can be legitimate, the Jikan 4 class with only retry once when faced with an 500 HTTP response.
-
-If you see an 404 error like "GET https://t2.gstatic.com/faviconV2?...", please ignore it. It is caused by Google not being able to find the favicon of an external site provided by the API.  
 
 ## Sub Pages and Sample Search Terms
 - [Home](http://webhome.csc.uvic.ca/~huanyangl/index.html) 
-    - Can be reached by clicking on the UsagiDB logo in top navigation bar.
+    - Can be reached by clicking on the UsagiDB logo in the top navigation bar.
 - Anime 
     - [Koe no Katachi - A Silent Voice](http://webhome.csc.uvic.ca/~huanyangl/anime/?id=28851)
         - Can be searched via navigation bar search box 
@@ -142,3 +122,31 @@ Password: usagidbAcc4CSC130
 Creating a fresh account is strongly recommended. 
 
 
+
+
+# Additional Information
+
+## Fetch and $.get
+Since a pure JavaScript wrapper was written for Jikan V4 API, all API calls uses *fetch* instead of *\$.get/ajax*. 
+However, to demonstrate using *\$.get*, *fillOutFrameWithData()* from *cache\_search.js* used *$.get* to obtain a json file from the host. 
+Although it is not an API call, beyond building the URL, it should practically be the same.
+
+## None API Data
+Due to Jikan API's rate limiting, the [magazines](http://webhome.csc.uvic.ca/~huanyangl/search/magazines/) and [companies](http://webhome.csc.uvic.ca/~huanyangl/search/companies/) page does not use the API. If those two pages were to use Jikan API, it would take at least ~16 seconds to load. Hence, those two pages get its data through a cached JSON file scraped from Jikan API ahead of time. [Scraper source code](https://webhome.csc.uvic.ca/~huanyangl/data/scraper.js).
+
+## A Note on Search
+Note that all search query will **only** search the main title, which is usually in Japanese. Hence, unfortunately you cannot search the english translation of titles. However, it will work if the main title is in English.
+
+## How Filters Work (on search pages)
+
+Filter tags are ***or*** operations. For example, if you have the filter "Action" and "Drama" on, it will search for items with the "Action" tag, ***or*** "Drama" tag.
+
+When filtering by studio/company, due to limitation of the API (it may be an API bug), it will only search one studio/company ID. Therefore, the filter input for studio/company uses *radio* intead of *checkbox*.
+
+## API Errors 
+
+The API used, Jikan v4, has a strict rate limiting of 3 request per second. In addition, the header Jikan sends does not appear to have X-Rate-Limit-Limit attached. As a result when loading detail information, or when user generates rapid search queries, you may see 429 errors in the console. However, multiple methods were implemented to prevent such error from bricking the site. The Jikan4 class utilizes Token Bucket to also have a client sided rate limit. In case the Token Bucket fails, The Jikan 4 class will retry until the data is obtained. In the very unlikely event that all counter meausre fails, please refresh the page.
+
+Occasionally, Jikan v4 will send a code 500. From experience, it apears that most of the time, retrying after a second solve the issue. Hence, this is believed to be another API bug. Becuase error code 500 can be legitimate, the Jikan 4 class with only retry once when faced with an 500 HTTP response.
+
+If you see an 404 error like "GET https://t2.gstatic.com/faviconV2?...", please ignore it. It is caused by Google not being able to find the favicon of an external site provided by the API.  
