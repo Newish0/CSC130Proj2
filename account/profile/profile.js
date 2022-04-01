@@ -62,6 +62,7 @@ $(() => {
     function initDeleteAccountBtns(user) {
         $(".delete-account-popup-btn").on("click", () => {
             $("#overtop-delete-account").css("display", "flex").hide().fadeIn(100); // fadeIn with Flex attr
+            disableScroll();
         });
 
         $("#comfirm-delete-account").on("click", () => {
