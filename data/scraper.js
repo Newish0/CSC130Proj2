@@ -6,7 +6,7 @@ async function getAllProducers() {
     while(api.hasNextPage()) {
         let more = await api.getMore();
         data = data.concat(more.data);
-        await sleep(800);
+        await sleep(100);
     }
 
     return data;
@@ -20,8 +20,6 @@ getAllProducers().then(data => console.log(JSON.stringify(data)));
 
 
 
-
-
 async function getAllMagazines() {
     let api = new Jikan4();
 
@@ -30,7 +28,7 @@ async function getAllMagazines() {
     while(api.hasNextPage()) {
         let more = await api.getMore();
         data = data.concat(more.data);
-        await sleep(800);
+        await sleep(100);
     }
 
     return data;
