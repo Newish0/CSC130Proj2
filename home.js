@@ -91,7 +91,7 @@ $(() => {
             for (let i in data[x].genres) {
                 let tag = `
                 <a class="tag clean-url" 
-                href="/~huanyangl/search/anime/?genre=${data[x].genres[i].mal_id}~${encodeURIComponent(data[x].genres[i].name)}">
+                href="/CSC130Proj2/search/anime/?genre=${data[x].genres[i].mal_id}~${encodeURIComponent(data[x].genres[i].name)}">
                 ${data[x].genres[i].name}
                 </a>
             `;
@@ -102,7 +102,7 @@ $(() => {
             for (let i in data[x].themes) {
                 let tag = `
                 <a class="tag clean-url" 
-                href="/~huanyangl/search/anime/?genre=${data[x].themes[i].mal_id}~${encodeURIComponent(data[x].themes[i].name)}">
+                href="/CSC130Proj2/search/anime/?genre=${data[x].themes[i].mal_id}~${encodeURIComponent(data[x].themes[i].name)}">
                 ${data[x].themes[i].name}
                 </a>
             `;
@@ -123,7 +123,7 @@ $(() => {
                 <br>
                 <br>
                 <br>
-                <a class="block text-center w-100 large-btn" href="/~huanyangl/anime/?id=${id}">View</a>
+                <a class="block text-center w-100 large-btn" href="/CSC130Proj2/anime/?id=${id}">View</a>
             </div>
 
             <img class="w-25 rounded-corner-full" src="${imgSrc}"
@@ -166,7 +166,7 @@ $(() => {
             let imgSrc = data[x].images.webp.image_url;
             let id = data[x].mal_id;
 
-            let html = `<a href="/~huanyangl/anime/?id=${id}" class="min-card">
+            let html = `<a href="/CSC130Proj2/anime/?id=${id}" class="min-card">
                             <img src="${imgSrc}" alt="">
                             <h4>${title}</h4>
                         </a>`;

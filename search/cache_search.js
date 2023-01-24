@@ -1,10 +1,10 @@
 $(() => {
     let dataURL = "";
 
-    if (document.URL.includes("/~huanyangl/search/companies")) {
-        dataURL = "/~huanyangl/data/producers.json";
-    } else if (document.URL.includes("/~huanyangl/search/magazines")) {
-        dataURL = "/~huanyangl/data/magazines.json";
+    if (document.URL.includes("/CSC130Proj2/search/companies")) {
+        dataURL = "/CSC130Proj2/data/producers.json";
+    } else if (document.URL.includes("/CSC130Proj2/search/magazines")) {
+        dataURL = "/CSC130Proj2/data/magazines.json";
     } else {
         display404();
     }
@@ -136,7 +136,7 @@ $(() => {
 
                 let html = `
                     <span class="tag">
-                       <a class="clean-url" href="/~huanyangl/search/anime/?producer=${id}~${encodeURIComponent(
+                       <a class="clean-url" href="/CSC130Proj2/search/anime/?producer=${id}~${encodeURIComponent(
                     name
                 )}"><h5 class="margin-small">${name} (${count})</h5></a>
                     </span>

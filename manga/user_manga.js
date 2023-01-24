@@ -180,11 +180,11 @@ $(() => {
 
         } else {
             $(".user-add-current").on("click", (evt) => {
-                window.location = "/~huanyangl/account/signin";
+                window.location = "/CSC130Proj2/account/signin";
             });
 
             $(".user-set-score").on("click", (evt) => {
-                window.location = "/~huanyangl/account/signin";
+                window.location = "/CSC130Proj2/account/signin";
             });
         }
     }

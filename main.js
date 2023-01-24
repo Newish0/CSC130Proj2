@@ -170,7 +170,7 @@ $(() => {
                         <img src="${imgSrc}">
                        
                         <div>
-                            <a href="/~huanyangl/anime/?id=${id}">${title}</a>
+                            <a href="/CSC130Proj2/anime/?id=${id}">${title}</a>
                             <div class="text-alt">${altTitle}</div>
                         </div>         
                         
@@ -217,7 +217,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/~huanyangl/manga/?id=${id}">${title}</a>
+                                <a href="/CSC130Proj2/manga/?id=${id}">${title}</a>
                                 <div class="text-alt">${altTitle}</div>
                             </div>
                                 
@@ -266,7 +266,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/~huanyangl/character/?id=${id}">${name}</a>
+                                <a href="/CSC130Proj2/character/?id=${id}">${name}</a>
                                 <div class="text-alt">${nameKanji}</div>
                             </div>
                                 
@@ -314,7 +314,7 @@ $(() => {
                             <img src="${imgSrc}">
                             
                             <div>
-                                <a href="/~huanyangl/character/?id=${id}">${name}</a>
+                                <a href="/CSC130Proj2/character/?id=${id}">${name}</a>
                                 <div class="text-alt">${nameKanji}</div>
                             </div>
                                 
@@ -343,7 +343,7 @@ function displayErrorPage(code) {
 
     let html = "";
 
-    fetch("/~huanyangl/assets/error.svg").then(res => res.text()).then(text => {
+    fetch("/CSC130Proj2/assets/error.svg").then(res => res.text()).then(text => {
         html = `    
         <div class="container margin-v-large">
             ${text}

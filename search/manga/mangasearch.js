@@ -401,13 +401,13 @@ $(() => {
 
     function createOneCard(oneData) {
         let title = oneData.title;
-        let titleHREF = "/~huanyangl/manga/?id=" + oneData.mal_id;
+        let titleHREF = "/CSC130Proj2/manga/?id=" + oneData.mal_id;
 
         let tagsHTML = "";
         for (let i in oneData.genres) {
             let tag = `
                 <a class="tag clean-url" 
-                href="/~huanyangl/search/manga/?genre=${oneData.genres[i].mal_id}~${encodeURIComponent(oneData.genres[i].name)}">
+                href="/CSC130Proj2/search/manga/?genre=${oneData.genres[i].mal_id}~${encodeURIComponent(oneData.genres[i].name)}">
                 ${oneData.genres[i].name}
                 </a>
             `;
@@ -433,7 +433,7 @@ $(() => {
             imgSrc = oneData.images.jpg.image_url;
         } // if else
 
-        imgLink = "/~huanyangl/manga/?id=" + oneData.mal_id;
+        imgLink = "/CSC130Proj2/manga/?id=" + oneData.mal_id;
 
         let authors = "";
         for (let i = 0; i < oneData.authors.length; i++) {
@@ -447,7 +447,7 @@ $(() => {
         for (let i in oneData.themes) {
             let tag = `
                 <a class="tag clean-url" 
-                href="/~huanyangl/search/anime/?genre=${oneData.themes[i].mal_id}~${encodeURIComponent(oneData.themes[i].name)}">
+                href="/CSC130Proj2/search/anime/?genre=${oneData.themes[i].mal_id}~${encodeURIComponent(oneData.themes[i].name)}">
                 ${oneData.themes[i].name}
                 </a>
             `;

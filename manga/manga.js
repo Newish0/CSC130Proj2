@@ -67,13 +67,13 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/manga/?genre=${id}~${name}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/search/manga/?genre=${id}~${name}">${name}</a>`
             }
 
             for (let x in data.themes) {
                 let name = data.themes[x].name;
                 let id = data.themes[x].mal_id;
-                tagsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/manga/?genre=${id}~${name}">${name}</a>`
+                tagsHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/search/manga/?genre=${id}~${name}">${name}</a>`
             }
 
             tags.html(tagsHTMLText);
@@ -92,7 +92,7 @@ $(() => {
             for (let x in data.serializations) {
                 let name = data.serializations[x].name;
                 let id = data.serializations[x].mal_id;
-                serializationsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/manga/?magazine=${id}~${name}">${name}</a>`
+                serializationsHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/search/manga/?magazine=${id}~${name}">${name}</a>`
             }
             publishers.html(serializationsHTMLText);
 
@@ -100,7 +100,7 @@ $(() => {
             for (let x in data.authors) {
                 let name = data.authors[x].name;
                 let id = data.authors[x].mal_id;
-                authorsHTMLText += `<a class="tag clean-url" href="/~huanyangl/people/?id=${id}">${name}</a>`
+                authorsHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/people/?id=${id}">${name}</a>`
             }
             authors.html(authorsHTMLText);
 
@@ -108,7 +108,7 @@ $(() => {
             for (let x in data.genres) {
                 let name = data.genres[x].name;
                 let id = data.genres[x].mal_id;
-                genresHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/manga/?genre=${id}~${name}">${name}</a>`
+                genresHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/search/manga/?genre=${id}~${name}">${name}</a>`
             }
             genres.html(genresHTMLText);
 
@@ -128,7 +128,7 @@ $(() => {
             for (let x in data.demographics) {
                 let name = data.demographics[x].name;
                 let id = data.demographics[x].mal_id;
-                demographicsHTMLText += `<a class="tag clean-url" href="/~huanyangl/search/manga/?demographic=${id}~${name}">${name}</a>`
+                demographicsHTMLText += `<a class="tag clean-url" href="/CSC130Proj2/search/manga/?demographic=${id}~${name}">${name}</a>`
             }
 
             demographicsHTMLText = demographicsHTMLText == "" ? "n/a" : demographicsHTMLText;
@@ -197,7 +197,7 @@ $(() => {
                             let entry = entries[y];
                             let entryHTMLText = "";
 
-                            entryHTMLText = `<a href="/~huanyangl/${entry.type}/?id=${entry.mal_id}" class="clean-url url-item">${entry.name}</a>`;
+                            entryHTMLText = `<a href="/CSC130Proj2/${entry.type}/?id=${entry.mal_id}" class="clean-url url-item">${entry.name}</a>`;
 
                             relationBlockHTMLText += entryHTMLText;
                         }
@@ -239,7 +239,7 @@ $(() => {
                         charRole = charRole == undefined ? "n/a" : charRole;
 
                         let charHTMLText = `
-                        <a href="/~huanyangl/character/?id=${charID}" class="clean-url black">
+                        <a href="/CSC130Proj2/character/?id=${charID}" class="clean-url black">
                             <img class="character-img"
                                 src="${charImgURL}"
                                 alt="character image of ${charName}"

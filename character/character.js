@@ -66,7 +66,7 @@ $(() => {
             <div class="role-card">
                 <div class="min-box">
                     <img src="${personImage}" alt="image of ${personImage}" loading="lazy">
-                    <a href="/~huanyangl/people/?id=${personID}">${personName} (${language})</a> 
+                    <a href="/CSC130Proj2/people/?id=${personID}">${personName} (${language})</a> 
                 </div>
             </div>
             `;
@@ -98,7 +98,7 @@ $(() => {
             <div class="role-card">
             <div class="min-box size-m">
                 <img src="${animeCover}" alt="image of ${animeTitle}" loading="lazy">
-                <a href="/~huanyangl/anime/?id=${animeID}">${animeTitle} - <b>${role}</b></a> 
+                <a href="/CSC130Proj2/anime/?id=${animeID}">${animeTitle} - <b>${role}</b></a> 
             </div>
             `;
             $("#anime-container").append(htmlTxt);
@@ -128,7 +128,7 @@ $(() => {
             <div class="role-card">
             <div class="min-box size-m">
                 <img src="${mangaCover}" alt="image of ${mangaTitle}" loading="lazy">
-                <a href="/~huanyangl/manga/?id=${mangaID}">${mangaTitle} - <b>${role}</b></a> 
+                <a href="/CSC130Proj2/manga/?id=${mangaID}">${mangaTitle} - <b>${role}</b></a> 
             </div>
             `;
             $("#manga-container").append(htmlTxt);
