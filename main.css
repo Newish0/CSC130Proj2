@@ -1094,3 +1094,8 @@ footer a {
         transform: rotate(360deg);
     }
 }
+
+
+.profile-btn {
+    display: none;
+}
