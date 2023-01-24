@@ -110,18 +110,6 @@ See more info at https://jikan.moe/
     - [Profile (Sign in required!)](https://newish0.github.io/CSC130Proj2/account/profile/)
         - Accessed via navigation bar's person icon after signing in 
 
-## Testing Account 
-Below is an account created for testing only. Credential is the same for both the email account and UsagiDB account.
-
-Mail service: https://account.protonmail.com/login
-
-Email: usagidb.test1@protonmail.com
-
-Password: usagidbAcc4CSC130
-
-Creating a fresh account is strongly recommended. 
-
-
 
 
 # Additional Information
