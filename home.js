@@ -111,23 +111,25 @@ $(() => {
 
 
             let html = `
-            <div class="swiper-slide suggestion-item center auto-gallery align-items-center justify-evenly w-100">
-            <div class="w-25 margin-large content">
-                <h1>${title}</h1>
-                <h3>${altTitle}</h3>
-                <div class="margin-v-large">
-                    ${tagsHTML}
-                    ${themesHTML}
-                </div>
-                <div>${synopsis}</div>
-                <br>
-                <br>
-                <br>
-                <a class="block text-center w-100 large-btn" href="/anime/?id=${id}">View</a>
-            </div>
+            <div class="swiper-slide suggestion-item center auto-gallery w-100">
+                <div class="swiper-slide-inner-wrapper">
+                    <div class="margin-large content">
+                        <h1>${title}</h1>
+                        <h3>${altTitle}</h3>
+                        <div class="margin-v-large">
+                            ${tagsHTML}
+                            ${themesHTML}
+                        </div>
+                        <div>${synopsis}</div>
+                        <br>
+                        <br>
+                        <br>
+                        <a class="block text-center w-100 large-btn" href="/anime/?id=${id}">View</a>
+                    </div>
 
-            <img class="w-25 rounded-corner-full" src="${imgSrc}"
-                alt="${title} cover image">
+                    <img class="rounded-corner-full" src="${imgSrc}"
+                        alt="${title} cover image">
+                </div>
             </div>`;
 
             suggestionCon.append(html);

@@ -36,6 +36,15 @@
     align-items: center;
 }
 
+.swiper-slide-inner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: max(50%, 800px);
+    margin: auto;
+}
+
 .suggestions-box .swiper-pagination {
     position: relative;
 }
@@ -68,6 +77,14 @@
 @media screen and (max-width: 600px) {
     .seasonal-gallery {
         justify-content: center;
+    }
+
+    .swiper-slide-inner-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-direction: column-reverse;
     }
 }
 
