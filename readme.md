@@ -1,7 +1,7 @@
 # README
 
 ## About This Website
-This site, UsagiDB, is a site where you can search for all anime, manga, light novel related. In addition to it being CSC 130's Project 2, the motivation behind the project was to create a frontend that any one of the single existing solutions lacks. Essentially, I want to combine all the good features of other sites into one.
+This site, [UsagiDB](https://newish0.github.io/CSC130Proj2/index.html), is a site where you can search for all anime, manga, light novel related. In addition to it being CSC 130's Project 2, the motivation behind the project was to create a frontend that any one of the single existing solutions lacks. Essentially, I want to combine all the good features of other sites into one.
 
 ## About Jikan (API)
 The API this webpage uses is Jikan V4. 
